@@ -10,7 +10,7 @@ using OtripleS.Portal.Web.Models.Students;
 
 namespace OtripleS.Portal.Web.Services.Students
 {
-    public class StudentService : IStudentService
+    public partial class StudentService : IStudentService
     {
         private readonly IApiBroker apiBroker;
         private readonly ILoggingBroker loggingBroker;
@@ -23,7 +23,12 @@ namespace OtripleS.Portal.Web.Services.Students
             this.loggingBroker = loggingBroker;
         }
 
-        public async ValueTask<Student> RegisterStudentAsync(Student student) =>
-            await this.apiBroker.PostStudentAsync(student);
+        public ValueTask<Student> RegisterStudentAsync(Student student) =>
+        TryCatch(async () =>
+        {
+            ValidateStudent(student);
+
+            return await this.apiBroker.PostStudentAsync(student);
+        });
     }
 }
