@@ -4,6 +4,8 @@
 // ---------------------------------------------------------------
 
 using System;
+using System.Linq.Expressions;
+using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using Moq;
 using OtripleS.Portal.Web.Brokers.API;
 using OtripleS.Portal.Web.Brokers.Logging;
@@ -31,6 +33,12 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
 
         private static Student CreateRandomStudent() =>
             CreateStudentFiller().Create();
+
+        private Expression<Func<Exception, bool>> SameExceptionAs(Exception expectedException)
+        {
+            return actualException => actualException.Message == expectedException.Message
+                && actualException.InnerException.Message == expectedException.InnerException.Message;
+        }
 
         private static Filler<Student> CreateStudentFiller()
         {
