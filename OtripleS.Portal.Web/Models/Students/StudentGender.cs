@@ -3,10 +3,12 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
-namespace OtripleS.Portal.Web.Brokers.API
+namespace OtripleS.Portal.Web.Models.Students
 {
-    public partial interface IApiBroker
+    public enum StudentGender
     {
-
+        Female,
+        Male,
+        Other
     }
 }
