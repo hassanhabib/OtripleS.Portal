@@ -3,7 +3,6 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
-using System;
 using System.Threading.Tasks;
 using OtripleS.Portal.Web.Brokers.API;
 using OtripleS.Portal.Web.Brokers.Logging;
@@ -24,9 +23,7 @@ namespace OtripleS.Portal.Web.Services.Students
             this.loggingBroker = loggingBroker;
         }
 
-        public ValueTask<Student> RegisterStudentAsync(Student student)
-        {
-            throw new NotImplementedException();
-        }
+        public async ValueTask<Student> RegisterStudentAsync(Student student) =>
+            await this.apiBroker.PostStudentAsync(student);
     }
 }
