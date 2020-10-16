@@ -3,6 +3,7 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
+using System;
 using OtripleS.Portal.Web.Models.Students;
 using OtripleS.Portal.Web.Models.Students.Exceptions;
 
@@ -12,10 +13,18 @@ namespace OtripleS.Portal.Web.Services.Students
     {
         private void ValidateStudent(Student student)
         {
-            if(student is null)
+            switch (student)
             {
-                throw new NullStudentException();
+                case null:
+                    throw new NullStudentException();
+
+                case { } when IsInvalid(student.Id):
+                    throw new InvalidStudentException(
+                        parameterName: nameof(Student.Id),
+                        parameterValue: student.Id);
             }
         }
+
+        private static bool IsInvalid(Guid id) => id == Guid.Empty;
     }
 }
