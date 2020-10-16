@@ -23,7 +23,7 @@ namespace OtripleS.Portal.Web.Services.Students
             catch (NullStudentException nullStudentException)
             {
                 throw CreateAndLogValidationException(nullStudentException);
-            } 
+            }
             catch (InvalidStudentException invalidStudentException)
             {
                 throw CreateAndLogValidationException(invalidStudentException);

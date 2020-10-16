@@ -5,7 +5,6 @@
 
 using System;
 using System.Linq.Expressions;
-using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 using Moq;
 using OtripleS.Portal.Web.Brokers.API;
 using OtripleS.Portal.Web.Brokers.Logging;
