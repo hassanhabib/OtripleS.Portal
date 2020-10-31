@@ -39,6 +39,8 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
                 && actualException.InnerException.Message == expectedException.InnerException.Message;
         }
 
+        private static string GetRandomString() => new MnemonicString().GetValue();
+
         private static Filler<Student> CreateStudentFiller()
         {
             var filler = new Filler<Student>();
