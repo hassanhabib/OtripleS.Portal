@@ -16,11 +16,8 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
 {
     public partial class StudentServiceTests
     {
-        [Fact]
-        public async Task ShouldThrowDependencyValidationExceptionOnRegisterIfBadRequestErrorOccursAndLogItAsync()
+        public static TheoryData ValidationApiExceptions()
         {
-            // given
-            Student someStudent = CreateRandomStudent();
             string exceptionMessage = GetRandomString();
             var responseMessage = new HttpResponseMessage();
 
@@ -29,13 +26,33 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
                     responseMessage: responseMessage,
                     message: exceptionMessage);
 
+            var httpResponseConflictException =
+                new HttpResponseConflictException(
+                    responseMessage: responseMessage,
+                    message: exceptionMessage);
+
+            return new TheoryData<Exception>
+            {
+                httpResponseBadRequestException,
+                httpResponseConflictException
+            };
+        }
+
+        [Theory]
+        [MemberData(nameof(ValidationApiExceptions))]
+        public async Task ShouldThrowDependencyValidationExceptionOnRegisterIfBadRequestErrorOccursAndLogItAsync(
+            Exception validationApiException)
+        {
+            // given
+            Student someStudent = CreateRandomStudent();
+
             var expectedDepndencyValidationException =
                 new StudentDependencyValidationException(
-                    httpResponseBadRequestException);
+                    validationApiException);
 
             this.apiBrokerMock.Setup(broker =>
                 broker.PostStudentAsync(It.IsAny<Student>()))
-                    .ThrowsAsync(httpResponseBadRequestException);
+                    .ThrowsAsync(validationApiException);
 
             // when
             ValueTask<Student> registerStudentTask =
