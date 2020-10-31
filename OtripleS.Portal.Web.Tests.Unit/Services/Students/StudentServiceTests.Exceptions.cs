@@ -31,7 +31,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
 
             var expectedDepndencyValidationException =
                 new StudentDependencyValidationException(
-                    httpResponseBadRequestException.InnerException);
+                    httpResponseBadRequestException);
 
             this.apiBrokerMock.Setup(broker =>
                 broker.PostStudentAsync(It.IsAny<Student>()))
