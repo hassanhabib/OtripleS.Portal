@@ -58,11 +58,8 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
             this.loggingBrokerMock.VerifyNoOtherCalls();
         }
 
-        [Fact]
-        public async Task ShouldThrowCriticalDependencyExceptionOnRegisterIfUrlNotFoundErrorOccursAndLogItAsync()
+        public static TheoryData CriticalApiExceptions()
         {
-            // given
-            Student someStudent = CreateRandomStudent();
             string exceptionMessage = GetRandomString();
             var responseMessage = new HttpResponseMessage();
 
@@ -71,13 +68,33 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
                     responseMessage: responseMessage,
                     message: exceptionMessage);
 
+            var httpResponseUnAuthorizedException =
+                new HttpResponseUnauthorizedException(
+                    responseMessage: responseMessage,
+                    message: exceptionMessage);
+
+            return new TheoryData<Exception>
+            {
+                httpResponseUrlNotFoundException,
+                httpResponseUnAuthorizedException
+            };
+        }
+
+        [Theory]
+        [MemberData(nameof(CriticalApiExceptions))]
+        public async Task ShouldThrowCriticalDependencyExceptionOnRegisterIfUrlNotFoundErrorOccursAndLogItAsync(
+            Exception httpResponseCriticalException)
+        {
+            // given
+            Student someStudent = CreateRandomStudent();
+            
             var expectedStudentDepndencyException =
                 new StudentDependencyException(
-                    httpResponseUrlNotFoundException);
+                    httpResponseCriticalException);
 
             this.apiBrokerMock.Setup(broker =>
                 broker.PostStudentAsync(It.IsAny<Student>()))
-                    .ThrowsAsync(httpResponseUrlNotFoundException);
+                    .ThrowsAsync(httpResponseCriticalException);
 
             // when
             ValueTask<Student> registerStudentTask =
