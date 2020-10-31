@@ -134,26 +134,45 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
             this.loggingBrokerMock.VerifyNoOtherCalls();
         }
 
-        [Fact]
-        public async Task ShouldThrowDependencyExceptionOnRegisterIfServerInternalErrorOccursAndLogItAsync()
+
+        public static TheoryData DependencyApiExceptions()
         {
-            // given
-            Student someStudent = CreateRandomStudent();
             string exceptionMessage = GetRandomString();
             var responseMessage = new HttpResponseMessage();
+
+            var httpResponseException =
+                new HttpResponseException(
+                    httpResponseMessage: responseMessage,
+                    message: exceptionMessage);
 
             var httpResponseInternalServerErrorException =
                 new HttpResponseInternalServerErrorException(
                     responseMessage: responseMessage,
                     message: exceptionMessage);
 
+            return new TheoryData<Exception>
+            {
+                httpResponseException,
+                httpResponseInternalServerErrorException
+            };
+        }
+
+        [Theory]
+        [MemberData(nameof(DependencyApiExceptions))]
+        public async Task ShouldThrowDependencyExceptionOnRegisterIfServerInternalErrorOccursAndLogItAsync(
+            Exception dependencyApiException)
+        {
+            // given
+            Student someStudent = CreateRandomStudent();
+            string exceptionMessage = GetRandomString();
+
             var expectedStudentDepndencyException =
                 new StudentDependencyException(
-                    httpResponseInternalServerErrorException);
+                    dependencyApiException);
 
             this.apiBrokerMock.Setup(broker =>
                 broker.PostStudentAsync(It.IsAny<Student>()))
-                    .ThrowsAsync(httpResponseInternalServerErrorException);
+                    .ThrowsAsync(dependencyApiException);
 
             // when
             ValueTask<Student> registerStudentTask =
