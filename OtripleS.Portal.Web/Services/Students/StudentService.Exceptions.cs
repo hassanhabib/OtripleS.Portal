@@ -49,6 +49,10 @@ namespace OtripleS.Portal.Web.Services.Students
             {
                 throw CreateAndLogDependencyException(httpResponseInternalServerException);
             }
+            catch (HttpResponseException httpResponseException)
+            {
+                throw CreateAndLogDependencyException(httpResponseException);
+            }
         }
 
         private StudentValidationException CreateAndLogValidationException(Exception exception)
