@@ -72,5 +72,62 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
             this.dateTimeBrokerMock.VerifyNoOtherCalls();
             this.studentServiceMock.VerifyNoOtherCalls();
         }
+
+        public static TheoryData StudentServiceDependencyExceptions()
+        {
+            var innerException = new Exception();
+
+            return new TheoryData<Exception>
+            {
+                new StudentDependencyException(innerException),
+                new StudentServiceException(innerException)
+            };
+        }
+
+        [Theory]
+        [MemberData(nameof(StudentServiceDependencyExceptions))]
+        public async Task ShouldThrowDependencyExceptionOnAddIfStudentDependencyErrorOccuredAndLogItAsync(
+            Exception studentServiceDependencyException)
+        {
+            // given
+            StudentView someStudentView = CreateRandomStudentView();
+
+            var expectedStudentDependencyException =
+                new StudentViewDependencyException(studentServiceDependencyException);
+
+            this.studentServiceMock.Setup(service =>
+                service.RegisterStudentAsync(It.IsAny<Student>()))
+                    .ThrowsAsync(studentServiceDependencyException);
+
+            // when
+            ValueTask<StudentView> addStudentViewTask =
+                this.studentViewService.AddStudentViewAsync(someStudentView);
+
+            // then
+            await Assert.ThrowsAsync<StudentViewDependencyException>(() =>
+               addStudentViewTask.AsTask());
+
+            this.userServiceMock.Verify(service =>
+                service.GetCurrentlyLoggedInUser(),
+                    Times.Once);
+
+            this.dateTimeBrokerMock.Verify(broker =>
+                broker.GetCurrentDateTime(),
+                    Times.Once);
+
+            this.studentServiceMock.Verify(service =>
+                service.RegisterStudentAsync(It.IsAny<Student>()),
+                    Times.Once);
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameExceptionAs(
+                    expectedStudentDependencyException))),
+                        Times.Once);
+
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+            this.userServiceMock.VerifyNoOtherCalls();
+            this.dateTimeBrokerMock.VerifyNoOtherCalls();
+            this.studentServiceMock.VerifyNoOtherCalls();
+        }
     }
 }
