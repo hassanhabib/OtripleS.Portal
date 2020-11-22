@@ -22,6 +22,11 @@ namespace OtripleS.Portal.Web.Services.StudentViews
                     throw new InvalidStudentViewException(
                         parameterName: nameof(StudentView.IdentityNumber),
                         parameterValue: studentView.IdentityNumber);
+                
+                case { } when IsInvalid(studentView.FirstName):
+                    throw new InvalidStudentViewException(
+                        parameterName: nameof(StudentView.FirstName),
+                        parameterValue: studentView.FirstName);
             }
         }
 
