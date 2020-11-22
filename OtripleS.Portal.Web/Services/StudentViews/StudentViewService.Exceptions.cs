@@ -37,6 +37,14 @@ namespace OtripleS.Portal.Web.Services.StudentViews
             {
                 throw CreateAndLogDependencyValidationException(studentDependencyValidationException);
             }
+            catch (StudentDependencyException studentDependencyException)
+            {
+                throw CreateAndLogDependencyException(studentDependencyException);
+            }
+            catch (StudentServiceException studentServiceException)
+            {
+                throw CreateAndLogDependencyException(studentServiceException);
+            }
         }
 
         private StudentViewValidationException CreateAndLogValidationException(Exception exception)
@@ -53,6 +61,14 @@ namespace OtripleS.Portal.Web.Services.StudentViews
             this.loggingBroker.LogError(studentViewDependencyValidationException);
 
             return studentViewDependencyValidationException;
+        }
+
+        private StudentViewDependencyException CreateAndLogDependencyException(Exception exception)
+        {
+            var studentViewDependencyException = new StudentViewDependencyException(exception);
+            this.loggingBroker.LogError(studentViewDependencyException);
+
+            return studentViewDependencyException;
         }
     }
 }
