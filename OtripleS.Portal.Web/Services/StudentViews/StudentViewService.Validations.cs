@@ -27,9 +27,15 @@ namespace OtripleS.Portal.Web.Services.StudentViews
                     throw new InvalidStudentViewException(
                         parameterName: nameof(StudentView.FirstName),
                         parameterValue: studentView.FirstName);
+
+                case { } when IsInvalid(studentView.BirthDate):
+                    throw new InvalidStudentViewException(
+                        parameterName: nameof(StudentView.BirthDate),
+                        parameterValue: studentView.BirthDate);
             }
         }
 
         private static bool IsInvalid(string text) => String.IsNullOrWhiteSpace(text);
+        private static bool IsInvalid(DateTimeOffset date) => date == default;
     }
 }
