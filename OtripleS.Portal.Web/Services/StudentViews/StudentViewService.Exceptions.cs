@@ -20,6 +20,10 @@ namespace OtripleS.Portal.Web.Services.StudentViews
             {
                 return await returningStudentViewFunction();
             }
+            catch (NullStudentViewException nullStudentViewException)
+            {
+                throw CreateAndLogValidationException(nullStudentViewException);
+            }
             catch (InvalidStudentViewException invalidStudentViewException)
             {
                 throw CreateAndLogValidationException(invalidStudentViewException);

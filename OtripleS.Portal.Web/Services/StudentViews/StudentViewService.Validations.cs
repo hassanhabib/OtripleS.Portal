@@ -15,6 +15,9 @@ namespace OtripleS.Portal.Web.Services.StudentViews
         {
             switch (studentView)
             {
+                case null:
+                    throw new NullStudentViewException();
+
                 case { } when IsInvalid(studentView.IdentityNumber):
                     throw new InvalidStudentViewException(
                         parameterName: nameof(StudentView.IdentityNumber),
