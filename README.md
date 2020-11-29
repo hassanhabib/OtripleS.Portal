@@ -16,3 +16,6 @@ This project is aiming toward directing all the software development funds and h
 <img width=20 src="https://www.searchmarketingaustralia.com.au/wp-content/uploads/2017/10/original_images_YouTube.png" /> [OtripleS.Portal 004: Services in Blazor (Exceptions)](https://www.youtube.com/watch?v=JGj5iyOT1SI)
 
 <img width=20 src="https://www.searchmarketingaustralia.com.au/wp-content/uploads/2017/10/original_images_YouTube.png" /> [OtripleS.Portal 005: View Services in Blazor (Mapping)](https://www.youtube.com/watch?v=41lNLxIljhE)
+
+
+<img width=20 src="https://www.searchmarketingaustralia.com.au/wp-content/uploads/2017/10/original_images_YouTube.png" /> [BLZ006: View Services in Blazor (Validations & Exceptions)](https://www.youtube.com/watch?v=YlqTLtqh--4)
