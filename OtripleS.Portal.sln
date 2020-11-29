@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OtripleS.Portal.Web", "OtripleS.Portal.Web\OtripleS.Portal.Web.csproj", "{45793A4A-3B17-4675-9757-5C6684D7406F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtripleS.Portal.Web.Tests.Unit", "OtripleS.Portal.Web.Tests.Unit\OtripleS.Portal.Web.Tests.Unit.csproj", "{0123BDE1-43D4-4616-8F54-C494BD409ECC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OtripleS.Portal.Web.Tests.Unit", "OtripleS.Portal.Web.Tests.Unit\OtripleS.Portal.Web.Tests.Unit.csproj", "{0123BDE1-43D4-4616-8F54-C494BD409ECC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
