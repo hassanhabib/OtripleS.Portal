@@ -8,8 +8,4 @@
     <PackageReference Include="RESTFulSense" Version="1.7.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\Components\Basics\" />
-  </ItemGroup>
-
 </Project>
