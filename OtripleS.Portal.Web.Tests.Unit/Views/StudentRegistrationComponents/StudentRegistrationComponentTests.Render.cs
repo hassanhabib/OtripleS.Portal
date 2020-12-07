@@ -60,6 +60,32 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
 
             this.renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox.Placeholder
                 .Should().Be(expectedIdentityTextBoxPlaceholder);
+
+            this.renderedStudentRegistrationComponent.Instance.StudentFirstNameTextBox
+                .Should().NotBeNull();
+
+            this.renderedStudentRegistrationComponent.Instance.StudentFirstNameTextBox.Placeholder
+                .Should().Be(expectedFirstNameTextBoxPlaceholder);
+
+            this.renderedStudentRegistrationComponent.Instance.StudentMiddleNameTextBox
+                .Should().NotBeNull();
+
+            this.renderedStudentRegistrationComponent.Instance.StudentMiddleNameTextBox.Placeholder
+                .Should().Be(expectedMiddleNameTextBoxPlaceholder);
+
+            this.renderedStudentRegistrationComponent.Instance.StudentLastNameTextBox
+                .Should().NotBeNull();
+
+            this.renderedStudentRegistrationComponent.Instance.StudentLastNameTextBox.Placeholder
+                .Should().Be(expectedLastnameTextBoxPlaceholder);
+
+            this.renderedStudentRegistrationComponent.Instance.SubmitButton
+                .Should().NotBeNull();
+
+            this.renderedStudentRegistrationComponent.Instance.SubmitButton.Label
+                .Should().Be(expectedSubmitButtonLabel);
+
+            this.studentViewServiceMock.VerifyNoOtherCalls();
         }
     }
 }
