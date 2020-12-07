@@ -3,6 +3,7 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
+using Bunit;
 using FluentAssertions;
 using OtripleS.Portal.Web.Models.ContainerComponents;
 using OtripleS.Portal.Web.Views.Components;
@@ -53,6 +54,9 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             // then
             this.renderedStudentRegistrationComponent.Instance.State
                 .Should().Be(expectedComponentState);
+
+            this.renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox
+                .Should().NotBeNull();
         }
     }
 }
