@@ -57,6 +57,9 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
 
             this.renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox
                 .Should().NotBeNull();
+
+            this.renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox.Placeholder
+                .Should().Be(expectedIdentityTextBoxPlaceholder);
         }
     }
 }
