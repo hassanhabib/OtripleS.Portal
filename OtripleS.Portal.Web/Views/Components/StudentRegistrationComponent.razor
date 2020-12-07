@@ -1,21 +1,23 @@
 ﻿@using OtripleS.Portal.Web.Views.Components.ContainerComponents;
-@using OtripleS.Portal.Web.Views.Bases; 
+@using OtripleS.Portal.Web.Views.Bases;
 
 <ContainerComponent State="State">
     <Content>
-        <TextBoxBase @ref=StudentIdentityTextBox
-                     Placeholder="Student Identity" />
-
-        <TextBoxBase @ref=StudentFirstNameTextBox
-                     Placeholder="First Name" />
-
-        <TextBoxBase @ref=StudentMiddleNameTextBox
-                     Placeholder="Middle Name" />
-
-        <TextBoxBase @ref=StudentLastNameTextBox
-                     Placeholder="Last Name" />
-
-        <ButtonBase @ref=SubmitButton
-                    Label="Submit Student" />
+        <div align="center">
+            <TextBoxBase @ref=StudentIdentityTextBox
+                         Placeholder="Student Identity" />
+            <br />
+            <TextBoxBase @ref=StudentFirstNameTextBox
+                         Placeholder="First Name" />
+            <br />
+            <TextBoxBase @ref=StudentMiddleNameTextBox
+                         Placeholder="Middle Name" />
+            <br />
+            <TextBoxBase @ref=StudentLastNameTextBox
+                         Placeholder="Last Name" />
+            <br />
+            <ButtonBase @ref=SubmitButton
+                        Label="Submit Student" />
+        </div>
     </Content>
 </ContainerComponent>
