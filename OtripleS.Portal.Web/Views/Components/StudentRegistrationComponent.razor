@@ -3,7 +3,19 @@
 
 <ContainerComponent State="State">
     <Content>
-        <TextBoxBase @ref=StudentIdentityTextBox 
-                     Placeholder="Student Identity"/>
+        <TextBoxBase @ref=StudentIdentityTextBox
+                     Placeholder="Student Identity" />
+
+        <TextBoxBase @ref=StudentFirstNameTextBox
+                     Placeholder="First Name" />
+
+        <TextBoxBase @ref=StudentMiddleNameTextBox
+                     Placeholder="Middle Name" />
+
+        <TextBoxBase @ref=StudentLastNameTextBox
+                     Placeholder="Last Name" />
+
+        <ButtonBase @ref=SubmitButton
+                    Label="Submit Student" />
     </Content>
 </ContainerComponent>
