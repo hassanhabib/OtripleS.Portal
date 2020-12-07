@@ -11,8 +11,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using OtripleS.Portal.Web.Brokers.API;
+using OtripleS.Portal.Web.Brokers.DateTimes;
 using OtripleS.Portal.Web.Brokers.Logging;
 using OtripleS.Portal.Web.Models.Configurations;
+using OtripleS.Portal.Web.Services.Students;
+using OtripleS.Portal.Web.Services.StudentViews;
+using OtripleS.Portal.Web.Services.Users;
 using RESTFulSense.Clients;
 
 namespace OtripleS.Portal.Web
@@ -33,6 +37,10 @@ namespace OtripleS.Portal.Web
             services.AddScoped<IApiBroker, ApiBroker>();
             services.AddScoped<ILogger, Logger<LoggingBroker>>();
             services.AddScoped<ILoggingBroker, LoggingBroker>();
+            services.AddScoped<IDateTimeBroker, DateTimeBroker>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IStudentService, StudentService>();
+            services.AddScoped<IStudentViewService, StudentViewService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

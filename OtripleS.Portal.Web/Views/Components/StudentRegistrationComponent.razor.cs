@@ -3,19 +3,26 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
-using System;
+using Microsoft.AspNetCore.Components;
+using OtripleS.Portal.Web.Models.ContainerComponents;
+using OtripleS.Portal.Web.Models.StudentRegistrationComponents.Exceptions;
+using OtripleS.Portal.Web.Models.StudentViews;
+using OtripleS.Portal.Web.Services.StudentViews;
 using OtripleS.Portal.Web.Views.Bases;
 
 namespace OtripleS.Portal.Web.Views.Components
 {
     public partial class StudentRegistrationComponent
     {
-        public TextBoxBase TextBox { get; set; }
+        [Inject]
+        public IStudentViewService StudentViewService { get; set; }
 
-        public void ButtonClicked()
-        {
-            string textBoxValue = this.TextBox.Value;
-            Console.WriteLine(textBoxValue);
-        }
+        public ComponentState State { get; set; }
+        public StudentRegistrationComponentException Exception { get; set; }
+        public StudentView StudentView { get; set; }
+        public TextBoxBase StudentIdentityTextBox { get; set; }
+        public TextBoxBase StudentFirstNameTextBox { get; set; }
+        public TextBoxBase StudentMiddleNameTextBox { get; set; }
+        public TextBoxBase StudentLastNameTextBox { get; set; }
     }
 }
