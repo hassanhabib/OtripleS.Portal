@@ -4,6 +4,7 @@
 // ---------------------------------------------------------------
 
 using FluentAssertions;
+using Moq;
 using OtripleS.Portal.Web.Models.ContainerComponents;
 using OtripleS.Portal.Web.Models.StudentViews;
 using OtripleS.Portal.Web.Views.Components;
@@ -133,6 +134,8 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             this.renderedStudentRegistrationComponent.Instance.DateOfBirthPicker
                 .SetValue(inputStudentView.BirthDate);
 
+            this.renderedStudentRegistrationComponent.Instance.SubmitButton.Click();
+
             // then
             this.renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox.Value
                 .Should().BeEquivalentTo(expectedStudentView.IdentityNumber);
@@ -151,6 +154,13 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
 
             this.renderedStudentRegistrationComponent.Instance.DateOfBirthPicker.Value
                 .Should().Be(inputStudentView.BirthDate);
+
+            this.studentViewServiceMock.Verify(service =>
+                service.AddStudentViewAsync(
+                    this.renderedStudentRegistrationComponent.Instance.StudentView),
+                        Times.Once);
+
+            this.studentViewServiceMock.VerifyNoOtherCalls();
         }
     }
 }
