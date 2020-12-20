@@ -17,8 +17,11 @@ namespace OtripleS.Portal.Web.Views.Bases
         [Parameter]
         public EventCallback<DateTimeOffset> ValueChanged { get; set; }
 
-        public void SetValue(DateTimeOffset value) =>
+        public async Task SetValue(DateTimeOffset value)
+        {
             this.Value = value;
+            await ValueChanged.InvokeAsync(this.Value);
+        }
 
         private Task OnValueChanged(ChangeEventArgs changeEventArgs)
         {

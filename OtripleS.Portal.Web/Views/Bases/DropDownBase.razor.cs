@@ -17,8 +17,11 @@ namespace OtripleS.Portal.Web.Views.Bases
         [Parameter]
         public EventCallback<TEnum> ValueChanged { get; set; }
 
-        public void SetValue(TEnum value) => 
+        public async Task SetValue(TEnum value)
+        {
             this.Value = value;
+            await ValueChanged.InvokeAsync(this.Value);
+        }
 
         private Task OnValueChanged(ChangeEventArgs changeEventArgs)
         {

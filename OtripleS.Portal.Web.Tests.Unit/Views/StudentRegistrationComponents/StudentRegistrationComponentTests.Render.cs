@@ -137,22 +137,22 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             this.renderedStudentRegistrationComponent.Instance.SubmitButton.Click();
 
             // then
-            this.renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox.Value
+            this.renderedStudentRegistrationComponent.Instance.StudentView.IdentityNumber
                 .Should().BeEquivalentTo(expectedStudentView.IdentityNumber);
 
-            this.renderedStudentRegistrationComponent.Instance.StudentFirstNameTextBox.Value
+            this.renderedStudentRegistrationComponent.Instance.StudentView.FirstName
                 .Should().BeEquivalentTo(inputStudentView.FirstName);
 
-            this.renderedStudentRegistrationComponent.Instance.StudentMiddleNameTextBox.Value
+            this.renderedStudentRegistrationComponent.Instance.StudentView.MiddleName
                 .Should().BeEquivalentTo(inputStudentView.MiddleName);
 
-            this.renderedStudentRegistrationComponent.Instance.StudentLastNameTextBox.Value
+            this.renderedStudentRegistrationComponent.Instance.StudentView.LastName
                 .Should().BeEquivalentTo(inputStudentView.LastName);
 
-            this.renderedStudentRegistrationComponent.Instance.StudentGenderDropDown.Value
+            this.renderedStudentRegistrationComponent.Instance.StudentView.Gender
                 .Should().Be(inputStudentView.Gender);
 
-            this.renderedStudentRegistrationComponent.Instance.DateOfBirthPicker.Value
+            this.renderedStudentRegistrationComponent.Instance.StudentView.BirthDate
                 .Should().Be(inputStudentView.BirthDate);
 
             this.studentViewServiceMock.Verify(service =>

@@ -19,8 +19,11 @@ namespace OtripleS.Portal.Web.Views.Bases
         [Parameter]
         public EventCallback<string> ValueChanged { get; set; }
 
-        public void SetValue(string value) =>
+        public async Task SetValue(string value)
+        {
             this.Value = value;
+            await ValueChanged.InvokeAsync(this.Value);
+        }
 
         private Task OnValueChanged(ChangeEventArgs changeEventArgs)
         {
