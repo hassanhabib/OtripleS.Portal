@@ -6,6 +6,7 @@
 using Bunit;
 using FluentAssertions;
 using OtripleS.Portal.Web.Models.ContainerComponents;
+using OtripleS.Portal.Web.Models.StudentViews;
 using OtripleS.Portal.Web.Views.Components;
 using Xunit;
 
@@ -79,6 +80,9 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
 
             this.renderedStudentRegistrationComponent.Instance.StudentLastNameTextBox.Placeholder
                 .Should().Be(expectedLastnameTextBoxPlaceholder);
+
+            this.renderedStudentRegistrationComponent.Instance.StudentGenderDropDown.Value
+                .Should().BeOfType(typeof(StudentViewGender));
 
             this.renderedStudentRegistrationComponent.Instance.StudentGenderDropDown
                 .Should().NotBeNull();
