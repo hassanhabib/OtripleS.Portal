@@ -102,5 +102,25 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             this.renderedStudentRegistrationComponent.Instance.Exception.Should().BeNull();
             this.studentViewServiceMock.VerifyNoOtherCalls();
         }
+
+        [Fact]
+        public void ShouldSubmitStudent()
+        {
+            // given
+            StudentView randomStudentView = CreateRandomStudentView();
+            StudentView inputStudentView = randomStudentView;
+            StudentView expectedStudentView = inputStudentView;
+
+            // when
+            this.renderedStudentRegistrationComponent =
+                RenderComponent<StudentRegistrationComponent>();
+
+            this.renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox
+                .SetValue(inputStudentView.IdentityNumber);
+
+            // then
+            this.renderedStudentRegistrationComponent.Instance.StudentView.IdentityNumber
+                .Should().BeEquivalentTo(expectedStudentView.IdentityNumber);
+        }
     }
 }
