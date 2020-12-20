@@ -10,20 +10,25 @@
                          Placeholder="Student Identity" />
             <br />
             <TextBoxBase @ref=StudentFirstNameTextBox
+                         @bind-Value="StudentView.FirstName"
                          Placeholder="First Name" />
             <br />
             <TextBoxBase @ref=StudentMiddleNameTextBox
+                         @bind-Value="StudentView.MiddleName"
                          Placeholder="Middle Name" />
             <br />
             <TextBoxBase @ref=StudentLastNameTextBox
+                         @bind-Value="StudentView.LastName"
                          Placeholder="Last Name" />
 
             <br/>
             <DropDownBase @ref=StudentGenderDropDown
+                          @bind-Value="StudentView.Gender"
                           TEnum="StudentViewGender" />
 
             <br/>
-            <DatePickerBase @ref=DateOfBirthPicker />
+            <DatePickerBase @ref=DateOfBirthPicker
+                            @bind-Value="StudentView.BirthDate"/>
 
             <br />
             <ButtonBase @ref=SubmitButton
