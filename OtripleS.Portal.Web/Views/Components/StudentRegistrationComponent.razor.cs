@@ -3,6 +3,7 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using OtripleS.Portal.Web.Models.ContainerComponents;
 using OtripleS.Portal.Web.Models.StudentRegistrationComponents.Exceptions;
@@ -24,7 +25,7 @@ namespace OtripleS.Portal.Web.Views.Components
         public TextBoxBase StudentFirstNameTextBox { get; set; }
         public TextBoxBase StudentMiddleNameTextBox { get; set; }
         public TextBoxBase StudentLastNameTextBox { get; set; }
-        public DropDownBase<StudentViewGender> StudentGenderDropDown{ get; set; }
+        public DropDownBase<StudentViewGender> StudentGenderDropDown { get; set; }
         public DatePickerBase DateOfBirthPicker { get; set; }
         public ButtonBase SubmitButton { get; set; }
 
@@ -32,6 +33,11 @@ namespace OtripleS.Portal.Web.Views.Components
         {
             this.StudentView = new StudentView();
             this.State = ComponentState.Content;
+        }
+
+        public async void RegisterStudentAsync()
+        {
+            await this.StudentViewService.AddStudentViewAsync(this.StudentView);
         }
     }
 }
