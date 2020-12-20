@@ -87,6 +87,9 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             this.renderedStudentRegistrationComponent.Instance.StudentGenderDropDown
                 .Should().NotBeNull();
 
+            this.renderedStudentRegistrationComponent.Instance.DateOfBirthPicker
+                .Should().NotBeNull();
+
             this.renderedStudentRegistrationComponent.Instance.SubmitButton.Label
                 .Should().Be(expectedSubmitButtonLabel);
 
