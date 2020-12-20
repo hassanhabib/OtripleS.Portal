@@ -24,6 +24,7 @@ namespace OtripleS.Portal.Web.Views.Components
         public TextBoxBase StudentFirstNameTextBox { get; set; }
         public TextBoxBase StudentMiddleNameTextBox { get; set; }
         public TextBoxBase StudentLastNameTextBox { get; set; }
+        public DropDownBase<StudentViewGender> StudentGenderDropDown{ get; set; }
         public ButtonBase SubmitButton { get; set; }
 
         protected override void OnInitialized()

@@ -32,6 +32,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             initialStudentRegistrationComponent.StudentLastNameTextBox.Should().BeNull();
             initialStudentRegistrationComponent.SubmitButton.Should().BeNull();
             initialStudentRegistrationComponent.StudentView.Should().BeNull();
+            initialStudentRegistrationComponent.StudentGenderDropDown.Should().BeNull();
         }
 
         [Fact]
