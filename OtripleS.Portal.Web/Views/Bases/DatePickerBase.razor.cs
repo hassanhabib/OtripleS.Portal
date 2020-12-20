@@ -3,19 +3,17 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
+using System;
 using Microsoft.AspNetCore.Components;
 
 namespace OtripleS.Portal.Web.Views.Bases
 {
-    public partial class TextBoxBase : ComponentBase
+    public partial class DatePickerBase
     {
         [Parameter]
-        public string Value { get; set; }
+        public DateTimeOffset Value { get; set; }
 
-        [Parameter]
-        public string Placeholder { get; set; }
-
-        public void SetValue(string value) =>
+        public void SetValue(DateTimeOffset value) =>
             this.Value = value;
     }
 }

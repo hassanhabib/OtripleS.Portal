@@ -3,7 +3,6 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
-using Bunit;
 using FluentAssertions;
 using OtripleS.Portal.Web.Models.ContainerComponents;
 using OtripleS.Portal.Web.Models.StudentViews;
@@ -34,6 +33,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             initialStudentRegistrationComponent.SubmitButton.Should().BeNull();
             initialStudentRegistrationComponent.StudentView.Should().BeNull();
             initialStudentRegistrationComponent.StudentGenderDropDown.Should().BeNull();
+            initialStudentRegistrationComponent.DateOfBirthPicker.Should().BeNull();
         }
 
         [Fact]
