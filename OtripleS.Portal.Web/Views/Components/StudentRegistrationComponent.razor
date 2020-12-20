@@ -1,5 +1,6 @@
 ﻿@using OtripleS.Portal.Web.Views.Components.ContainerComponents;
 @using OtripleS.Portal.Web.Views.Bases;
+@using OtripleS.Portal.Web.Models.StudentViews;
 
 <ContainerComponent State="State">
     <Content>
@@ -15,6 +16,11 @@
             <br />
             <TextBoxBase @ref=StudentLastNameTextBox
                          Placeholder="Last Name" />
+
+            <br/>
+            <DropDownBase @ref=StudentGenderDropDown
+                          TEnum="StudentViewGender" />
+
             <br />
             <ButtonBase @ref=SubmitButton
                         Label="Submit Student" />
