@@ -118,9 +118,39 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             this.renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox
                 .SetValue(inputStudentView.IdentityNumber);
 
+            this.renderedStudentRegistrationComponent.Instance.StudentFirstNameTextBox
+                .SetValue(inputStudentView.FirstName);
+
+            this.renderedStudentRegistrationComponent.Instance.StudentMiddleNameTextBox
+                .SetValue(inputStudentView.MiddleName);
+
+            this.renderedStudentRegistrationComponent.Instance.StudentLastNameTextBox
+                .SetValue(inputStudentView.LastName);
+
+            this.renderedStudentRegistrationComponent.Instance.StudentGenderDropDown
+                .SetValue(inputStudentView.Gender);
+
+            this.renderedStudentRegistrationComponent.Instance.DateOfBirthPicker
+                .SetValue(inputStudentView.BirthDate);
+
             // then
             this.renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox.Value
                 .Should().BeEquivalentTo(expectedStudentView.IdentityNumber);
+
+            this.renderedStudentRegistrationComponent.Instance.StudentFirstNameTextBox.Value
+                .Should().BeEquivalentTo(inputStudentView.FirstName);
+
+            this.renderedStudentRegistrationComponent.Instance.StudentMiddleNameTextBox.Value
+                .Should().BeEquivalentTo(inputStudentView.MiddleName);
+
+            this.renderedStudentRegistrationComponent.Instance.StudentLastNameTextBox.Value
+                .Should().BeEquivalentTo(inputStudentView.LastName);
+
+            this.renderedStudentRegistrationComponent.Instance.StudentGenderDropDown.Value
+                .Should().Be(inputStudentView.Gender);
+
+            this.renderedStudentRegistrationComponent.Instance.DateOfBirthPicker.Value
+                .Should().Be(inputStudentView.BirthDate);
         }
     }
 }
