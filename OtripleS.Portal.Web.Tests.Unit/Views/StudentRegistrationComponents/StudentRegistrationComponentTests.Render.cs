@@ -99,7 +99,6 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             this.renderedStudentRegistrationComponent.Instance.SubmitButton
                 .Should().NotBeNull();
 
-            this.renderedStudentRegistrationComponent.Instance.StudentView.Should().BeNull();
             this.renderedStudentRegistrationComponent.Instance.Exception.Should().BeNull();
             this.studentViewServiceMock.VerifyNoOtherCalls();
         }

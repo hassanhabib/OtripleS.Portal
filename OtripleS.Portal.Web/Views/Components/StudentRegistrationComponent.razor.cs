@@ -30,6 +30,7 @@ namespace OtripleS.Portal.Web.Views.Components
 
         protected override void OnInitialized()
         {
+            this.StudentView = new StudentView();
             this.State = ComponentState.Content;
         }
     }
