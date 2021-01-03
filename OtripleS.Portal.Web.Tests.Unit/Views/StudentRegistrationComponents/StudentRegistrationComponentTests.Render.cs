@@ -5,6 +5,7 @@
 
 using FluentAssertions;
 using Moq;
+using OtripleS.Portal.Web.Models.Colors;
 using OtripleS.Portal.Web.Models.ContainerComponents;
 using OtripleS.Portal.Web.Models.StudentViews;
 using OtripleS.Portal.Web.Views.Components;
@@ -106,6 +107,9 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
 
             this.renderedStudentRegistrationComponent.Instance.ErrorLabel.Value
                 .Should().BeNull();
+
+            this.renderedStudentRegistrationComponent.Instance.ErrorLabel.Color
+                .Should().Be(Color.Red);
 
             this.renderedStudentRegistrationComponent.Instance.Exception.Should().BeNull();
             this.studentViewServiceMock.VerifyNoOtherCalls();

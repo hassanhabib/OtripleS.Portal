@@ -4,6 +4,7 @@
 // ---------------------------------------------------------------
 
 using Microsoft.AspNetCore.Components;
+using OtripleS.Portal.Web.Models.Colors;
 
 namespace OtripleS.Portal.Web.Views.Bases
 {
@@ -11,6 +12,9 @@ namespace OtripleS.Portal.Web.Views.Bases
     {
         [Parameter]
         public string Value { get; set; }
+
+        [Parameter]
+        public Color Color { get; set; }
 
         public void SetValue(string value)
         {
