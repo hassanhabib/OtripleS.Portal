@@ -8,9 +8,11 @@ using Bunit;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using OtripleS.Portal.Web.Models.StudentViews;
+using OtripleS.Portal.Web.Models.StudentViews.Exceptions;
 using OtripleS.Portal.Web.Services.StudentViews;
 using OtripleS.Portal.Web.Views.Components;
 using Tynamix.ObjectFiller;
+using Xunit;
 
 namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
 {
@@ -30,6 +32,20 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             CreateStudentFiller().Create();
 
         private static string GetRandomString() => new MnemonicString().GetValue();
+
+        public static TheoryData StudentViewValidationExceptions()
+        {
+            string randomMessage = GetRandomString();
+            string validationMesage = randomMessage;
+            string expectedErrorMessage = validationMesage;
+            var innerValidationException = new Exception(validationMesage);
+
+            return new TheoryData<Exception>
+            {
+                new StudentViewValidationException(innerValidationException),
+                new StudentViewDependencyValidationException(innerValidationException)
+            };
+        }
 
         private static Filler<StudentView> CreateStudentFiller()
         {

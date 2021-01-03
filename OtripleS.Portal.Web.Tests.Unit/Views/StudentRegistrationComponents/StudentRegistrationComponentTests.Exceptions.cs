@@ -15,17 +15,14 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
 {
     public partial class StudentRegistrationComponentTests
     {
-        [Fact]
-        public void ShouldRenderInnerExceptionMessageIfValidationErrorOccured()
+        [Theory]
+        [MemberData(nameof(StudentViewValidationExceptions))]
+        public void ShouldRenderInnerExceptionMessageIfValidationErrorOccured(
+            Exception studentViewValidationException)
         {
             // given
-            string randomMessage = GetRandomString();
-            string validationMesage = randomMessage;
-            string expectedErrorMessage = validationMesage;
-            var innerValidationException = new Exception(validationMesage);
-
-            var studentViewValidationException =
-                new StudentViewValidationException(innerValidationException);
+            string expectedErrorMessage =
+                studentViewValidationException.InnerException.Message;
 
             this.studentViewServiceMock.Setup(service =>
                 service.AddStudentViewAsync(It.IsAny<StudentView>()))
