@@ -28,6 +28,7 @@ namespace OtripleS.Portal.Web.Views.Components
         public DropDownBase<StudentViewGender> StudentGenderDropDown { get; set; }
         public DatePickerBase DateOfBirthPicker { get; set; }
         public ButtonBase SubmitButton { get; set; }
+        public LabelBase ErrorLabel { get; set; }
 
         protected override void OnInitialized()
         {

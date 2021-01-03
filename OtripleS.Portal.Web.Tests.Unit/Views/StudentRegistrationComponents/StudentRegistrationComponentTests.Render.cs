@@ -35,6 +35,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             initialStudentRegistrationComponent.StudentView.Should().BeNull();
             initialStudentRegistrationComponent.StudentGenderDropDown.Should().BeNull();
             initialStudentRegistrationComponent.DateOfBirthPicker.Should().BeNull();
+            initialStudentRegistrationComponent.ErrorLabel.Should().BeNull();
         }
 
         [Fact]
@@ -100,6 +101,9 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             this.renderedStudentRegistrationComponent.Instance.SubmitButton
                 .Should().NotBeNull();
 
+            this.renderedStudentRegistrationComponent.Instance.ErrorLabel
+                .Should().NotBeNull();
+
             this.renderedStudentRegistrationComponent.Instance.Exception.Should().BeNull();
             this.studentViewServiceMock.VerifyNoOtherCalls();
         }
@@ -154,6 +158,9 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
 
             this.renderedStudentRegistrationComponent.Instance.StudentView.BirthDate
                 .Should().Be(inputStudentView.BirthDate);
+
+            this.renderedStudentRegistrationComponent.Instance.ErrorLabel.Value
+                .Should().BeNull();
 
             this.studentViewServiceMock.Verify(service =>
                 service.AddStudentViewAsync(
