@@ -50,10 +50,24 @@ namespace OtripleS.Portal.Web.Views.Components
 
                 this.ErrorLabel.SetValue(validationMessage);
             }
-            catch (StudentViewDependencyValidationException studentViewDependencyValidationException)
+            catch (StudentViewDependencyValidationException dependencyValidationException)
             {
                 string validationMessage =
-                    studentViewDependencyValidationException.InnerException.Message;
+                    dependencyValidationException.InnerException.Message;
+
+                this.ErrorLabel.SetValue(validationMessage);
+            }
+            catch (StudentViewDependencyException studentViewDependencyException)
+            {
+                string validationMessage =
+                    studentViewDependencyException.Message;
+
+                this.ErrorLabel.SetValue(validationMessage);
+            }
+            catch (StudentViewServiceException studentViewServiceException)
+            {
+                string validationMessage =
+                    studentViewServiceException.Message;
 
                 this.ErrorLabel.SetValue(validationMessage);
             }
