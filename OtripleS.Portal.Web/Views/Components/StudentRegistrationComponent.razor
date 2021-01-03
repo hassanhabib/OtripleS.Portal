@@ -1,6 +1,7 @@
 ﻿@using OtripleS.Portal.Web.Views.Components.ContainerComponents;
 @using OtripleS.Portal.Web.Views.Bases;
 @using OtripleS.Portal.Web.Models.StudentViews;
+@using OtripleS.Portal.Web.Models.Colors; 
 
 <ContainerComponent State="State">
     <Content>
@@ -36,7 +37,7 @@
                         OnClick="@RegisterStudentAsync"/>
 
             <br />
-            <LabelBase @ref=ErrorLabel />
+            <LabelBase @ref=ErrorLabel Color="Color.Red"/>
         </div>
     </Content>
 </ContainerComponent>
