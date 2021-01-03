@@ -47,6 +47,17 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             };
         }
 
+        public static TheoryData StudentViewDependencyServiceExceptions()
+        {
+            var innerValidationException = new Exception();
+
+            return new TheoryData<Exception>
+            {
+                new StudentViewDependencyException(innerValidationException),
+                new StudentViewServiceException(innerValidationException)
+            };
+        }
+
         private static Filler<StudentView> CreateStudentFiller()
         {
             var filler = new Filler<StudentView>();

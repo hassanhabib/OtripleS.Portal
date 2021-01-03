@@ -44,5 +44,35 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
 
             this.studentViewServiceMock.VerifyNoOtherCalls();
         }
+
+        [Theory]
+        [MemberData(nameof(StudentViewDependencyServiceExceptions))]
+        public void ShouldRenderOuterExceptionMessageIfDependencyOrServiceErrorOccured(
+            Exception studentViewDependencyServiceException)
+        {
+            // given
+            string expectedErrorMessage =
+                studentViewDependencyServiceException.Message;
+
+            this.studentViewServiceMock.Setup(service =>
+                service.AddStudentViewAsync(It.IsAny<StudentView>()))
+                    .ThrowsAsync(studentViewDependencyServiceException);
+
+            // when
+            this.renderedStudentRegistrationComponent =
+                RenderComponent<StudentRegistrationComponent>();
+
+            this.renderedStudentRegistrationComponent.Instance.SubmitButton.Click();
+
+            // then
+            this.renderedStudentRegistrationComponent.Instance.ErrorLabel.Value
+                .Should().BeEquivalentTo(expectedErrorMessage);
+
+            this.studentViewServiceMock.Verify(service =>
+                service.AddStudentViewAsync(It.IsAny<StudentView>()),
+                    Times.Once);
+
+            this.studentViewServiceMock.VerifyNoOtherCalls();
+        }
     }
 }
