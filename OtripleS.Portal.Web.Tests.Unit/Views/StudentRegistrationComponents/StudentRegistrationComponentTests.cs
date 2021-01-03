@@ -29,6 +29,8 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
         private static StudentView CreateRandomStudentView() =>
             CreateStudentFiller().Create();
 
+        private static string GetRandomString() => new MnemonicString().GetValue();
+
         private static Filler<StudentView> CreateStudentFiller()
         {
             var filler = new Filler<StudentView>();
