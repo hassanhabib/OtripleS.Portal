@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components;
 using OtripleS.Portal.Web.Models.ContainerComponents;
 using OtripleS.Portal.Web.Models.StudentRegistrationComponents.Exceptions;
 using OtripleS.Portal.Web.Models.StudentViews;
+using OtripleS.Portal.Web.Models.StudentViews.Exceptions;
 using OtripleS.Portal.Web.Services.StudentViews;
 using OtripleS.Portal.Web.Views.Bases;
 
@@ -38,7 +39,17 @@ namespace OtripleS.Portal.Web.Views.Components
 
         public async void RegisterStudentAsync()
         {
-            await this.StudentViewService.AddStudentViewAsync(this.StudentView);
+            try
+            {
+                await this.StudentViewService.AddStudentViewAsync(this.StudentView);
+            }
+            catch (StudentViewValidationException studentViewValidationException)
+            {
+                string validationMessage = 
+                    studentViewValidationException.InnerException.Message;
+
+                this.ErrorLabel.SetValue(validationMessage);
+            }
         }
     }
 }
