@@ -21,5 +21,11 @@ namespace OtripleS.Portal.Web.Views.Bases
             this.Value = value;
             InvokeAsync(StateHasChanged);
         }
+
+        public void SetColor(Color color)
+        {
+            this.Color = color;
+            InvokeAsync(StateHasChanged);
+        }
     }
 }

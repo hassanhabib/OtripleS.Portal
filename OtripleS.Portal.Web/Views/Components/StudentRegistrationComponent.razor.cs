@@ -42,6 +42,8 @@ namespace OtripleS.Portal.Web.Views.Components
             try
             {
                 await this.StudentViewService.AddStudentViewAsync(this.StudentView);
+                this.StatusLabel.SetValue("Student submitted successfully!");
+                this.StatusLabel.SetColor(Models.Colors.Color.Green);
             }
             catch (StudentViewValidationException studentViewValidationException)
             {
