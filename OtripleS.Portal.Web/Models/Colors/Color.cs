@@ -8,6 +8,7 @@ namespace OtripleS.Portal.Web.Models.Colors
     public enum Color
     {
         Black,
-        Red
+        Red,
+        Green
     }
 }
