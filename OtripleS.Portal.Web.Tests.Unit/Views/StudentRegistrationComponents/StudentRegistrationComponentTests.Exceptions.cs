@@ -35,7 +35,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             this.renderedStudentRegistrationComponent.Instance.SubmitButton.Click();
 
             // then
-            this.renderedStudentRegistrationComponent.Instance.ErrorLabel.Value
+            this.renderedStudentRegistrationComponent.Instance.StatusLabel.Value
                 .Should().BeEquivalentTo(expectedErrorMessage);
 
             this.studentViewServiceMock.Verify(service =>
@@ -65,7 +65,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             this.renderedStudentRegistrationComponent.Instance.SubmitButton.Click();
 
             // then
-            this.renderedStudentRegistrationComponent.Instance.ErrorLabel.Value
+            this.renderedStudentRegistrationComponent.Instance.StatusLabel.Value
                 .Should().BeEquivalentTo(expectedErrorMessage);
 
             this.studentViewServiceMock.Verify(service =>
