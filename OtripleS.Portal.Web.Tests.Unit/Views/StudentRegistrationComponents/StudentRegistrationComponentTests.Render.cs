@@ -109,7 +109,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
                 .Should().BeNull();
 
             this.renderedStudentRegistrationComponent.Instance.StatusLabel.Color
-                .Should().Be(Color.Red);
+                .Should().Be(Color.Black);
 
             this.renderedStudentRegistrationComponent.Instance.Exception.Should().BeNull();
             this.studentViewServiceMock.VerifyNoOtherCalls();
