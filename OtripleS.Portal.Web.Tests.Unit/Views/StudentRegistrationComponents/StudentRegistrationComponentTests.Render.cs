@@ -3,6 +3,7 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
+using System;
 using FluentAssertions;
 using Moq;
 using OtripleS.Portal.Web.Models.Colors;
@@ -112,6 +113,37 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
                 .Should().Be(Color.Black);
 
             this.renderedStudentRegistrationComponent.Instance.Exception.Should().BeNull();
+            this.studentViewServiceMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public void ShouldDisplaySubmittingWhileSubmittingStudent()
+        {
+            // given
+            StudentView randomStudentView = CreateRandomStudentView();
+            StudentView inputStudentView = randomStudentView;
+            StudentView returnedStudentView = inputStudentView;
+            StudentView expectedStudentView = inputStudentView;
+
+            this.studentViewServiceMock.Setup(service =>
+                service.AddStudentViewAsync(It.IsAny<StudentView>()))
+                    .ReturnsAsync(returnedStudentView, delay: TimeSpan.FromMilliseconds(5));
+
+            // when
+            this.renderedStudentRegistrationComponent =
+                RenderComponent<StudentRegistrationComponent>();
+
+            this.renderedStudentRegistrationComponent.Instance.SubmitButton.Click();
+
+            // then
+            this.studentViewServiceMock.Verify(service =>
+                service.AddStudentViewAsync(
+                    this.renderedStudentRegistrationComponent.Instance.StudentView),
+                        Times.Once);
+
+            this.renderedStudentRegistrationComponent.Instance.StatusLabel.Value
+                .Should().Be("Submitting...");
+
             this.studentViewServiceMock.VerifyNoOtherCalls();
         }
 

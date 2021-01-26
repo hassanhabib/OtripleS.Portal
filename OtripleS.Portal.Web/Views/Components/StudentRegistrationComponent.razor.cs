@@ -42,6 +42,7 @@ namespace OtripleS.Portal.Web.Views.Components
         {
             try
             {
+                this.StatusLabel.SetValue("Submitting...");
                 await this.StudentViewService.AddStudentViewAsync(this.StudentView);
                 ReportRegistrationSuccess();
             }
