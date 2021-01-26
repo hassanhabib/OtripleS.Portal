@@ -37,7 +37,6 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
         {
             string randomMessage = GetRandomString();
             string validationMesage = randomMessage;
-            string expectedErrorMessage = validationMesage;
             var innerValidationException = new Exception(validationMesage);
 
             return new TheoryData<Exception>

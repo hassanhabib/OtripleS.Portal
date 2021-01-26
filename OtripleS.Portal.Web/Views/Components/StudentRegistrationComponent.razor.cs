@@ -11,6 +11,7 @@ using OtripleS.Portal.Web.Models.StudentViews;
 using OtripleS.Portal.Web.Models.StudentViews.Exceptions;
 using OtripleS.Portal.Web.Services.StudentViews;
 using OtripleS.Portal.Web.Views.Bases;
+using OtripleS.Portal.Web.Models.Colors;
 
 namespace OtripleS.Portal.Web.Views.Components
 {
@@ -49,35 +50,41 @@ namespace OtripleS.Portal.Web.Views.Components
                 string validationMessage = 
                     studentViewValidationException.InnerException.Message;
 
-                this.StatusLabel.SetValue(validationMessage);
+                ReportRegistrationFailure(validationMessage);
             }
             catch (StudentViewDependencyValidationException dependencyValidationException)
             {
                 string validationMessage =
                     dependencyValidationException.InnerException.Message;
 
-                this.StatusLabel.SetValue(validationMessage);
+                ReportRegistrationFailure(validationMessage);
             }
             catch (StudentViewDependencyException studentViewDependencyException)
             {
                 string validationMessage =
                     studentViewDependencyException.Message;
 
-                this.StatusLabel.SetValue(validationMessage);
+                ReportRegistrationFailure(validationMessage);
             }
             catch (StudentViewServiceException studentViewServiceException)
             {
                 string validationMessage =
                     studentViewServiceException.Message;
 
-                this.StatusLabel.SetValue(validationMessage);
+                ReportRegistrationFailure(validationMessage);
             }
         }
 
         private void ReportRegistrationSuccess()
         {
             this.StatusLabel.SetValue("Student submitted successfully!");
-            this.StatusLabel.SetColor(Models.Colors.Color.Green);
+            this.StatusLabel.SetColor(Color.Green);
+        }
+
+        private void ReportRegistrationFailure(string errorMessage)
+        {
+            this.StatusLabel.SetValue(errorMessage);
+            this.StatusLabel.SetColor(Color.Red);
         }
     }
 }
