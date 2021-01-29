@@ -6,6 +6,7 @@
 using System;
 using FluentAssertions;
 using Moq;
+using OtripleS.Portal.Web.Models.Colors;
 using OtripleS.Portal.Web.Models.StudentViews;
 using OtripleS.Portal.Web.Models.StudentViews.Exceptions;
 using OtripleS.Portal.Web.Views.Components;
@@ -38,6 +39,9 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             this.renderedStudentRegistrationComponent.Instance.StatusLabel.Value
                 .Should().BeEquivalentTo(expectedErrorMessage);
 
+            this.renderedStudentRegistrationComponent.Instance.StatusLabel.Color
+                .Should().Be(Color.Red);
+
             this.studentViewServiceMock.Verify(service =>
                 service.AddStudentViewAsync(It.IsAny<StudentView>()),
                     Times.Once);
@@ -67,6 +71,9 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             // then
             this.renderedStudentRegistrationComponent.Instance.StatusLabel.Value
                 .Should().BeEquivalentTo(expectedErrorMessage);
+
+            this.renderedStudentRegistrationComponent.Instance.StatusLabel.Color
+                .Should().Be(Color.Red);
 
             this.studentViewServiceMock.Verify(service =>
                 service.AddStudentViewAsync(It.IsAny<StudentView>()),

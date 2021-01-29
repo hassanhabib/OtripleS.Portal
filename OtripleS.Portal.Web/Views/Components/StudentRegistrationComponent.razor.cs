@@ -5,6 +5,7 @@
 
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
+using OtripleS.Portal.Web.Models.Colors;
 using OtripleS.Portal.Web.Models.ContainerComponents;
 using OtripleS.Portal.Web.Models.StudentRegistrationComponents.Exceptions;
 using OtripleS.Portal.Web.Models.StudentViews;
@@ -42,38 +43,48 @@ namespace OtripleS.Portal.Web.Views.Components
             try
             {
                 await this.StudentViewService.AddStudentViewAsync(this.StudentView);
-
-                this.StatusLabel.SetColor(Models.Colors.Color.Green);
-                this.StatusLabel.SetValue("Submitted Successfully");
+                ReportStudentSubmissionSucceeded();
             }
             catch (StudentViewValidationException studentViewValidationException)
             {
                 string validationMessage = 
                     studentViewValidationException.InnerException.Message;
 
-                this.StatusLabel.SetValue(validationMessage);
+                ReportStudentSubmissionFailed(validationMessage);
             }
             catch (StudentViewDependencyValidationException dependencyValidationException)
             {
                 string validationMessage =
                     dependencyValidationException.InnerException.Message;
 
-                this.StatusLabel.SetValue(validationMessage);
+                ReportStudentSubmissionFailed(validationMessage);
             }
             catch (StudentViewDependencyException studentViewDependencyException)
             {
                 string validationMessage =
                     studentViewDependencyException.Message;
 
-                this.StatusLabel.SetValue(validationMessage);
+                ReportStudentSubmissionFailed(validationMessage);
             }
             catch (StudentViewServiceException studentViewServiceException)
             {
                 string validationMessage =
                     studentViewServiceException.Message;
 
-                this.StatusLabel.SetValue(validationMessage);
+                ReportStudentSubmissionFailed(validationMessage);
             }
+        }
+
+        private void ReportStudentSubmissionSucceeded()
+        {
+            this.StatusLabel.SetColor(Color.Green);
+            this.StatusLabel.SetValue("Submitted Successfully");
+        }
+
+        private void ReportStudentSubmissionFailed(string errorMessage)
+        {
+            this.StatusLabel.SetColor(Color.Red);
+            this.StatusLabel.SetValue(errorMessage);
         }
     }
 }
