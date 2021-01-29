@@ -42,6 +42,7 @@ namespace OtripleS.Portal.Web.Views.Components
         {
             try
             {
+                ReportStudentSubmissionWaiting();
                 await this.StudentViewService.AddStudentViewAsync(this.StudentView);
                 ReportStudentSubmissionSucceeded();
             }
@@ -73,6 +74,12 @@ namespace OtripleS.Portal.Web.Views.Components
 
                 ReportStudentSubmissionFailed(validationMessage);
             }
+        }
+
+        private void ReportStudentSubmissionWaiting()
+        {
+            this.StatusLabel.SetColor(Color.Black);
+            this.StatusLabel.SetValue("Submitting ... ");
         }
 
         private void ReportStudentSubmissionSucceeded()
