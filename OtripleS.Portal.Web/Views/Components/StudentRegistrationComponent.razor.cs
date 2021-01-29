@@ -29,7 +29,7 @@ namespace OtripleS.Portal.Web.Views.Components
         public DropDownBase<StudentViewGender> StudentGenderDropDown { get; set; }
         public DatePickerBase DateOfBirthPicker { get; set; }
         public ButtonBase SubmitButton { get; set; }
-        public LabelBase ErrorLabel { get; set; }
+        public LabelBase StatusLabel { get; set; }
 
         protected override void OnInitialized()
         {
@@ -48,28 +48,28 @@ namespace OtripleS.Portal.Web.Views.Components
                 string validationMessage = 
                     studentViewValidationException.InnerException.Message;
 
-                this.ErrorLabel.SetValue(validationMessage);
+                this.StatusLabel.SetValue(validationMessage);
             }
             catch (StudentViewDependencyValidationException dependencyValidationException)
             {
                 string validationMessage =
                     dependencyValidationException.InnerException.Message;
 
-                this.ErrorLabel.SetValue(validationMessage);
+                this.StatusLabel.SetValue(validationMessage);
             }
             catch (StudentViewDependencyException studentViewDependencyException)
             {
                 string validationMessage =
                     studentViewDependencyException.Message;
 
-                this.ErrorLabel.SetValue(validationMessage);
+                this.StatusLabel.SetValue(validationMessage);
             }
             catch (StudentViewServiceException studentViewServiceException)
             {
                 string validationMessage =
                     studentViewServiceException.Message;
 
-                this.ErrorLabel.SetValue(validationMessage);
+                this.StatusLabel.SetValue(validationMessage);
             }
         }
     }
