@@ -167,7 +167,10 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
                 .Should().Be(inputStudentView.BirthDate);
 
             this.renderedStudentRegistrationComponent.Instance.StatusLabel.Value
-                .Should().BeNull();
+                .Should().Be("Submitted Successfully");
+
+            this.renderedStudentRegistrationComponent.Instance.StatusLabel.Color
+                .Should().Be(Color.Green);
 
             this.studentViewServiceMock.Verify(service =>
                 service.AddStudentViewAsync(
