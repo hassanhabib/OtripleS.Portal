@@ -33,7 +33,16 @@ namespace OtripleS.Portal.Web.Views.Bases
             return ValueChanged.InvokeAsync(this.Value);
         }
 
-        public void Disable() => this.IsDisabled = true;
-        public void Enabled() => this.IsDisabled = false;
+        public void Disable()
+        {
+            this.IsDisabled = true;
+            InvokeAsync(StateHasChanged);
+        }
+
+        public void Enabled()
+        {
+            this.IsDisabled = false;
+            InvokeAsync(StateHasChanged);
+        }
     }
 }

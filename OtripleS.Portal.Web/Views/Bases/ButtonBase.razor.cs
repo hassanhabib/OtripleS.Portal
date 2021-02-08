@@ -20,7 +20,17 @@ namespace OtripleS.Portal.Web.Views.Bases
         public bool IsDisabled { get; set; }
 
         public void Click() => OnClick.Invoke();
-        public void Disable() => this.IsDisabled = true;
-        public void Enabled() => this.IsDisabled = false;
+
+        public void Disable()
+        {
+            this.IsDisabled = true;
+            InvokeAsync(StateHasChanged);
+        }
+
+        public void Enabled()
+        {
+            this.IsDisabled = false;
+            InvokeAsync(StateHasChanged);
+        }
     }
 }

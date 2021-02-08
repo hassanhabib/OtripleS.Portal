@@ -42,7 +42,7 @@ namespace OtripleS.Portal.Web.Views.Components
         {
             try
             {
-                ReportStudentSubmissionWaiting();
+                ApplySubmittingStatus();
                 await this.StudentViewService.AddStudentViewAsync(this.StudentView);
                 ReportStudentSubmissionSucceeded();
             }
@@ -76,10 +76,17 @@ namespace OtripleS.Portal.Web.Views.Components
             }
         }
 
-        private void ReportStudentSubmissionWaiting()
+        private void ApplySubmittingStatus()
         {
             this.StatusLabel.SetColor(Color.Black);
             this.StatusLabel.SetValue("Submitting ... ");
+            this.StudentIdentityTextBox.Disable();
+            this.StudentFirstNameTextBox.Disable();
+            this.StudentMiddleNameTextBox.Disable();
+            this.StudentLastNameTextBox.Disable();
+            this.StudentGenderDropDown.Disable();
+            this.DateOfBirthPicker.Disable();
+            this.SubmitButton.Disable();
         }
 
         private void ReportStudentSubmissionSucceeded()
