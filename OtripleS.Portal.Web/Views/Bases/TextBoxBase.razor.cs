@@ -41,7 +41,7 @@ namespace OtripleS.Portal.Web.Views.Bases
             InvokeAsync(StateHasChanged);
         }
 
-        public void Enabled()
+        public void Enable()
         {
             this.IsDisabled = false;
             InvokeAsync(StateHasChanged);

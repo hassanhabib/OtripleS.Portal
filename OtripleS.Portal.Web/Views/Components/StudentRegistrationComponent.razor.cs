@@ -51,28 +51,28 @@ namespace OtripleS.Portal.Web.Views.Components
                 string validationMessage = 
                     studentViewValidationException.InnerException.Message;
 
-                ReportStudentSubmissionFailed(validationMessage);
+                ApplySubmissionFailed(validationMessage);
             }
             catch (StudentViewDependencyValidationException dependencyValidationException)
             {
                 string validationMessage =
                     dependencyValidationException.InnerException.Message;
 
-                ReportStudentSubmissionFailed(validationMessage);
+                ApplySubmissionFailed(validationMessage);
             }
             catch (StudentViewDependencyException studentViewDependencyException)
             {
                 string validationMessage =
                     studentViewDependencyException.Message;
 
-                ReportStudentSubmissionFailed(validationMessage);
+                ApplySubmissionFailed(validationMessage);
             }
             catch (StudentViewServiceException studentViewServiceException)
             {
                 string validationMessage =
                     studentViewServiceException.Message;
 
-                ReportStudentSubmissionFailed(validationMessage);
+                ApplySubmissionFailed(validationMessage);
             }
         }
 
@@ -95,10 +95,17 @@ namespace OtripleS.Portal.Web.Views.Components
             this.StatusLabel.SetValue("Submitted Successfully");
         }
 
-        private void ReportStudentSubmissionFailed(string errorMessage)
+        private void ApplySubmissionFailed(string errorMessage)
         {
             this.StatusLabel.SetColor(Color.Red);
             this.StatusLabel.SetValue(errorMessage);
+            this.StudentIdentityTextBox.Enable();
+            this.StudentFirstNameTextBox.Enable();
+            this.StudentMiddleNameTextBox.Enable();
+            this.StudentLastNameTextBox.Enable();
+            this.StudentGenderDropDown.Enable();
+            this.DateOfBirthPicker.Enable();
+            this.SubmitButton.Enable();
         }
     }
 }
