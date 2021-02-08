@@ -67,11 +67,17 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             this.renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox
                 .Should().NotBeNull();
 
+            this.renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox.IsDisabled
+                .Should().BeFalse();
+
             this.renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox.Placeholder
                 .Should().Be(expectedIdentityTextBoxPlaceholder);
 
             this.renderedStudentRegistrationComponent.Instance.StudentFirstNameTextBox
                 .Should().NotBeNull();
+
+            this.renderedStudentRegistrationComponent.Instance.StudentFirstNameTextBox.IsDisabled
+                .Should().BeFalse();
 
             this.renderedStudentRegistrationComponent.Instance.StudentFirstNameTextBox.Placeholder
                 .Should().Be(expectedFirstNameTextBoxPlaceholder);
@@ -82,11 +88,17 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             this.renderedStudentRegistrationComponent.Instance.StudentMiddleNameTextBox.Placeholder
                 .Should().Be(expectedMiddleNameTextBoxPlaceholder);
 
+            this.renderedStudentRegistrationComponent.Instance.StudentMiddleNameTextBox.IsDisabled
+                .Should().BeFalse();
+
             this.renderedStudentRegistrationComponent.Instance.StudentLastNameTextBox
                 .Should().NotBeNull();
 
             this.renderedStudentRegistrationComponent.Instance.StudentLastNameTextBox.Placeholder
                 .Should().Be(expectedLastnameTextBoxPlaceholder);
+
+            this.renderedStudentRegistrationComponent.Instance.StudentLastNameTextBox.IsDisabled
+                .Should().BeFalse();
 
             this.renderedStudentRegistrationComponent.Instance.StudentGenderDropDown.Value
                 .Should().BeOfType(typeof(StudentViewGender));
@@ -94,14 +106,23 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             this.renderedStudentRegistrationComponent.Instance.StudentGenderDropDown
                 .Should().NotBeNull();
 
+            this.renderedStudentRegistrationComponent.Instance.StudentGenderDropDown.IsDisabled
+                .Should().BeFalse();
+
             this.renderedStudentRegistrationComponent.Instance.DateOfBirthPicker
                 .Should().NotBeNull();
+
+            this.renderedStudentRegistrationComponent.Instance.DateOfBirthPicker.IsDisabled
+                .Should().BeFalse();
 
             this.renderedStudentRegistrationComponent.Instance.SubmitButton.Label
                 .Should().Be(expectedSubmitButtonLabel);
 
             this.renderedStudentRegistrationComponent.Instance.SubmitButton
                 .Should().NotBeNull();
+
+            this.renderedStudentRegistrationComponent.Instance.SubmitButton.IsDisabled
+                .Should().BeFalse();
 
             this.renderedStudentRegistrationComponent.Instance.StatusLabel
                 .Should().NotBeNull();
