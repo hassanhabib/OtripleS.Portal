@@ -29,3 +29,5 @@ This project is aiming toward directing all the software development funds and h
 <img width=20 src="https://www.searchmarketingaustralia.com.au/wp-content/uploads/2017/10/original_images_YouTube.png" /> [OtripleS.Portal 010:  Components (Rendering Errors)](https://www.youtube.com/watch?v=P1C6ad18XgE)
 
 <img width=20 src="https://www.searchmarketingaustralia.com.au/wp-content/uploads/2017/10/original_images_YouTube.png" /> [OtripleS.Portal 011:  Components (Reporting Status)](https://www.youtube.com/watch?v=0hY-5xcJaeQ)
+
+<img width=20 src="https://www.searchmarketingaustralia.com.au/wp-content/uploads/2017/10/original_images_YouTube.png" /> [OtripleS.Portal 012:  Components (Enabling & Disabling Controls)](https://www.youtube.com/watch?v=0jqRhsanIFM)
