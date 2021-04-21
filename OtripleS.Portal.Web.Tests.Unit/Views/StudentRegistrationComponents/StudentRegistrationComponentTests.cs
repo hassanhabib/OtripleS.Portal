@@ -25,7 +25,6 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
         {
             this.studentViewServiceMock = new Mock<IStudentViewService>();
             this.Services.AddScoped(services => this.studentViewServiceMock.Object);
-            this.Services.AddServerSideBlazor();
         }
 
         private static StudentView CreateRandomStudentView() =>
