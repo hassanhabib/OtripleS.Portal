@@ -80,6 +80,9 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
             string exceptionMessage = GetRandomString();
             var responseMessage = new HttpResponseMessage();
 
+            var httpRequestException = 
+                new HttpRequestException();
+
             var httpResponseUrlNotFoundException =
                 new HttpResponseUrlNotFoundException(
                     responseMessage: responseMessage,
@@ -92,6 +95,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
 
             return new TheoryData<Exception>
             {
+                httpRequestException,
                 httpResponseUrlNotFoundException,
                 httpResponseUnAuthorizedException
             };
