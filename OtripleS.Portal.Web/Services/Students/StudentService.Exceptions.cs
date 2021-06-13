@@ -4,6 +4,7 @@
 // ---------------------------------------------------------------
 
 using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using OtripleS.Portal.Web.Models.Students;
 using OtripleS.Portal.Web.Models.Students.Exceptions;
@@ -28,6 +29,10 @@ namespace OtripleS.Portal.Web.Services.Students
             catch (InvalidStudentException invalidStudentException)
             {
                 throw CreateAndLogValidationException(invalidStudentException);
+            }
+            catch (HttpRequestException httpRequestException)
+            {
+                throw CreateAndLogCriticalDependencyException(httpRequestException);
             }
             catch (HttpResponseUrlNotFoundException httpResponseUrlNotFoundException)
             {
