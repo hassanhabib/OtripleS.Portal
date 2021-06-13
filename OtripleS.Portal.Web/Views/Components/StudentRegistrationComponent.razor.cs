@@ -3,7 +3,6 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using OtripleS.Portal.Web.Models.Colors;
 using OtripleS.Portal.Web.Models.ContainerComponents;
@@ -15,7 +14,7 @@ using OtripleS.Portal.Web.Views.Bases;
 
 namespace OtripleS.Portal.Web.Views.Components
 {
-    public partial class StudentRegistrationComponent
+    public partial class StudentRegistrationComponent : ComponentBase
     {
         [Inject]
         public IStudentViewService StudentViewService { get; set; }
