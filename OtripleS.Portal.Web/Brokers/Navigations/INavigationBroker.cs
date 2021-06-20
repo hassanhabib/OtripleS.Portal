@@ -3,14 +3,10 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
-using System.Threading.Tasks;
-using OtripleS.Portal.Web.Models.StudentViews;
-
-namespace OtripleS.Portal.Web.Services.StudentViews
+namespace OtripleS.Portal.Web.Brokers.Navigations
 {
-    public interface IStudentViewService
+    public interface INavigationBroker
     {
-        ValueTask<StudentView> AddStudentViewAsync(StudentView studentView);
         void NavigateTo(string route);
     }
 }

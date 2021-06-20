@@ -7,6 +7,7 @@ using System;
 using System.Threading.Tasks;
 using OtripleS.Portal.Web.Brokers.DateTimes;
 using OtripleS.Portal.Web.Brokers.Logging;
+using OtripleS.Portal.Web.Brokers.Navigations;
 using OtripleS.Portal.Web.Models.Students;
 using OtripleS.Portal.Web.Models.StudentViews;
 using OtripleS.Portal.Web.Services.Students;
@@ -19,17 +20,20 @@ namespace OtripleS.Portal.Web.Services.StudentViews
         private readonly IStudentService studentService;
         private readonly IUserService userService;
         private readonly IDateTimeBroker dateTimeBroker;
+        private readonly INavigationBroker navigationBroker;
         private readonly ILoggingBroker loggingBroker;
 
         public StudentViewService(
             IStudentService studentService, 
             IUserService userService, 
-            IDateTimeBroker dateTimeBroker, 
+            IDateTimeBroker dateTimeBroker,
+            INavigationBroker navigationBroker,
             ILoggingBroker loggingBroker)
         {
             this.studentService = studentService;
             this.userService = userService;
             this.dateTimeBroker = dateTimeBroker;
+            this.navigationBroker = navigationBroker;
             this.loggingBroker = loggingBroker;
         }
 
@@ -42,6 +46,11 @@ namespace OtripleS.Portal.Web.Services.StudentViews
 
             return studentView;
         });
+
+        public void NavigateTo(string route)
+        {
+            throw new NotImplementedException();
+        }
 
         private Student MapToStudent(StudentView studentView)
         {

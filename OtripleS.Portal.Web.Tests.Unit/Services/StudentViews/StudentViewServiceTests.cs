@@ -9,6 +9,7 @@ using KellermanSoftware.CompareNetObjects;
 using Moq;
 using OtripleS.Portal.Web.Brokers.DateTimes;
 using OtripleS.Portal.Web.Brokers.Logging;
+using OtripleS.Portal.Web.Brokers.Navigations;
 using OtripleS.Portal.Web.Models.Students;
 using OtripleS.Portal.Web.Models.StudentViews;
 using OtripleS.Portal.Web.Services.Students;
@@ -23,6 +24,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
         private readonly Mock<IStudentService> studentServiceMock;
         private readonly Mock<IUserService> userServiceMock;
         private readonly Mock<IDateTimeBroker> dateTimeBrokerMock;
+        private readonly Mock<INavigationBroker> navigationBrokerMock;
         private readonly Mock<ILoggingBroker> loggingBrokerMock;
         private readonly ICompareLogic compareLogic;
         private readonly IStudentViewService studentViewService;
@@ -32,6 +34,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
             this.studentServiceMock = new Mock<IStudentService>();
             this.userServiceMock = new Mock<IUserService>();
             this.dateTimeBrokerMock = new Mock<IDateTimeBroker>();
+            this.navigationBrokerMock = new Mock<INavigationBroker>();
             this.loggingBrokerMock = new Mock<ILoggingBroker>();
             var compareConfig = new ComparisonConfig();
             compareConfig.IgnoreProperty<Student>(student => student.Id);
@@ -42,6 +45,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
                 studentService: this.studentServiceMock.Object,
                 userService: this.userServiceMock.Object,
                 dateTimeBroker: this.dateTimeBrokerMock.Object,
+                navigationBroker: this.navigationBrokerMock.Object,
                 loggingBroker: this.loggingBrokerMock.Object);
         }
 
@@ -86,6 +90,9 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
             return actualException => actualException.Message == expectedException.Message
                 && actualException.InnerException.Message == expectedException.InnerException.Message;
         }
+
+        private static string GetRandomRoute() => 
+            new RandomUrl().GetValue();
 
         private static string GetRandomName() =>
             new RealNames(NameStyle.FirstName).GetValue();

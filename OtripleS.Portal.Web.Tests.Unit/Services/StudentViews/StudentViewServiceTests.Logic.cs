@@ -97,6 +97,29 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
             this.userServiceMock.VerifyNoOtherCalls();
             this.studentServiceMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
+            this.navigationBrokerMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public void ShouldNavigateToRoute()
+        {
+            // given
+            string randomRoute = GetRandomRoute();
+            string inputRoute = randomRoute;
+
+            // when
+            this.studentViewService.NavigateTo(inputRoute);
+
+            // then
+            this.navigationBrokerMock.Verify(broker =>
+                broker.NavigateTo(inputRoute),
+                    Times.Once);
+
+            this.navigationBrokerMock.VerifyNoOtherCalls();
+            this.dateTimeBrokerMock.VerifyNoOtherCalls();
+            this.userServiceMock.VerifyNoOtherCalls();
+            this.studentServiceMock.VerifyNoOtherCalls();
+            this.loggingBrokerMock.VerifyNoOtherCalls();
         }
     }
 }

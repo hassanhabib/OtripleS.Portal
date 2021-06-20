@@ -33,7 +33,8 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
         private static Student CreateRandomStudent() =>
             CreateStudentFiller().Create();
 
-        private Expression<Func<Exception, bool>> SameExceptionAs(Exception expectedException)
+        private static Expression<Func<Exception, bool>> SameExceptionAs(
+            Exception expectedException)
         {
             return actualException => actualException.Message == expectedException.Message
                 && actualException.InnerException.Message == expectedException.InnerException.Message;
