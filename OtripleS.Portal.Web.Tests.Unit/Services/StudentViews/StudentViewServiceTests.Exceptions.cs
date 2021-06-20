@@ -71,6 +71,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
             this.userServiceMock.VerifyNoOtherCalls();
             this.dateTimeBrokerMock.VerifyNoOtherCalls();
             this.studentServiceMock.VerifyNoOtherCalls();
+            this.navigationBrokerMock.VerifyNoOtherCalls();
         }
 
         public static TheoryData StudentServiceDependencyExceptions()
@@ -128,6 +129,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
             this.userServiceMock.VerifyNoOtherCalls();
             this.dateTimeBrokerMock.VerifyNoOtherCalls();
             this.studentServiceMock.VerifyNoOtherCalls();
+            this.navigationBrokerMock.VerifyNoOtherCalls();
         }
 
         [Fact]
@@ -169,6 +171,44 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
                 service.RegisterStudentAsync(It.IsAny<Student>()),
                     Times.Never);
 
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+            this.userServiceMock.VerifyNoOtherCalls();
+            this.dateTimeBrokerMock.VerifyNoOtherCalls();
+            this.studentServiceMock.VerifyNoOtherCalls();
+            this.navigationBrokerMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public void ShouldThrowServiceExceptionOnNavigateIfServiceErrorOccursAndLogItAsync()
+        {
+            // given
+            string someRoute = GetRandomRoute();
+            var serviceException = new Exception();
+
+            var expectedStudentViewServiceException =
+                new StudentViewServiceException(serviceException);
+
+            this.navigationBrokerMock.Setup(broker =>
+                broker.NavigateTo(It.IsAny<string>()))
+                    .Throws(serviceException);
+
+            // when
+            Action navigateToAction = () =>
+                this.studentViewService.NavigateTo(someRoute);
+
+            // then
+            Assert.Throws<StudentViewServiceException>(navigateToAction);
+
+            this.navigationBrokerMock.Verify(broker =>
+                broker.NavigateTo(It.IsAny<string>()),
+                    Times.Once);
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameExceptionAs(
+                    expectedStudentViewServiceException))),
+                        Times.Once);
+
+            this.navigationBrokerMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
             this.userServiceMock.VerifyNoOtherCalls();
             this.dateTimeBrokerMock.VerifyNoOtherCalls();
