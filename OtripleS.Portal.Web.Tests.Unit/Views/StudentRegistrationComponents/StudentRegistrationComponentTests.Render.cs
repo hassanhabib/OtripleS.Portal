@@ -194,6 +194,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             StudentView randomStudentView = CreateRandomStudentView();
             StudentView inputStudentView = randomStudentView;
             StudentView expectedStudentView = inputStudentView;
+            string expectedOnSubmitRoute = "/studentsubmitted";
 
             // when
             this.renderedStudentRegistrationComponent =
@@ -220,34 +221,14 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             this.renderedStudentRegistrationComponent.Instance.SubmitButton.Click();
 
             // then
-            this.renderedStudentRegistrationComponent.Instance.StudentView.IdentityNumber
-                .Should().BeEquivalentTo(expectedStudentView.IdentityNumber);
-
-            this.renderedStudentRegistrationComponent.Instance.StudentView.FirstName
-                .Should().BeEquivalentTo(inputStudentView.FirstName);
-
-            this.renderedStudentRegistrationComponent.Instance.StudentView.MiddleName
-                .Should().BeEquivalentTo(inputStudentView.MiddleName);
-
-            this.renderedStudentRegistrationComponent.Instance.StudentView.LastName
-                .Should().BeEquivalentTo(inputStudentView.LastName);
-
-            this.renderedStudentRegistrationComponent.Instance.StudentView.Gender
-                .Should().Be(inputStudentView.Gender);
-
-            this.renderedStudentRegistrationComponent.Instance.StudentView.BirthDate
-                .Should().Be(inputStudentView.BirthDate);
-
-            this.renderedStudentRegistrationComponent.Instance.StatusLabel.Value
-                .Should().Be("Submitted Successfully");
-
-            this.renderedStudentRegistrationComponent.Instance.StatusLabel.Color
-                .Should().Be(Color.Green);
-
             this.studentViewServiceMock.Verify(service =>
                 service.AddStudentViewAsync(
                     this.renderedStudentRegistrationComponent.Instance.StudentView),
                         Times.Once);
+
+            this.studentViewServiceMock.Verify(service =>
+                service.NavigateTo(expectedOnSubmitRoute),
+                    Times.Once);
 
             this.studentViewServiceMock.VerifyNoOtherCalls();
         }
