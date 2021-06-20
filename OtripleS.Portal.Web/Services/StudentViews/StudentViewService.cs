@@ -47,10 +47,8 @@ namespace OtripleS.Portal.Web.Services.StudentViews
             return studentView;
         });
 
-        public void NavigateTo(string route)
-        {
-            throw new NotImplementedException();
-        }
+        public void NavigateTo(string route) =>
+            this.navigationBroker.NavigateTo(route);
 
         private Student MapToStudent(StudentView studentView)
         {
