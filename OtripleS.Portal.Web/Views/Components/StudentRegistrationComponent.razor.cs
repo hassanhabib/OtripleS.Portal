@@ -43,7 +43,7 @@ namespace OtripleS.Portal.Web.Views.Components
             {
                 ApplySubmittingStatus();
                 await this.StudentViewService.AddStudentViewAsync(this.StudentView);
-                ReportStudentSubmissionSucceeded();
+                NavigateToStudentSubmittedPage();
             }
             catch (StudentViewValidationException studentViewValidationException)
             {
@@ -88,11 +88,8 @@ namespace OtripleS.Portal.Web.Views.Components
             this.SubmitButton.Disable();
         }
 
-        private void ReportStudentSubmissionSucceeded()
-        {
-            this.StatusLabel.SetColor(Color.Green);
-            this.StatusLabel.SetValue("Submitted Successfully");
-        }
+        private void NavigateToStudentSubmittedPage() =>
+            this.StudentViewService.NavigateTo("/studentsubmitted");
 
         private void ApplySubmissionFailed(string errorMessage)
         {
