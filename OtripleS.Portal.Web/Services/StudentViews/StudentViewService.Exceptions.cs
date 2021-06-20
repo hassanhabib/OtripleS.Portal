@@ -14,6 +14,7 @@ namespace OtripleS.Portal.Web.Services.StudentViews
     public partial class StudentViewService
     {
         private delegate ValueTask<StudentView> ReturningStudentViewFunction();
+        private delegate void ReturningNothingFunction();
 
         private async ValueTask<StudentView> TryCatch(ReturningStudentViewFunction returningStudentViewFunction)
         {
@@ -48,6 +49,18 @@ namespace OtripleS.Portal.Web.Services.StudentViews
             catch (Exception serviceException)
             {
                 throw CreateAndLogServiceException(serviceException);
+            }
+        }
+
+        private void TryCatch(ReturningNothingFunction returningNothingFunction)
+        {
+            try
+            {
+                returningNothingFunction();
+            }
+            catch (InvalidStudentViewException invalidStudentViewException)
+            {
+                throw CreateAndLogValidationException(invalidStudentViewException);
             }
         }
 

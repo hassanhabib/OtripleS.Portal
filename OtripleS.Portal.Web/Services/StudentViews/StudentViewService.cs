@@ -24,8 +24,8 @@ namespace OtripleS.Portal.Web.Services.StudentViews
         private readonly ILoggingBroker loggingBroker;
 
         public StudentViewService(
-            IStudentService studentService, 
-            IUserService userService, 
+            IStudentService studentService,
+            IUserService userService,
             IDateTimeBroker dateTimeBroker,
             INavigationBroker navigationBroker,
             ILoggingBroker loggingBroker)
@@ -48,7 +48,11 @@ namespace OtripleS.Portal.Web.Services.StudentViews
         });
 
         public void NavigateTo(string route) =>
+        TryCatch(() =>
+        {
+            ValidateRoute(route);
             this.navigationBroker.NavigateTo(route);
+        });
 
         private Student MapToStudent(StudentView studentView)
         {

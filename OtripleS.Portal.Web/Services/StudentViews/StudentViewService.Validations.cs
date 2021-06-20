@@ -35,6 +35,16 @@ namespace OtripleS.Portal.Web.Services.StudentViews
             }
         }
 
+        private static void ValidateRoute(string route)
+        {
+            if (IsInvalid(route))
+            {
+                throw new InvalidStudentViewException(
+                    parameterName: "Route",
+                    parameterValue: route);
+            }
+        }
+
         private static bool IsInvalid(string text) => String.IsNullOrWhiteSpace(text);
         private static bool IsInvalid(DateTimeOffset date) => date == default;
     }
