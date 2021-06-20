@@ -3,6 +3,7 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
+using System;
 using System.Threading.Tasks;
 using Moq;
 using OtripleS.Portal.Web.Models.Students;
@@ -53,6 +54,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
             this.userServiceMock.VerifyNoOtherCalls();
             this.dateTimeBrokerMock.VerifyNoOtherCalls();
             this.studentServiceMock.VerifyNoOtherCalls();
+            this.navigationBrokerMock.VerifyNoOtherCalls();
         }
 
         [Theory]
@@ -103,6 +105,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
             this.userServiceMock.VerifyNoOtherCalls();
             this.dateTimeBrokerMock.VerifyNoOtherCalls();
             this.studentServiceMock.VerifyNoOtherCalls();
+            this.navigationBrokerMock.VerifyNoOtherCalls();
         }
 
         [Theory]
@@ -153,6 +156,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
             this.userServiceMock.VerifyNoOtherCalls();
             this.dateTimeBrokerMock.VerifyNoOtherCalls();
             this.studentServiceMock.VerifyNoOtherCalls();
+            this.navigationBrokerMock.VerifyNoOtherCalls();
         }
 
         [Fact]
@@ -195,6 +199,46 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
                 service.RegisterStudentAsync(It.IsAny<Student>()),
                     Times.Never);
 
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+            this.userServiceMock.VerifyNoOtherCalls();
+            this.dateTimeBrokerMock.VerifyNoOtherCalls();
+            this.studentServiceMock.VerifyNoOtherCalls();
+            this.navigationBrokerMock.VerifyNoOtherCalls();
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData("    ")]
+        public void ShouldThrowValidationExceptionOnNavigateIfRouteIsInvalidAndLogItAsync(
+           string invalidRoute)
+        {
+            // given
+            var invalidStudentViewException =
+                new InvalidStudentViewException(
+                    parameterName: "Route",
+                    parameterValue: invalidRoute);
+
+            var expectedStudentViewValidationException =
+                new StudentViewValidationException(invalidStudentViewException);
+
+            // when
+            Action navigateToAction = () =>
+                this.studentViewService.NavigateTo(invalidRoute);
+
+            // then
+            Assert.Throws<StudentViewValidationException>(navigateToAction);
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameExceptionAs(
+                    expectedStudentViewValidationException))),
+                        Times.Once);
+
+            this.navigationBrokerMock.Verify(broker =>
+                broker.NavigateTo(It.IsAny<string>()),
+                    Times.Never);
+
+            this.navigationBrokerMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
             this.userServiceMock.VerifyNoOtherCalls();
             this.dateTimeBrokerMock.VerifyNoOtherCalls();
