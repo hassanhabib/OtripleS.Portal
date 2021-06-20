@@ -62,6 +62,10 @@ namespace OtripleS.Portal.Web.Services.StudentViews
             {
                 throw CreateAndLogValidationException(invalidStudentViewException);
             }
+            catch (Exception serviceException)
+            {
+                throw CreateAndLogServiceException(serviceException);
+            }
         }
 
         private StudentViewValidationException CreateAndLogValidationException(Exception exception)
