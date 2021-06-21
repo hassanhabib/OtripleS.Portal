@@ -179,7 +179,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
         }
 
         [Fact]
-        public void ShouldThrowServiceExceptionOnNavigateIfServiceErrorOccursAndLogItAsync()
+        public void ShouldThrowServiceExceptionOnNavigateIfServiceErrorOccursAndLogIt()
         {
             // given
             string someRoute = GetRandomRoute();
