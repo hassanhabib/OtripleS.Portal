@@ -33,3 +33,5 @@ This project is aiming toward directing all the software development funds and h
 <img width=20 src="https://www.searchmarketingaustralia.com.au/wp-content/uploads/2017/10/original_images_YouTube.png" /> [OtripleS.Portal 012:  Components (Enabling & Disabling Controls)](https://www.youtube.com/watch?v=0jqRhsanIFM)
 
 <img width=20 src="https://www.searchmarketingaustralia.com.au/wp-content/uploads/2017/10/original_images_YouTube.png" /> [OtripleS.Portal 013:  Upgrading to .NET 6](https://www.youtube.com/watch?v=5FN4Dzkj-M0)
+
+<img width=20 src="https://www.searchmarketingaustralia.com.au/wp-content/uploads/2017/10/original_images_YouTube.png" /> [OtripleS.Portal 014:  Components (Navigation)](https://www.youtube.com/watch?v=c2sKc9LolnY)
