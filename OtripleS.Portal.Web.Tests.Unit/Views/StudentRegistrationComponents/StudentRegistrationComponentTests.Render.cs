@@ -100,8 +100,8 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             this.renderedStudentRegistrationComponent.Instance.StudentLastNameTextBox.IsDisabled
                 .Should().BeFalse();
 
-            this.renderedStudentRegistrationComponent.Instance.StudentGenderDropDown.Value
-                .Should().BeOfType(typeof(StudentViewGender));
+            this.renderedStudentRegistrationComponent.Instance.StudentGenderDropDown.Value.GetType()
+                .Should().Be(typeof(StudentViewGender));
 
             this.renderedStudentRegistrationComponent.Instance.StudentGenderDropDown
                 .Should().NotBeNull();
