@@ -22,16 +22,18 @@ This project is aiming toward directing all the software development funds and h
 
 <img width=20 src="https://www.searchmarketingaustralia.com.au/wp-content/uploads/2017/10/original_images_YouTube.png" /> [OtripleS.Portal 007: Base Components](https://www.youtube.com/watch?v=qI1vIuGb9lo)
 
-<img width=20 src="https://www.searchmarketingaustralia.com.au/wp-content/uploads/2017/10/original_images_YouTube.png" /> [OtripleS.Portal 008:  Components (Rendering)](https://www.youtube.com/watch?v=t4plghroUXk)
+<img width=20 src="https://www.searchmarketingaustralia.com.au/wp-content/uploads/2017/10/original_images_YouTube.png" /> [OtripleS.Portal 008: Components (Rendering)](https://www.youtube.com/watch?v=t4plghroUXk)
 
-<img width=20 src="https://www.searchmarketingaustralia.com.au/wp-content/uploads/2017/10/original_images_YouTube.png" /> [OtripleS.Portal 009:  Components (Binding)](https://www.youtube.com/watch?v=GGz2ESAkP4A)
+<img width=20 src="https://www.searchmarketingaustralia.com.au/wp-content/uploads/2017/10/original_images_YouTube.png" /> [OtripleS.Portal 009: Components (Binding)](https://www.youtube.com/watch?v=GGz2ESAkP4A)
 
-<img width=20 src="https://www.searchmarketingaustralia.com.au/wp-content/uploads/2017/10/original_images_YouTube.png" /> [OtripleS.Portal 010:  Components (Rendering Errors)](https://www.youtube.com/watch?v=P1C6ad18XgE)
+<img width=20 src="https://www.searchmarketingaustralia.com.au/wp-content/uploads/2017/10/original_images_YouTube.png" /> [OtripleS.Portal 010: Components (Rendering Errors)](https://www.youtube.com/watch?v=P1C6ad18XgE)
 
-<img width=20 src="https://www.searchmarketingaustralia.com.au/wp-content/uploads/2017/10/original_images_YouTube.png" /> [OtripleS.Portal 011:  Components (Reporting Status)](https://www.youtube.com/watch?v=0hY-5xcJaeQ)
+<img width=20 src="https://www.searchmarketingaustralia.com.au/wp-content/uploads/2017/10/original_images_YouTube.png" /> [OtripleS.Portal 011: Components (Reporting Status)](https://www.youtube.com/watch?v=0hY-5xcJaeQ)
 
-<img width=20 src="https://www.searchmarketingaustralia.com.au/wp-content/uploads/2017/10/original_images_YouTube.png" /> [OtripleS.Portal 012:  Components (Enabling & Disabling Controls)](https://www.youtube.com/watch?v=0jqRhsanIFM)
+<img width=20 src="https://www.searchmarketingaustralia.com.au/wp-content/uploads/2017/10/original_images_YouTube.png" /> [OtripleS.Portal 012: Components (Enabling & Disabling Controls)](https://www.youtube.com/watch?v=0jqRhsanIFM)
 
-<img width=20 src="https://www.searchmarketingaustralia.com.au/wp-content/uploads/2017/10/original_images_YouTube.png" /> [OtripleS.Portal 013:  Upgrading to .NET 6](https://www.youtube.com/watch?v=5FN4Dzkj-M0)
+<img width=20 src="https://www.searchmarketingaustralia.com.au/wp-content/uploads/2017/10/original_images_YouTube.png" /> [OtripleS.Portal 013: Upgrading to .NET 6](https://www.youtube.com/watch?v=5FN4Dzkj-M0)
 
-<img width=20 src="https://www.searchmarketingaustralia.com.au/wp-content/uploads/2017/10/original_images_YouTube.png" /> [OtripleS.Portal 014:  Components (Navigation)](https://www.youtube.com/watch?v=c2sKc9LolnY)
+<img width=20 src="https://www.searchmarketingaustralia.com.au/wp-content/uploads/2017/10/original_images_YouTube.png" /> [OtripleS.Portal 014: Components (Navigation)](https://www.youtube.com/watch?v=c2sKc9LolnY)
+
+<img width=20 src="https://www.searchmarketingaustralia.com.au/wp-content/uploads/2017/10/original_images_YouTube.png" /> [OtripleS.Portal 015: Components (UI Libraries)](https://www.youtube.com/watch?v=NEmBbmuTJ6I)
