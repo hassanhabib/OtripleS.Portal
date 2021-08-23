@@ -1,43 +1,50 @@
 ﻿@using OtripleS.Portal.Web.Views.Components.ContainerComponents;
 @using OtripleS.Portal.Web.Views.Bases;
 @using OtripleS.Portal.Web.Models.StudentViews;
-@using OtripleS.Portal.Web.Models.Colors; 
+@using OtripleS.Portal.Web.Models.Colors;
 
-<ContainerComponent State="State">
-    <Content>
-        <div align="center">
-            <TextBoxBase @ref=StudentIdentityTextBox
-                         @bind-Value="StudentView.IdentityNumber"
-                         Placeholder="Student Identity"/>
-            <br />
-            <TextBoxBase @ref=StudentFirstNameTextBox
-                         @bind-Value="StudentView.FirstName"
-                         Placeholder="First Name"/>
-            <br />
-            <TextBoxBase @ref=StudentMiddleNameTextBox
-                         @bind-Value="StudentView.MiddleName"
-                         Placeholder="Middle Name" />
-            <br />
-            <TextBoxBase @ref=StudentLastNameTextBox
-                         @bind-Value="StudentView.LastName"
-                         Placeholder="Last Name"/>
+<CardBase Title="Student Registration"
+		  SubTitle="Please fill in the below fields">
+	<Content>
+		<ContainerComponent State="State">
+			<Content>
+				<div>
+					<TextBoxBase @ref=StudentIdentityTextBox
+								 @bind-Value="StudentView.IdentityNumber"
+								 Placeholder="Student Identity" />
+					<br />
+					<TextBoxBase @ref=StudentFirstNameTextBox
+								 @bind-Value="StudentView.FirstName"
+								 Placeholder="First Name" />
+					<br />
+					<TextBoxBase @ref=StudentMiddleNameTextBox
+								 @bind-Value="StudentView.MiddleName"
+								 Placeholder="Middle Name" />
+					<br />
+					<TextBoxBase @ref=StudentLastNameTextBox
+								 @bind-Value="StudentView.LastName"
+								 Placeholder="Last Name" />
 
-            <br/>
-            <DropDownBase @ref=StudentGenderDropDown
-                          @bind-Value="StudentView.Gender"
-                          TEnum="StudentViewGender"/>
+					<br />
+					<DropDownBase @ref=StudentGenderDropDown
+								  @bind-Value="StudentView.Gender"
+								  TEnum="StudentViewGender" />
 
-            <br/>
-            <DatePickerBase @ref=DateOfBirthPicker
-                            @bind-Value="StudentView.BirthDate"/>
+					<br />
+					<DatePickerBase @ref=DateOfBirthPicker
+									@bind-Value="StudentView.BirthDate" />
 
-            <br />
-            <ButtonBase @ref=SubmitButton
-                        Label="Submit Student"
-                        OnClick="@RegisterStudentAsync"/>
 
-            <br />
-            <LabelBase @ref=StatusLabel />
-        </div>
-    </Content>
-</ContainerComponent>
+					<LabelBase @ref=StatusLabel />
+				</div>
+			</Content>
+		</ContainerComponent>
+	</Content>
+	<Footer>
+		<div align=right>
+			<ButtonBase @ref=SubmitButton
+						Label="SUBMIT"
+						OnClick="@RegisterStudentAsync" />
+		</div>
+	</Footer>
+</CardBase>

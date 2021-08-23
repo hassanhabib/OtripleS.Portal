@@ -6,6 +6,7 @@
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
+using Syncfusion.Blazor.DropDowns;
 
 namespace OtripleS.Portal.Web.Views.Bases
 {
@@ -26,11 +27,10 @@ namespace OtripleS.Portal.Web.Views.Bases
             await ValueChanged.InvokeAsync(this.Value);
         }
 
-        private Task OnValueChanged(ChangeEventArgs changeEventArgs)
+        private async Task OnValueChanged(
+            ChangeEventArgs<TEnum, string> changeEventArgs)
         {
-            this.Value = (TEnum) Enum.Parse(typeof(TEnum), changeEventArgs.Value.ToString());
-
-            return ValueChanged.InvokeAsync(this.Value);
+            await SetValue(changeEventArgs.Value);
         }
 
         public void Disable()

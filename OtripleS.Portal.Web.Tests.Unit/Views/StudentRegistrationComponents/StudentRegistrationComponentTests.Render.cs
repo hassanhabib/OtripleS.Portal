@@ -51,7 +51,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             string expectedFirstNameTextBoxPlaceholder = "First Name";
             string expectedMiddleNameTextBoxPlaceholder = "Middle Name";
             string expectedLastnameTextBoxPlaceholder = "Last Name";
-            string expectedSubmitButtonLabel = "Submit Student";
+            string expectedSubmitButtonLabel = "SUBMIT";
 
             // when
             this.renderedStudentRegistrationComponent =

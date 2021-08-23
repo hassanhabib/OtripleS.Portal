@@ -11,6 +11,7 @@ using OtripleS.Portal.Web.Models.StudentViews;
 using OtripleS.Portal.Web.Models.StudentViews.Exceptions;
 using OtripleS.Portal.Web.Services.StudentViews;
 using OtripleS.Portal.Web.Views.Components;
+using Syncfusion.Blazor;
 using Tynamix.ObjectFiller;
 using Xunit;
 
@@ -25,6 +26,9 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
         {
             this.studentViewServiceMock = new Mock<IStudentViewService>();
             this.Services.AddScoped(services => this.studentViewServiceMock.Object);
+            this.Services.AddSyncfusionBlazor();
+            this.Services.AddOptions();
+            this.JSInterop.Mode = JSRuntimeMode.Loose;
         }
 
         private static StudentView CreateRandomStudentView() =>

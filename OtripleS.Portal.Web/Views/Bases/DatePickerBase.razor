@@ -1,4 +1,8 @@
-﻿<input type="date" 
-       @bind-value="@Value"
-       @oninput="OnValueChanged"
-       disabled="@IsDisabled"/>
+﻿@using Syncfusion.Blazor.Calendars
+
+<SfDateTimePicker TValue="DateTimeOffset"
+                  Enabled="@(!IsDisabled)">
+                  
+                  <DateTimePickerEvents TValue="DateTimeOffset"
+                                    ValueChange="OnValueChanged" />
+</SfDateTimePicker>

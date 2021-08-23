@@ -19,6 +19,8 @@ using OtripleS.Portal.Web.Services.Students;
 using OtripleS.Portal.Web.Services.StudentViews;
 using OtripleS.Portal.Web.Services.Users;
 using RESTFulSense.Clients;
+using Syncfusion.Blazor;
+using Syncfusion.Licensing;
 
 namespace OtripleS.Portal.Web
 {
@@ -33,6 +35,7 @@ namespace OtripleS.Portal.Web
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddSyncfusionBlazor();
             AddHttpClient(services);
             AddRootDirectory(services);
             services.AddScoped<IApiBroker, ApiBroker>();
@@ -56,6 +59,9 @@ namespace OtripleS.Portal.Web
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
+
+            SyncfusionLicenseProvider.RegisterLicense(
+                licenseKey: "ADD_LICENSE_HERE");
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

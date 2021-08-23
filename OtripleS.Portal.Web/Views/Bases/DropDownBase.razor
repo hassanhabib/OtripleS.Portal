@@ -1,10 +1,13 @@
-﻿@typeparam TEnum
+﻿@using Syncfusion.Blazor.DropDowns
+@typeparam TEnum
 
-<select @oninput="OnValueChanged" disabled="@IsDisabled">
-    @{ 
-        foreach(TEnum enumValue in Enum.GetValues(typeof(TEnum)))
-        {
-            <option>@enumValue</option>
-        }
-    }
-</select>
+<SfDropDownList TValue="TEnum"
+                TItem="string"
+                DataSource="@(Enum.GetNames(typeof(TEnum)))"
+                Enabled="@(IsDisabled is false)"
+                style="dropdown-space">
+
+        <DropDownListEvents TValue="TEnum" 
+                            TItem="string"
+                            ValueChange="@OnValueChanged" />
+</SfDropDownList>

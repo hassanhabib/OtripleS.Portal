@@ -1,3 +1,7 @@
-﻿<button @onclick="@Click" disabled="@IsDisabled">
-    @Label
-</button>
+﻿@using Syncfusion.Blazor.Buttons
+
+<SfButton OnClick="@Click"
+		  Disabled=@IsDisabled
+		  IsPrimary=true>
+	@Label
+</SfButton>
