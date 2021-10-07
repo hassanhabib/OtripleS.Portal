@@ -1,5 +1,6 @@
 # OtripleS.Portal
 
+[![.NET](https://github.com/hassanhabib/OtripleS.Portal/actions/workflows/dotnet.yml/badge.svg)](https://github.com/hassanhabib/OtripleS.Portal/actions/workflows/dotnet.yml)
 [<img src="https://img.shields.io/badge/chat-Teams-blueviolet" alt="Chat on Teams!">](https://teams.microsoft.com/join/nh8zj7qeaf3q)
 
 This is an open source schooling system, dedicated to provide a better experience for schools needing a management and communication and tutoring system all in one place.
