@@ -10,7 +10,7 @@ namespace OtripleS.Portal.Web.Models.StudentRegistrationComponents.Exceptions
     public class StudentRegistrationComponentException : Exception
     {
         public StudentRegistrationComponentException(Exception innerException)
-            :base ("Error occurred, contact support", innerException)
+            : base("Error occurred, contact support", innerException)
         {
 
         }

@@ -47,7 +47,7 @@ namespace OtripleS.Portal.Web.Views.Components
             }
             catch (StudentViewValidationException studentViewValidationException)
             {
-                string validationMessage = 
+                string validationMessage =
                     studentViewValidationException.InnerException.Message;
 
                 ApplySubmissionFailed(validationMessage);

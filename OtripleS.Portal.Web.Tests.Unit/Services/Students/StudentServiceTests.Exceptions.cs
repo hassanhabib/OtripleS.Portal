@@ -80,7 +80,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
             string exceptionMessage = GetRandomString();
             var responseMessage = new HttpResponseMessage();
 
-            var httpRequestException = 
+            var httpRequestException =
                 new HttpRequestException();
 
             var httpResponseUrlNotFoundException =
@@ -108,7 +108,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
         {
             // given
             Student someStudent = CreateRandomStudent();
-            
+
             var expectedStudentDepndencyException =
                 new StudentDependencyException(
                     httpResponseCriticalException);
@@ -207,7 +207,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
             var serviceException = new Exception();
 
             var expectedStudentServiceException =
-                new StudentServiceException(serviceException) ;
+                new StudentServiceException(serviceException);
 
             this.apiBrokerMock.Setup(broker =>
                 broker.PostStudentAsync(It.IsAny<Student>()))

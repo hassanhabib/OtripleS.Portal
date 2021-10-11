@@ -91,7 +91,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
                 && actualException.InnerException.Message == expectedException.InnerException.Message;
         }
 
-        private static string GetRandomRoute() => 
+        private static string GetRandomRoute() =>
             new RandomUrl().GetValue();
 
         private static string GetRandomName() =>
