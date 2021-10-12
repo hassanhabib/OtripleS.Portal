@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="RESTFulSense" Version="2.0.0" />
-    <PackageReference Include="Syncfusion.Blazor" Version="19.3.0.43" />
-    <PackageReference Include="Syncfusion.Blazor.Themes" Version="19.3.0.43" />
+    <PackageReference Include="RESTFulSense" Version="2.2.0" />
+    <PackageReference Include="Syncfusion.Blazor" Version="19.3.0.44" />
+    <PackageReference Include="Syncfusion.Blazor.Themes" Version="19.3.0.44" />
   </ItemGroup>
 
 </Project>
