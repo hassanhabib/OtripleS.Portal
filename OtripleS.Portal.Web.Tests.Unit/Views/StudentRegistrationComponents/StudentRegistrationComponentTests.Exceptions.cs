@@ -8,7 +8,6 @@ using FluentAssertions;
 using Moq;
 using OtripleS.Portal.Web.Models.Colors;
 using OtripleS.Portal.Web.Models.StudentViews;
-using OtripleS.Portal.Web.Models.StudentViews.Exceptions;
 using OtripleS.Portal.Web.Views.Components;
 using Xunit;
 
@@ -30,7 +29,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
                     .ThrowsAsync(studentViewValidationException);
 
             // when
-            this.renderedStudentRegistrationComponent = 
+            this.renderedStudentRegistrationComponent =
                 RenderComponent<StudentRegistrationComponent>();
 
             this.renderedStudentRegistrationComponent.Instance.SubmitButton.Click();

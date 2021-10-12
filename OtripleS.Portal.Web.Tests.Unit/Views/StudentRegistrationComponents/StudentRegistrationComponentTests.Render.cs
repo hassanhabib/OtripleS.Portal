@@ -143,11 +143,11 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
             this.studentViewServiceMock.Setup(service =>
                 service.AddStudentViewAsync(It.IsAny<StudentView>()))
                     .ReturnsAsync(
-                        value:someStudentView, 
+                        value: someStudentView,
                         delay: TimeSpan.FromMilliseconds(500));
 
             // when
-            this.renderedStudentRegistrationComponent = 
+            this.renderedStudentRegistrationComponent =
                 RenderComponent<StudentRegistrationComponent>();
 
             this.renderedStudentRegistrationComponent.Instance.SubmitButton.Click();

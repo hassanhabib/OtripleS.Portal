@@ -21,7 +21,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
             // given
             Guid randomUserId = Guid.NewGuid();
             DateTimeOffset randomDateTime = GetRandomDate();
-            
+
             dynamic randomStudentViewProperties =
                 CreateRandomStudentViewProperties(
                     auditDates: randomDateTime,
