@@ -27,6 +27,7 @@ namespace OtripleS.Portal.Web.Infrastructure.Build
                     {
                         Branches = new string[] { "master" }
                     },
+
                     PullRequest = new PullRequestEvent
                     {
                         Branches = new string[] { "master" }
@@ -49,9 +50,10 @@ namespace OtripleS.Portal.Web.Infrastructure.Build
                             new SetupDotNetTaskV1
                             {
                                 Name = "Setup .Net",
+
                                 TargetDotNetVersion = new TargetDotNetVersion
                                 {
-                                    DotNetVersion = "6.0.100-rc.1.21463.6",
+                                    DotNetVersion = "6.0.100-rc.2.21505.57",
                                     IncludePrerelease = true
                                 }
                             },
