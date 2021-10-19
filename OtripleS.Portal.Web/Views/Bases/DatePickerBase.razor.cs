@@ -21,6 +21,8 @@ namespace OtripleS.Portal.Web.Views.Bases
         [Parameter]
         public bool IsDisabled { get; set; }
 
+        public bool IsEnabled => IsDisabled is false;
+
         public async Task SetValue(DateTimeOffset value)
         {
             this.Value = value;
