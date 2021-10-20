@@ -4,10 +4,11 @@
 // ---------------------------------------------------------------
 
 using System;
+using Xeptions;
 
 namespace OtripleS.Portal.Web.Models.Teachers.Exceptions
 {
-    public class TeacherServiceException : Exception
+    public class TeacherServiceException : Xeption
     {
         public TeacherServiceException(Exception innerException)
             : base(message:"Teacher service error occurred, contact support.", innerException) { }

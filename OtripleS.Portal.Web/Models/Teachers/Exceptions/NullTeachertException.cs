@@ -4,10 +4,11 @@
 // ---------------------------------------------------------------
 
 using System;
+using Xeptions;
 
 namespace OtripleS.Portal.Web.Models.Teachers.Exceptions
 {
-      public class NullTeachertException : Exception
+      public class NullTeachertException : Xeption
       {
             public NullTeachertException()
                 : base(message: "Null teacher error occurred.") { }

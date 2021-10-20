@@ -4,10 +4,11 @@
 // ---------------------------------------------------------------
 
 using System;
+using Xeptions;
 
 namespace OtripleS.Portal.Web.Models.Teachers.Exceptions
 {
-    public class InvalidTeacherException : Exception
+    public class InvalidTeacherException : Xeption
     {
         public InvalidTeacherException(string parameterName, object parameterValue)
             : base(message:"Invalid Teacher error occurred, " +
