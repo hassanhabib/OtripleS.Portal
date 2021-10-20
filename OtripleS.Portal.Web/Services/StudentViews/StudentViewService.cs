@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using OtripleS.Portal.Web.Brokers.DateTimes;
 using OtripleS.Portal.Web.Brokers.Logging;
 using OtripleS.Portal.Web.Brokers.Navigations;
+using OtripleS.Portal.Web.Models.Enums;
 using OtripleS.Portal.Web.Models.Students;
 using OtripleS.Portal.Web.Models.StudentViews;
 using OtripleS.Portal.Web.Services.Students;
@@ -15,65 +16,65 @@ using OtripleS.Portal.Web.Services.Users;
 
 namespace OtripleS.Portal.Web.Services.StudentViews
 {
-    public partial class StudentViewService : IStudentViewService
-    {
-        private readonly IStudentService studentService;
-        private readonly IUserService userService;
-        private readonly IDateTimeBroker dateTimeBroker;
-        private readonly INavigationBroker navigationBroker;
-        private readonly ILoggingBroker loggingBroker;
+      public partial class StudentViewService : IStudentViewService
+      {
+            private readonly IStudentService studentService;
+            private readonly IUserService userService;
+            private readonly IDateTimeBroker dateTimeBroker;
+            private readonly INavigationBroker navigationBroker;
+            private readonly ILoggingBroker loggingBroker;
 
-        public StudentViewService(
-            IStudentService studentService,
-            IUserService userService,
-            IDateTimeBroker dateTimeBroker,
-            INavigationBroker navigationBroker,
-            ILoggingBroker loggingBroker)
-        {
-            this.studentService = studentService;
-            this.userService = userService;
-            this.dateTimeBroker = dateTimeBroker;
-            this.navigationBroker = navigationBroker;
-            this.loggingBroker = loggingBroker;
-        }
-
-        public ValueTask<StudentView> AddStudentViewAsync(StudentView studentView) =>
-        TryCatch(async () =>
-        {
-            ValidateStudentView(studentView);
-            Student student = MapToStudent(studentView);
-            await this.studentService.RegisterStudentAsync(student);
-
-            return studentView;
-        });
-
-        public void NavigateTo(string route) =>
-        TryCatch(() =>
-        {
-            ValidateRoute(route);
-            this.navigationBroker.NavigateTo(route);
-        });
-
-        private Student MapToStudent(StudentView studentView)
-        {
-            Guid currentLoggedInUserId = this.userService.GetCurrentlyLoggedInUser();
-            DateTimeOffset currentDateTime = this.dateTimeBroker.GetCurrentDateTime();
-
-            return new Student
+            public StudentViewService(
+                IStudentService studentService,
+                IUserService userService,
+                IDateTimeBroker dateTimeBroker,
+                INavigationBroker navigationBroker,
+                ILoggingBroker loggingBroker)
             {
-                Id = Guid.NewGuid(),
-                UserId = Guid.NewGuid().ToString(),
-                IdentityNumber = studentView.IdentityNumber,
-                FirstName = studentView.FirstName,
-                MiddleName = studentView.MiddleName,
-                LastName = studentView.LastName,
-                Gender = (StudentGender)studentView.Gender,
-                BirthDate = studentView.BirthDate,
-                CreatedBy = currentLoggedInUserId,
-                UpdatedBy = currentLoggedInUserId,
-                CreatedDate = currentDateTime,
-                UpdatedDate = currentDateTime
-            };
-        }
-    }
+                  this.studentService = studentService;
+                  this.userService = userService;
+                  this.dateTimeBroker = dateTimeBroker;
+                  this.navigationBroker = navigationBroker;
+                  this.loggingBroker = loggingBroker;
+            }
+
+            public ValueTask<StudentView> AddStudentViewAsync(StudentView studentView) =>
+            TryCatch(async () =>
+            {
+                  ValidateStudentView(studentView);
+                  Student student = MapToStudent(studentView);
+                  await this.studentService.RegisterStudentAsync(student);
+
+                  return studentView;
+            });
+
+            public void NavigateTo(string route) =>
+            TryCatch(() =>
+            {
+                  ValidateRoute(route);
+                  this.navigationBroker.NavigateTo(route);
+            });
+
+            private Student MapToStudent(StudentView studentView)
+            {
+                  Guid currentLoggedInUserId = this.userService.GetCurrentlyLoggedInUser();
+                  DateTimeOffset currentDateTime = this.dateTimeBroker.GetCurrentDateTime();
+
+                  return new Student
+                  {
+                        Id = Guid.NewGuid(),
+                        UserId = Guid.NewGuid().ToString(),
+                        IdentityNumber = studentView.IdentityNumber,
+                        FirstName = studentView.FirstName,
+                        MiddleName = studentView.MiddleName,
+                        LastName = studentView.LastName,
+                        Gender = (Gender)studentView.Gender,
+                        BirthDate = studentView.BirthDate,
+                        CreatedBy = currentLoggedInUserId,
+                        UpdatedBy = currentLoggedInUserId,
+                        CreatedDate = currentDateTime,
+                        UpdatedDate = currentDateTime
+                  };
+            }
+      }
 }

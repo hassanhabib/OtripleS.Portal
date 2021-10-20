@@ -10,6 +10,6 @@ namespace OtripleS.Portal.Web.Models.Teachers.Exceptions
     public class TeacherDependencyValidationException : Exception
     {
         public TeacherDependencyValidationException(Exception innerException)
-            : base("Teacher dependency validation error occurred, try again.", innerException) { }
+            : base(message:"Teacher dependency validation error occurred, try again.", innerException) { }
     }
 }

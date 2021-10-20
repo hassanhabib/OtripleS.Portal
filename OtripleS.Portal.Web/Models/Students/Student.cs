@@ -4,6 +4,7 @@
 // ---------------------------------------------------------------
 
 using System;
+using OtripleS.Portal.Web.Models.Enums;
 
 namespace OtripleS.Portal.Web.Models.Students
 {
@@ -16,7 +17,7 @@ namespace OtripleS.Portal.Web.Models.Students
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public DateTimeOffset BirthDate { get; set; }
-        public StudentGender Gender { get; set; }
+        public Gender Gender { get; set; }
         public DateTimeOffset CreatedDate { get; set; }
         public DateTimeOffset UpdatedDate { get; set; }
         public Guid CreatedBy { get; set; }

@@ -10,7 +10,7 @@ namespace OtripleS.Portal.Web.Models.Teachers.Exceptions
     public class InvalidTeacherException : Exception
     {
         public InvalidTeacherException(string parameterName, object parameterValue)
-            : base("Invalid Teacher error occurred, " +
+            : base(message:"Invalid Teacher error occurred, " +
                  $"parameter name: {parameterName}, " +
                  $"parameter value: {parameterValue}")
         { }

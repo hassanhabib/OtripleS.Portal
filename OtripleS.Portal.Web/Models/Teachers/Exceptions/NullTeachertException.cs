@@ -7,9 +7,9 @@ using System;
 
 namespace OtripleS.Portal.Web.Models.Teachers.Exceptions
 {
-    public class NullTeachertException : Exception
-    {
-        public NullTeachertException()
-            : base("Null teacher error occurred.") { }
-    }
+      public class NullTeachertException : Exception
+      {
+            public NullTeachertException()
+                : base(message: "Null teacher error occurred.") { }
+      }
 }

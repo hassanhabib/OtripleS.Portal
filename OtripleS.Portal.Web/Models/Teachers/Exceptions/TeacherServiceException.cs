@@ -10,6 +10,6 @@ namespace OtripleS.Portal.Web.Models.Teachers.Exceptions
     public class TeacherServiceException : Exception
     {
         public TeacherServiceException(Exception innerException)
-            : base("Teacher service error occurred, contact support.", innerException) { }
+            : base(message:"Teacher service error occurred, contact support.", innerException) { }
     }
 }
