@@ -25,6 +25,6 @@ namespace OtripleS.Portal.Web.Services.Teachers
         }
 
         public ValueTask<IEnumerable<Teacher>> RetrieveAllTeachersAsync() =>
-            throw new System.NotImplementedException();
+            this.apiBroker.GetAllTeachersAsync();
     }
 }
