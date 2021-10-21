@@ -6,12 +6,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using Moq;
 using OtripleS.Portal.Web.Brokers.API;
 using OtripleS.Portal.Web.Brokers.Logging;
 using OtripleS.Portal.Web.Models.Teachers;
 using OtripleS.Portal.Web.Services.Teachers;
 using Tynamix.ObjectFiller;
+using Xeptions;
 
 namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
 {
@@ -33,8 +35,18 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
         
         private static int GetRandomNumber() => new IntRange(min: 2, max: 10).GetValue();
 
+        private static string GetRandomText() => new MnemonicString().GetValue();
+
         private IList<Teacher> CreateRandomTeachers() =>
             CreateTeacherFiller().Create(GetRandomNumber()).ToList();
+
+        private static Expression<Func<Exception, bool>> SameValidationExceptionAs(Exception expectedException)
+        {
+            return actualException =>
+                actualException.Message == expectedException.Message
+                && actualException.InnerException.Message == expectedException.InnerException.Message
+                && (actualException.InnerException as Xeption).Equals(expectedException.InnerException.Data);
+        }
 
         private static Filler<Teacher> CreateTeacherFiller()
         {
