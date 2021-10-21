@@ -26,17 +26,32 @@ namespace OtripleS.Portal.Web.Services.Teachers
             {
                 throw CreateAndLogDependencyException(httpResponseInternalServerException);
             }
+            catch (Exception exception)
+            {
+                throw CreateAndLogServiceException(exception);
+            }
         }
 
         private TeacherDependencyValidationException CreateAndLogDependencyException(
             Exception exception)
         {
-            var studentDependencyException =
+            var teacherDependencyException =
                 new TeacherDependencyValidationException(exception);
 
-            this.loggingBroker.LogError(studentDependencyException);
+            this.loggingBroker.LogError(teacherDependencyException);
 
-            return studentDependencyException;
+            return teacherDependencyException;
+        }
+
+        private TeacherServiceException CreateAndLogServiceException(
+            Exception exception)
+        {
+            var teacherServiceException =
+                new TeacherServiceException(exception);
+
+            this.loggingBroker.LogError(teacherServiceException);
+
+            return teacherServiceException;
         }
     }
 }
