@@ -40,6 +40,13 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
         private IList<Teacher> CreateRandomTeachers() =>
             CreateTeacherFiller().Create(GetRandomNumber()).ToList();
 
+        private static Expression<Func<Exception, bool>> SameExceptionAs(
+            Exception expectedException)
+        {
+            return actualException => actualException.Message == expectedException.Message
+                && actualException.InnerException.Message == expectedException.InnerException.Message;
+        }
+
         private static Expression<Func<Exception, bool>> SameValidationExceptionAs(Exception expectedException)
         {
             return actualException =>
