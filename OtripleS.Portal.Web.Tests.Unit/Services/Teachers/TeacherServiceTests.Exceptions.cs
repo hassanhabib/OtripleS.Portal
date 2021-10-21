@@ -28,7 +28,8 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
             var expectedDependencyValidationException = 
                 new TeacherDependencyValidationException(internalServerErrorException);
 
-            this.apiBrokerMock.Setup(apiBroker => apiBroker.GetAllTeachersAsync)
+            this.apiBrokerMock.Setup(apiBroker => 
+                apiBroker.GetAllTeachersAsync)
                 .Throws(internalServerErrorException);
 
             var retrieveAllTeachersTask =
