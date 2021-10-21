@@ -11,6 +11,6 @@ namespace OtripleS.Portal.Web.Brokers.API
 {
     public partial interface IApiBroker
     {
-        ValueTask<IEnumerable<Teacher>> GetAllTeachersAsync();
+        ValueTask<IList<Teacher>> GetAllTeachersAsync();
     }
 }

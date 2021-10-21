@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Moq;
 using OtripleS.Portal.Web.Brokers.API;
 using OtripleS.Portal.Web.Brokers.Logging;
@@ -32,8 +33,8 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
         
         private static int GetRandomNumber() => new IntRange(min: 2, max: 10).GetValue();
 
-        private IEnumerable<Teacher> CreateRandomTeachers() =>
-            CreateTeacherFiller().Create(GetRandomNumber());
+        private IList<Teacher> CreateRandomTeachers() =>
+            CreateTeacherFiller().Create(GetRandomNumber()).ToList();
 
         private static Filler<Teacher> CreateTeacherFiller()
         {

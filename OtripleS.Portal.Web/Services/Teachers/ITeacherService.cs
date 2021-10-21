@@ -11,6 +11,6 @@ namespace OtripleS.Portal.Web.Services
 {
     public interface ITeacherService
     {
-        ValueTask<IEnumerable<Teacher>> RetrieveAllTeachersAsync();
+        ValueTask<IList<Teacher>> RetrieveAllTeachersAsync();
     }
 }
