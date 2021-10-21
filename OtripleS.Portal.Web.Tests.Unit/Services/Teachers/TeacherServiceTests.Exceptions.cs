@@ -3,11 +3,11 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
+using System.Net.Http;
+using System.Threading.Tasks;
 using Moq;
 using OtripleS.Portal.Web.Models.Teachers.Exceptions;
 using RESTFulSense.Exceptions;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
@@ -29,7 +29,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
                 new TeacherDependencyValidationException(internalServerErrorException);
 
             this.apiBrokerMock.Setup(apiBroker => 
-                apiBroker.GetAllTeachersAsync)
+                apiBroker.GetAllTeachersAsync())
                 .Throws(internalServerErrorException);
 
             var retrieveAllTeachersTask =

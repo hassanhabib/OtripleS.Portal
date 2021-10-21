@@ -1,6 +1,6 @@
-﻿using OtripleS.Portal.Web.Models.Teachers;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using OtripleS.Portal.Web.Models.Teachers;
 
 namespace OtripleS.Portal.Web.Services.Teachers
 {
