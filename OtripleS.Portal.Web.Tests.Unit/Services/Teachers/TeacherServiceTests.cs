@@ -45,7 +45,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
             return actualException =>
                 actualException.Message == expectedException.Message
                 && actualException.InnerException.Message == expectedException.InnerException.Message
-                && (actualException.InnerException as Xeption).Equals(expectedException.InnerException.Data);
+                && (actualException.InnerException as Xeption).DataEquals(expectedException.InnerException.Data);
         }
 
         private static Filler<Teacher> CreateTeacherFiller()

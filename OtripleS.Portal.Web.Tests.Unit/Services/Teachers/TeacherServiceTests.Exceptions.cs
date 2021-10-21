@@ -41,7 +41,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
                 apiBroker.GetAllTeachersAsync(), Times.Once);
 
             this.loggingBrokerMock.Verify(loggingBroker =>
-                loggingBroker.LogError(It.Is(SameValidationExceptionAs(expectedDependencyValidationException));
+                loggingBroker.LogError(It.Is(SameValidationExceptionAs(expectedDependencyValidationException))));
 
             apiBrokerMock.VerifyNoOtherCalls();
             loggingBrokerMock.VerifyNoOtherCalls();
