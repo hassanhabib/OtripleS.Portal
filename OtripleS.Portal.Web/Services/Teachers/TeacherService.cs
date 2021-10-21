@@ -3,7 +3,9 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using OtripleS.Portal.Web.Brokers.API;
 using OtripleS.Portal.Web.Brokers.Logging;
@@ -11,7 +13,7 @@ using OtripleS.Portal.Web.Models.Teachers;
 
 namespace OtripleS.Portal.Web.Services.Teachers
 {
-    public class TeacherService : ITeacherService
+    public partial class TeacherService : ITeacherService
     {
         private readonly IApiBroker apiBroker;
         private readonly ILoggingBroker loggingBroker;
@@ -24,7 +26,14 @@ namespace OtripleS.Portal.Web.Services.Teachers
             this.loggingBroker = loggingBroker;
         }
 
-        public async ValueTask<IEnumerable<Teacher>> RetrieveAllTeachersAsync() =>
-            await this.apiBroker.GetAllTeachersAsync();
+        public async ValueTask<IEnumerable<Teacher>> RetrieveAllTeachersAsync()
+        {
+            IEnumerable<Teacher> teachers = 
+                await this.apiBroker.GetAllTeachersAsync();
+
+            ValidateGetAllTeachersApiResponse(teachers.ToList());
+
+            return teachers;
+        }
     }
 }
