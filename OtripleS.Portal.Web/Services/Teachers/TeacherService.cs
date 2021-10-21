@@ -3,7 +3,6 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using OtripleS.Portal.Web.Brokers.API;
@@ -26,6 +25,6 @@ namespace OtripleS.Portal.Web.Services.Teachers
         }
 
         public async ValueTask<IEnumerable<Teacher>> RetrieveAllTeachersAsync() =>
-            throw new NotImplementedException();
+            await this.apiBroker.GetAllTeachersAsync();
     }
 }
