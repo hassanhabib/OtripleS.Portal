@@ -12,8 +12,8 @@ namespace OtripleS.Portal.Web.Brokers.API
     public partial class ApiBroker
     {
         private const string TeachersRelativeUrl = "api/teachers";
-        
-        public ValueTask<IEnumerable<Teacher>> GetAllTeachersAsync =>
-            this.apiClient.GetContentAsync<IEnumerable<Teacher>>(TeachersRelativeUrl);
+
+        public async ValueTask<IEnumerable<Teacher>> GetAllTeachersAsync() =>
+            await this.apiClient.GetContentAsync<IEnumerable<Teacher>>(TeachersRelativeUrl);
     }
 }
