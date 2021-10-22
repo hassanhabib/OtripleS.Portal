@@ -25,7 +25,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
 
             apiBrokerMock.Setup(apiBroker =>
                 apiBroker.GetAllTeachersAsync())
-                .ReturnsAsync(expectedTeachers);
+                .ReturnsAsync(apiTeachers);
 
             var retrievedTeachers = 
                 await this.teacherService.RetrieveAllTeachersAsync();
