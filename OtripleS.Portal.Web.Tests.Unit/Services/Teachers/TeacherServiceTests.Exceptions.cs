@@ -4,9 +4,11 @@
 // ---------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Moq;
+using OtripleS.Portal.Web.Models.Teachers;
 using OtripleS.Portal.Web.Models.Teachers.Exceptions;
 using RESTFulSense.Exceptions;
 using Xunit;
@@ -15,6 +17,64 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
 {
     public partial class TeacherServiceTests
     {
+        public static TheoryData CriticalApiExceptions()
+        {
+            string exceptionMessage = GetRandomText();
+            var responseMessage = new HttpResponseMessage();
+
+            var httpRequestException =
+                new HttpRequestException();
+
+            var httpResponseUrlNotFoundException =
+                new HttpResponseUrlNotFoundException(
+                    responseMessage: responseMessage,
+                    message: exceptionMessage);
+
+            var httpResponseUnAuthorizedException =
+                new HttpResponseUnauthorizedException(
+                    responseMessage: responseMessage,
+                    message: exceptionMessage);
+
+            return new TheoryData<Exception>
+            {
+                httpRequestException,
+                httpResponseUrlNotFoundException,
+                httpResponseUnAuthorizedException
+            };
+        }
+
+        [Theory]
+        [MemberData(nameof(CriticalApiExceptions))]
+        public async Task ShouldThrowCriticalDependencyExceptionOnRetrieveAllIfCriticalApiExceptionOccursAndLogItAsync(
+            Exception httpResponseCriticalException)
+        {
+            var expectedTeacherDependencyException =
+                new TeacherDependencyException(
+                    httpResponseCriticalException);
+
+            this.apiBrokerMock.Setup(broker =>
+                broker.GetAllTeachersAsync())
+                    .ThrowsAsync(httpResponseCriticalException);
+
+            ValueTask<IList<Teacher>> retrieveAllTeachersTask =
+                this.teacherService.RetrieveAllTeachersAsync();
+
+            await Assert.ThrowsAsync<TeacherDependencyException>(() =>
+               retrieveAllTeachersTask.AsTask());
+
+            this.apiBrokerMock.Verify(broker =>
+                broker.GetAllTeachersAsync(),
+                    Times.Once);
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogCritical(It.Is(
+                    SameExceptionAs(expectedTeacherDependencyException))),
+                        Times.Once);
+
+            this.apiBrokerMock.VerifyNoOtherCalls();
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+        }
+
         [Fact]
         public async Task ShouldThrowDependencyValidationExceptionOnRetrieveAllIfInternalServerErrorOccursAndLogItAsync()
         {
