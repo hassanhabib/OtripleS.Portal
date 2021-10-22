@@ -7,10 +7,8 @@ namespace OtripleS.Portal.Web.Models.Teachers
 {
       public enum TeacherStatus
       {
-            Working,
-            Fired,
-            Died,
-            Resigned
-
+            Active,
+            Retired,
+            Terminated
       }
 }
