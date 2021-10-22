@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using OtripleS.Portal.Web.Brokers.DateTimes;
 using OtripleS.Portal.Web.Brokers.Logging;
 using OtripleS.Portal.Web.Brokers.Navigations;
+using OtripleS.Portal.Web.Models.Genders;
 using OtripleS.Portal.Web.Models.Students;
 using OtripleS.Portal.Web.Models.StudentViews;
 using OtripleS.Portal.Web.Services.Students;
@@ -67,7 +68,7 @@ namespace OtripleS.Portal.Web.Services.StudentViews
                 FirstName = studentView.FirstName,
                 MiddleName = studentView.MiddleName,
                 LastName = studentView.LastName,
-                Gender = (StudentGender)studentView.Gender,
+                Gender = (Gender)studentView.Gender,
                 BirthDate = studentView.BirthDate,
                 CreatedBy = currentLoggedInUserId,
                 UpdatedBy = currentLoggedInUserId,

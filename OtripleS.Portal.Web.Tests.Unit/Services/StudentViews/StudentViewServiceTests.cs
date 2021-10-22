@@ -10,6 +10,7 @@ using Moq;
 using OtripleS.Portal.Web.Brokers.DateTimes;
 using OtripleS.Portal.Web.Brokers.Logging;
 using OtripleS.Portal.Web.Brokers.Navigations;
+using OtripleS.Portal.Web.Models.Genders;
 using OtripleS.Portal.Web.Models.Students;
 using OtripleS.Portal.Web.Models.StudentViews;
 using OtripleS.Portal.Web.Services.Students;
@@ -53,7 +54,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
             DateTimeOffset auditDates,
             Guid auditIds)
         {
-            StudentGender randomStudentGender = GetRandomGender();
+            Gender randomStudentGender = GetRandomGender();
 
             return new
             {
@@ -100,15 +101,15 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
         private static string GetRandomString() =>
             new MnemonicString().GetValue();
 
-        private static StudentGender GetRandomGender()
+        private static Gender GetRandomGender()
         {
             int studentGenderCount =
-                Enum.GetValues(typeof(StudentGender)).Length;
+                Enum.GetValues(typeof(Gender)).Length;
 
             int randomStudentGenderValue =
                 new IntRange(min: 0, max: studentGenderCount).GetValue();
 
-            return (StudentGender)randomStudentGenderValue;
+            return (Gender)randomStudentGenderValue;
         }
 
         private static Filler<StudentView> CreateStudentViewFiller()
