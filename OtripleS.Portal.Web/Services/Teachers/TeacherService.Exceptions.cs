@@ -14,13 +14,13 @@ namespace OtripleS.Portal.Web.Services.Teachers
 {
     public partial class TeacherService
     {
-        private delegate ValueTask<IList<Teacher>> ReturningStudentFunction();
+        private delegate ValueTask<IList<Teacher>> ReturningTeacherFunction();
 
-        private async ValueTask<IList<Teacher>> TryCatch(ReturningStudentFunction returningStudentFunction)
+        private async ValueTask<IList<Teacher>> TryCatch(ReturningTeacherFunction returningTeacherFunction)
         {
             try
             {
-                return await returningStudentFunction();
+                return await returningTeacherFunction();
             }
             catch (HttpResponseInternalServerErrorException httpResponseInternalServerException)
             {
