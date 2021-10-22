@@ -13,7 +13,7 @@ namespace OtripleS.Portal.Web.Brokers.API
       {
             private const string TeachersRelativeUrl = "api/teachers";
 
-            public async ValueTask<List<Teacher>> GetAllTeachers() =>
+            public async ValueTask<List<Teacher>> GetAllTeachersAsync() =>
                 await this.GetAsync<List<Teacher>>(TeachersRelativeUrl);
       }
 }
