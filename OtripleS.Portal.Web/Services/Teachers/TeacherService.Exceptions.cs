@@ -26,9 +26,9 @@ namespace OtripleS.Portal.Web.Services.Teachers
             {
                 throw CreateAndLogDependencyException(httpResponseInternalServerException);
             }
-            catch (Exception exception)
+            catch (Exception serviceException)
             {
-                throw CreateAndLogServiceException(exception);
+                throw CreateAndLogServiceException(serviceException);
             }
         }
 
