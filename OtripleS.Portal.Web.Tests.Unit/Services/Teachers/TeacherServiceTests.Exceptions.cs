@@ -76,7 +76,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
         }
 
         [Fact]
-        public async Task ShouldThrowDependencyValidationExceptionOnRetrieveAllIfInternalServerErrorOccursAndLogItAsync()
+        public async Task ShouldThrowDependencyExceptionOnRetrieveAllIfInternalServerErrorOccursAndLogItAsync()
         {
             var randomExceptionMessage = GetRandomText();
             var responseMessage = new HttpResponseMessage();
@@ -87,7 +87,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
                     randomExceptionMessage);
 
             var expectedDependencyValidationException = 
-                new TeacherDependencyValidationException(internalServerErrorException);
+                new TeacherDependencyException(internalServerErrorException);
 
             this.apiBrokerMock.Setup(apiBroker => 
                 apiBroker.GetAllTeachersAsync())
@@ -96,7 +96,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
             var retrieveAllTeachersTask =
                 teacherService.RetrieveAllTeachersAsync();
 
-            await Assert.ThrowsAsync<TeacherDependencyValidationException>(() => 
+            await Assert.ThrowsAsync<TeacherDependencyException>(() => 
                 retrieveAllTeachersTask.AsTask());
 
             this.apiBrokerMock.Verify(apiBroker => 
