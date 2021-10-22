@@ -10,6 +10,7 @@ using FluentAssertions;
 using Moq;
 using Xunit;
 using OtripleS.Portal.Web.Models.Teachers;
+using Force.DeepCloner;
 
 namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
 {
@@ -19,16 +20,17 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
         public async Task ShouldLogWarningOnRetrieveAllWhenTeachersWereEmpty()
         {
             IList<Teacher> emptyTeacherCollection = Enumerable.Empty<Teacher>().ToList();
-            var expectedTeachersFromApi = emptyTeacherCollection;
+            IList<Teacher> apiTeachers = emptyTeacherCollection;
+            IList<Teacher> expectedTeachers = apiTeachers.DeepClone();
 
             apiBrokerMock.Setup(apiBroker =>
                 apiBroker.GetAllTeachersAsync())
-                .ReturnsAsync(expectedTeachersFromApi);
+                .ReturnsAsync(expectedTeachers);
 
             var retrievedTeachers = 
                 await this.teacherService.RetrieveAllTeachersAsync();
 
-            retrievedTeachers.Should().BeEquivalentTo(expectedTeachersFromApi);
+            retrievedTeachers.Should().BeEquivalentTo(expectedTeachers);
 
             this.apiBrokerMock.Verify(apiBroker => 
                 apiBroker.GetAllTeachersAsync(), Times.Once);

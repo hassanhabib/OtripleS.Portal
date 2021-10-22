@@ -4,6 +4,7 @@
 // ---------------------------------------------------------------
 
 using FluentAssertions;
+using Force.DeepCloner;
 using Moq;
 using OtripleS.Portal.Web.Models.Teachers;
 using System.Collections.Generic;
@@ -18,16 +19,17 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
         public async Task ShouldRetrieveAllTeachersAsync()
         {
             IList<Teacher> randomTeachers = CreateRandomTeachers();
-            IList<Teacher> storageTeachers = randomTeachers;
+            IList<Teacher> apiTeachers = randomTeachers;
+            IList<Teacher> expectedTeachers = apiTeachers.DeepClone();
 
             this.apiBrokerMock.Setup(apiBroker =>
                 apiBroker.GetAllTeachersAsync())
-                .ReturnsAsync(storageTeachers);
+                .ReturnsAsync(apiTeachers);
 
             var retrievedTeachers =
                 await teacherService.RetrieveAllTeachersAsync();
 
-            retrievedTeachers.Should().BeEquivalentTo(storageTeachers);
+            retrievedTeachers.Should().BeEquivalentTo(expectedTeachers);
 
             this.apiBrokerMock.Verify(apiBroker => 
                 apiBroker.GetAllTeachersAsync(),
