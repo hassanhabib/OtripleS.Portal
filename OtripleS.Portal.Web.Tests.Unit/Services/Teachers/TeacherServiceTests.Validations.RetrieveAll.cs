@@ -25,8 +25,8 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
             IReadOnlyList<Teacher> apiTeachers = emptyTeacherCollection;
             IReadOnlyList<Teacher> expectedTeachers = apiTeachers.DeepClone();
 
-            this.apiBrokerMock.Setup(apiBroker =>
-                apiBroker.GetAllTeachersAsync())
+            this.apiBrokerMock.Setup(broker =>
+                broker.GetAllTeachersAsync())
                     .ReturnsAsync(apiTeachers);
 
             IReadOnlyList<Teacher> retrievedTeachers = 
@@ -34,11 +34,11 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
 
             retrievedTeachers.Should().BeEquivalentTo(expectedTeachers);
 
-            this.apiBrokerMock.Verify(apiBroker => 
-                apiBroker.GetAllTeachersAsync(), Times.Once);
+            this.apiBrokerMock.Verify(broker => 
+                broker.GetAllTeachersAsync(), Times.Once);
 
-            this.loggingBrokerMock.Verify(x => 
-                x.LogWarning("No teachers retrieved from the api."), 
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogWarning("No teachers retrieved from the api."), 
                     Times.Once());
 
             this.apiBrokerMock.VerifyNoOtherCalls();

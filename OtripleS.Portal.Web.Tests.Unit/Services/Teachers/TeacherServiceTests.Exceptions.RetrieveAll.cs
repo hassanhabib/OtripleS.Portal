@@ -109,8 +109,8 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
                 new TeacherDependencyException(
                     dependencyApiException);
 
-            this.apiBrokerMock.Setup(apiBroker => 
-                apiBroker.GetAllTeachersAsync())
+            this.apiBrokerMock.Setup(broker => 
+                broker.GetAllTeachersAsync())
                     .Throws(dependencyApiException);
 
             ValueTask<IReadOnlyList<Teacher>> retrieveAllTeachersTask =
@@ -119,12 +119,12 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
             await Assert.ThrowsAsync<TeacherDependencyException>(() => 
                 retrieveAllTeachersTask.AsTask());
 
-            this.apiBrokerMock.Verify(apiBroker => 
-                apiBroker.GetAllTeachersAsync(),
+            this.apiBrokerMock.Verify(broker => 
+                broker.GetAllTeachersAsync(),
                     Times.Once);
 
-            this.loggingBrokerMock.Verify(loggingBroker =>
-                loggingBroker.LogError(It.Is(SameValidationExceptionAs(
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameValidationExceptionAs(
                         expectedDependencyException))),
                             Times.Once);
 
@@ -140,8 +140,8 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
             var expectedTeacherServiceException = 
                 new TeacherServiceException(serviceException);
 
-            this.apiBrokerMock.Setup(apiBroker => 
-                apiBroker.GetAllTeachersAsync())
+            this.apiBrokerMock.Setup(broker => 
+                broker.GetAllTeachersAsync())
                     .Throws(serviceException);
 
             // when
@@ -152,12 +152,12 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
             await Assert.ThrowsAsync<TeacherServiceException>(() =>
                retrieveAllTeachersTask.AsTask());
 
-            this.apiBrokerMock.Verify(apiBroker => 
-                apiBroker.GetAllTeachersAsync(),
+            this.apiBrokerMock.Verify(broker => 
+                broker.GetAllTeachersAsync(),
                     Times.Once);
 
-            this.loggingBrokerMock.Verify(loggingBroker =>
-                loggingBroker.LogError(It.Is(SameExceptionAs(
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameExceptionAs(
                     expectedTeacherServiceException))),
                         Times.Once);
 
