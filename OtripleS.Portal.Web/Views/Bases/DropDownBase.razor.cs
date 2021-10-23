@@ -3,6 +3,8 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Syncfusion.Blazor.DropDowns;
@@ -21,6 +23,8 @@ namespace OtripleS.Portal.Web.Views.Bases
         public bool IsDisabled { get; set; }
 
         public bool IsEnabled => IsDisabled is false;
+
+        public IReadOnlyList<string> EnumNames => Enum.GetNames(typeof(TEnum));
 
         public async Task SetValue(TEnum value)
         {

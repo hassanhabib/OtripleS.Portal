@@ -9,8 +9,8 @@ using OtripleS.Portal.Web.Models.Teachers;
 
 namespace OtripleS.Portal.Web.Brokers.API
 {
-    public partial interface IApiBroker
-    {
+      public partial interface IApiBroker
+      {
         ValueTask<IList<Teacher>> GetAllTeachersAsync();
-    }
+      }
 }
