@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using OtripleS.Portal.Web.Brokers.DateTimes;
 using OtripleS.Portal.Web.Brokers.Logging;
 using OtripleS.Portal.Web.Brokers.Navigations;
-using OtripleS.Portal.Web.Models.Genders;
 using OtripleS.Portal.Web.Models.Students;
 using OtripleS.Portal.Web.Models.StudentViews;
 using OtripleS.Portal.Web.Services.Students;
