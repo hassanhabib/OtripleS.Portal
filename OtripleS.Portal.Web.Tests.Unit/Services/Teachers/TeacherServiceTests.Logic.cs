@@ -4,7 +4,6 @@
 // ---------------------------------------------------------------
 
 using FluentAssertions;
-using Force.DeepCloner;
 using Moq;
 using OtripleS.Portal.Web.Models.Teachers;
 using System.Collections.Generic;
