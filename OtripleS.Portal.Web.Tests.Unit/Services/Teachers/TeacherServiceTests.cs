@@ -37,7 +37,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
 
         private static string GetRandomText() => new MnemonicString().GetValue();
 
-        private IList<Teacher> CreateRandomTeachers() =>
+        private IReadOnlyList<Teacher> CreateRandomTeachers() =>
             CreateTeacherFiller().Create(GetRandomNumber()).ToList();
 
         private static Expression<Func<Exception, bool>> SameExceptionAs(

@@ -18,9 +18,9 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
         [Fact]
         public async Task ShouldRetrieveAllTeachersAsync()
         {
-            IList<Teacher> randomTeachers = CreateRandomTeachers();
-            IList<Teacher> apiTeachers = randomTeachers;
-            IList<Teacher> expectedTeachers = apiTeachers.DeepClone();
+            IReadOnlyList<Teacher> randomTeachers = CreateRandomTeachers();
+            IReadOnlyList<Teacher> apiTeachers = randomTeachers;
+            IReadOnlyList<Teacher> expectedTeachers = apiTeachers;
 
             this.apiBrokerMock.Setup(apiBroker =>
                 apiBroker.GetAllTeachersAsync())

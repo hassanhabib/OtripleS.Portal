@@ -19,9 +19,9 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
         [Fact]
         public async Task ShouldLogWarningOnRetrieveAllWhenTeachersWereEmpty()
         {
-            IList<Teacher> emptyTeacherCollection = Enumerable.Empty<Teacher>().ToList();
-            IList<Teacher> apiTeachers = emptyTeacherCollection;
-            IList<Teacher> expectedTeachers = apiTeachers.DeepClone();
+            IReadOnlyList<Teacher> emptyTeacherCollection = Enumerable.Empty<Teacher>().ToList();
+            IReadOnlyList<Teacher> apiTeachers = emptyTeacherCollection;
+            IReadOnlyList<Teacher> expectedTeachers = apiTeachers.DeepClone();
 
             apiBrokerMock.Setup(apiBroker =>
                 apiBroker.GetAllTeachersAsync())

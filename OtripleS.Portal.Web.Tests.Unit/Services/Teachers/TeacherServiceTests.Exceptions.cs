@@ -56,7 +56,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
                 broker.GetAllTeachersAsync())
                     .ThrowsAsync(httpResponseCriticalException);
 
-            ValueTask<IList<Teacher>> retrieveAllTeachersTask =
+            ValueTask<IReadOnlyList<Teacher>> retrieveAllTeachersTask =
                 this.teacherService.RetrieveAllTeachersAsync();
 
             await Assert.ThrowsAsync<TeacherDependencyException>(() =>

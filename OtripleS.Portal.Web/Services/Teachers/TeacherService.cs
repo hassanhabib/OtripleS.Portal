@@ -26,10 +26,10 @@ namespace OtripleS.Portal.Web.Services.Teachers
             this.loggingBroker = loggingBroker;
         }
 
-        public ValueTask<IList<Teacher>> RetrieveAllTeachersAsync() =>
+        public ValueTask<IReadOnlyList<Teacher>> RetrieveAllTeachersAsync() =>
         TryCatch(async () => 
         {
-            IList<Teacher> teachers =
+            IReadOnlyList<Teacher> teachers =
                 await this.apiBroker.GetAllTeachersAsync();
 
             ValidateGetAllTeachersApiResponse(teachers);
