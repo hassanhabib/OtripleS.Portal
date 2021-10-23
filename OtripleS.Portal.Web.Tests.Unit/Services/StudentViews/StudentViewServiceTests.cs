@@ -54,7 +54,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
             DateTimeOffset auditDates,
             Guid auditIds)
         {
-            Gender randomStudentGender = GetRandomGender();
+            StudentGender randomStudentGender = GetRandomGender();
 
             return new
             {
@@ -101,15 +101,15 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
         private static string GetRandomString() =>
             new MnemonicString().GetValue();
 
-        private static Gender GetRandomGender()
+        private static StudentGender GetRandomGender()
         {
             int studentGenderCount =
-                Enum.GetValues(typeof(Gender)).Length;
+                Enum.GetValues(typeof(StudentGender)).Length;
 
             int randomStudentGenderValue =
                 new IntRange(min: 0, max: studentGenderCount).GetValue();
 
-            return (Gender)randomStudentGenderValue;
+            return (StudentGender)randomStudentGenderValue;
         }
 
         private static Filler<StudentView> CreateStudentViewFiller()

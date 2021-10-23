@@ -68,7 +68,7 @@ namespace OtripleS.Portal.Web.Services.StudentViews
                 FirstName = studentView.FirstName,
                 MiddleName = studentView.MiddleName,
                 LastName = studentView.LastName,
-                Gender = (Gender)studentView.Gender,
+                Gender = (StudentGender)studentView.Gender,
                 BirthDate = studentView.BirthDate,
                 CreatedBy = currentLoggedInUserId,
                 UpdatedBy = currentLoggedInUserId,
