@@ -27,7 +27,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
 
             this.apiBrokerMock.Setup(apiBroker =>
                 apiBroker.GetAllTeachersAsync())
-                .ReturnsAsync(apiTeachers);
+                    .ReturnsAsync(apiTeachers);
 
             IReadOnlyList<Teacher> retrievedTeachers = 
                 await this.teacherService.RetrieveAllTeachersAsync();
@@ -39,7 +39,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
 
             this.loggingBrokerMock.Verify(x => 
                 x.LogWarning("No teachers retrieved from the api."), 
-                Times.Once());
+                    Times.Once());
 
             this.apiBrokerMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
