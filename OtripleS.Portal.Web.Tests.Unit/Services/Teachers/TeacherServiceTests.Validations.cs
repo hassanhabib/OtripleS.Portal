@@ -10,6 +10,7 @@ using FluentAssertions;
 using Moq;
 using Xunit;
 using OtripleS.Portal.Web.Models.Teachers;
+using Force.DeepCloner;
 
 namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
 {
@@ -22,7 +23,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
                 Enumerable.Empty<Teacher>().ToList();
 
             IReadOnlyList<Teacher> apiTeachers = emptyTeacherCollection;
-            IReadOnlyList<Teacher> expectedTeachers = apiTeachers;
+            IReadOnlyList<Teacher> expectedTeachers = apiTeachers.DeepClone();
 
             apiBrokerMock.Setup(apiBroker =>
                 apiBroker.GetAllTeachersAsync())
