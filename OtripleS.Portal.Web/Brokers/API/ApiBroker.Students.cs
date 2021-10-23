@@ -10,9 +10,9 @@ namespace OtripleS.Portal.Web.Brokers.API
 {
     public partial class ApiBroker
     {
-        private const string RelativeUrl = "api/students";
+        private const string StudentsRelativeUrl = "api/students";
 
         public async ValueTask<Student> PostStudentAsync(Student student) =>
-            await this.PostAsync(RelativeUrl, student);
+            await this.PostAsync(StudentsRelativeUrl, student);
     }
 }

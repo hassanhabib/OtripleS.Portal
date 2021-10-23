@@ -3,14 +3,17 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
+using OtripleS.Portal.Web.Models.Courses;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using OtripleS.Portal.Web.Models.Courses;
 
 namespace OtripleS.Portal.Web.Brokers.API
 {
-    public partial interface IApiBroker
+    public partial class ApiBroker
     {
-        ValueTask<IEnumerable<Course>> GetAllCoursesAsync();
+        private const string CoursesRelativeUrl = "api/courses";
+
+        public async ValueTask<IEnumerable<Course>> GetAllCoursesAsync() =>
+            await this.GetAsync<IEnumerable<Course>>(CoursesRelativeUrl);
     }
 }
