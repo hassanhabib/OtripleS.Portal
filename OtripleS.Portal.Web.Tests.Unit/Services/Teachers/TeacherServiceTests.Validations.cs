@@ -10,7 +10,6 @@ using FluentAssertions;
 using Moq;
 using Xunit;
 using OtripleS.Portal.Web.Models.Teachers;
-using Force.DeepCloner;
 
 namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
 {
