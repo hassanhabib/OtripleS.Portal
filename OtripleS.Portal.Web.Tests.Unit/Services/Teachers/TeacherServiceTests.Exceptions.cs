@@ -19,7 +19,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
     {
         public static TheoryData CriticalApiExceptions()
         {
-            string exceptionMessage = GetRandomText();
+            string exceptionMessage = GetRandomString();
             var responseMessage = new HttpResponseMessage();
 
             var httpRequestException =
@@ -74,9 +74,10 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
             this.apiBrokerMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
         }
+
         public static TheoryData DependencyApiExceptions()
         {
-            string exceptionMessage = GetRandomText();
+            string exceptionMessage = GetRandomString();
             var responseMessage = new HttpResponseMessage();
 
             var httpResponseException =
@@ -101,34 +102,37 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
         public async Task ShouldThrowDependencyExceptionOnRetrieveAllIfDependencyApiErrorOccursAndLogItAsync(
             Exception dependencyApiException)
         {
-            var randomExceptionMessage = GetRandomText();
+            var randomExceptionMessage = GetRandomString();
             var responseMessage = new HttpResponseMessage();
 
             var expectedDependencyException = 
-                new TeacherDependencyException(dependencyApiException);
+                new TeacherDependencyException(
+                    dependencyApiException);
 
             this.apiBrokerMock.Setup(apiBroker => 
                 apiBroker.GetAllTeachersAsync())
                 .Throws(dependencyApiException);
 
-            var retrieveAllTeachersTask =
+            ValueTask<IReadOnlyList<Teacher>> retrieveAllTeachersTask =
                 teacherService.RetrieveAllTeachersAsync();
 
             await Assert.ThrowsAsync<TeacherDependencyException>(() => 
                 retrieveAllTeachersTask.AsTask());
 
             this.apiBrokerMock.Verify(apiBroker => 
-                apiBroker.GetAllTeachersAsync(), Times.Once);
+                apiBroker.GetAllTeachersAsync(),
+                Times.Once);
 
             this.loggingBrokerMock.Verify(loggingBroker =>
-                loggingBroker.LogError(It.Is(SameValidationExceptionAs(expectedDependencyException))));
+                loggingBroker.LogError(
+                    It.Is(SameValidationExceptionAs(expectedDependencyException))));
 
             apiBrokerMock.VerifyNoOtherCalls();
             loggingBrokerMock.VerifyNoOtherCalls();
         }
 
         [Fact]
-        public async Task ShouldThrowServiceExceptionRetrieveAllIfErrorOccursAndLogItAsync()
+        public async Task ShouldThrowServiceExceptionOnRetrieveAllIfErrorOccursAndLogItAsync()
         {
             var serviceException = new Exception();
 
@@ -140,7 +144,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
                 .Throws(serviceException);
 
             // when
-            var retrieveAllTeachersTask =
+            ValueTask<IReadOnlyList<Teacher>> retrieveAllTeachersTask =
                 this.teacherService.RetrieveAllTeachersAsync();
 
             // then

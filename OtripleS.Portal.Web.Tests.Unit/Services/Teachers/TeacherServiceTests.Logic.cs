@@ -26,7 +26,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
                 apiBroker.GetAllTeachersAsync())
                 .ReturnsAsync(apiTeachers);
 
-            var retrievedTeachers =
+            IReadOnlyList<Teacher> retrievedTeachers =
                 await teacherService.RetrieveAllTeachersAsync();
 
             retrievedTeachers.Should().BeEquivalentTo(expectedTeachers);
