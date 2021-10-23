@@ -25,7 +25,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
             IReadOnlyList<Teacher> apiTeachers = emptyTeacherCollection;
             IReadOnlyList<Teacher> expectedTeachers = apiTeachers.DeepClone();
 
-            apiBrokerMock.Setup(apiBroker =>
+            this.apiBrokerMock.Setup(apiBroker =>
                 apiBroker.GetAllTeachersAsync())
                 .ReturnsAsync(apiTeachers);
 

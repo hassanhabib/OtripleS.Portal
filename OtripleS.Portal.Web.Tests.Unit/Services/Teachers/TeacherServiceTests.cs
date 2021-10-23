@@ -25,25 +25,25 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
 
         public TeacherServiceTests()
         {
-            apiBrokerMock = new Mock<IApiBroker>();
-            loggingBrokerMock = new Mock<ILoggingBroker>();
+            this.apiBrokerMock = new Mock<IApiBroker>();
+            this.loggingBrokerMock = new Mock<ILoggingBroker>();
 
-            teacherService = new TeacherService(
+            this.teacherService = new TeacherService(
                 apiBroker: apiBrokerMock.Object,
                 loggingBroker: loggingBrokerMock.Object);
         }
         
         private static int GetRandomNumber() => new IntRange(min: 2, max: 10).GetValue();
-
         private static string GetRandomString() => new MnemonicString().GetValue();
 
         private IReadOnlyList<Teacher> CreateRandomTeachers() =>
-            CreateTeacherFiller().Create(GetRandomNumber()).ToList();
+            CreateTeacherFiller().Create(count: GetRandomNumber()).ToList();
 
         private static Expression<Func<Exception, bool>> SameExceptionAs(
             Exception expectedException)
         {
-            return actualException => actualException.Message == expectedException.Message
+            return actualException => 
+                actualException.Message == expectedException.Message
                 && actualException.InnerException.Message == expectedException.InnerException.Message;
         }
 
