@@ -4,7 +4,6 @@
 // ---------------------------------------------------------------
 
 using System;
-using OtripleS.Portal.Web.Models.Genders;
 
 namespace OtripleS.Portal.Web.Models.Students
 {
