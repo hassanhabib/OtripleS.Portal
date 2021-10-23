@@ -36,6 +36,9 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
         private static int GetRandomNumber() => new IntRange(min: 2, max: 10).GetValue();
         private static string GetRandomString() => new MnemonicString().GetValue();
 
+        private static DateTimeOffset GetRandomDateTime() =>
+            new DateTimeRange(earliestDate: new DateTime()).GetValue();
+
         private IReadOnlyList<Teacher> CreateRandomTeachers() =>
             CreateTeacherFiller().Create(count: GetRandomNumber()).ToList();
 
@@ -60,7 +63,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
             var filler = new Filler<Teacher>();
 
             filler.Setup()
-                .OnType<DateTimeOffset>().Use(DateTimeOffset.UtcNow);
+                .OnType<DateTimeOffset>().Use(valueToUse: GetRandomDateTime());
 
             return filler;
         }
