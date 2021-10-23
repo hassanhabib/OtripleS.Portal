@@ -11,7 +11,9 @@ namespace OtripleS.Portal.Web.Brokers.API
 {
     public partial class ApiBroker
     {
+        private const string TeachersRelativeUrl = "api/teachers";
+
         public ValueTask<IEnumerable<Teacher>> GetAllTeachersAsync() =>
-            throw new System.NotImplementedException();
+            this.GetAsync<IEnumerable<Teacher>>(TeachersRelativeUrl);
     }
 }
