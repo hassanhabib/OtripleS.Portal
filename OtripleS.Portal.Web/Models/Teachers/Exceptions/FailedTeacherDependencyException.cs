@@ -8,10 +8,10 @@ using Xeptions;
 
 namespace OtripleS.Portal.Web.Models.Teachers.Exceptions
 {
-    public class TeacherServiceException : Xeption
+    public class FailedTeacherDependencyException : Xeption
     {
-        public TeacherServiceException(Exception innerException)
-            : base(message: "Teacher service error occurred, please contact support.", innerException)
+        public FailedTeacherDependencyException(Exception innerException)
+            : base(message: "Failed teacher dependency error occurred, please contact support.", innerException)
         { }
     }
 }

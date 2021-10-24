@@ -75,43 +75,27 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
             this.loggingBrokerMock.VerifyNoOtherCalls();
         }
 
-        public static TheoryData DependencyApiExceptions()
-        {
-            string exceptionMessage = GetRandomString();
-            var responseMessage = new HttpResponseMessage();
-
-            var httpResponseException =
-                new HttpResponseException(
-                    httpResponseMessage: responseMessage,
-                    message: exceptionMessage);
-
-            var httpResponseInternalServerErrorException =
-                new HttpResponseInternalServerErrorException(
-                    responseMessage: responseMessage,
-                    message: exceptionMessage);
-
-            return new TheoryData<Exception>
-            {
-                httpResponseException,
-                httpResponseInternalServerErrorException
-            };
-        }
-
-        [Theory]
-        [MemberData(nameof(DependencyApiExceptions))]
-        public async Task ShouldThrowDependencyExceptionOnRetrieveAllIfDependencyApiErrorOccursAndLogItAsync(
-            Exception dependencyApiException)
+        [Fact]
+        public async Task ShouldThrowTeacherDependencyExceptionOnRetrieveAllIfDependencyApiErrorOccursAndLogItAsync()
         {
             var randomExceptionMessage = GetRandomString();
             var responseMessage = new HttpResponseMessage();
 
+            var httpResponseException = 
+                new HttpResponseException(
+                    httpResponseMessage: responseMessage,
+                    message: randomExceptionMessage);
+
+            var failedTeacherDependencyException =
+                new FailedTeacherDependencyException(httpResponseException);
+
             var expectedDependencyException = 
                 new TeacherDependencyException(
-                    dependencyApiException);
+                    failedTeacherDependencyException);
 
             this.apiBrokerMock.Setup(broker => 
                 broker.GetAllTeachersAsync())
-                    .Throws(dependencyApiException);
+                    .Throws(httpResponseException);
 
             ValueTask<List<Teacher>> retrieveAllTeachersTask =
                 teacherService.RetrieveAllTeachersAsync();
