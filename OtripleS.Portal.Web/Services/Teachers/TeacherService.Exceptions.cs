@@ -25,18 +25,24 @@ namespace OtripleS.Portal.Web.Services.Teachers
             }
             catch (HttpRequestException httpRequestException)
             {
-                var failedTeacherDependencyException =
-                    new FailedTeacherDependencyException(httpRequestException);
+                var failedRequestToTeacherDependencyException =
+                    new FailedRequestToTeacherDependencyException(httpRequestException);
 
-                throw CreateAndLogCriticalDependencyException(httpRequestException);
+                throw CreateAndLogCriticalDependencyException(failedRequestToTeacherDependencyException);
             }
             catch (HttpResponseUrlNotFoundException httpResponseUrlNotFoundException)
             {
-                throw CreateAndLogCriticalDependencyException(httpResponseUrlNotFoundException);
+                var failedRequestToTeacherDependencyException =
+                    new FailedRequestToTeacherDependencyException(httpResponseUrlNotFoundException);
+
+                throw CreateAndLogCriticalDependencyException(failedRequestToTeacherDependencyException);
             }
             catch (HttpResponseUnauthorizedException httpResponseUnauthorizedException)
             {
-                throw CreateAndLogCriticalDependencyException(httpResponseUnauthorizedException);
+                var failedRequestToTeacherDependencyException =
+                    new FailedRequestToTeacherDependencyException(httpResponseUnauthorizedException);
+
+                throw CreateAndLogCriticalDependencyException(failedRequestToTeacherDependencyException);
             }
             catch (HttpResponseException httpResponseException)
             {
