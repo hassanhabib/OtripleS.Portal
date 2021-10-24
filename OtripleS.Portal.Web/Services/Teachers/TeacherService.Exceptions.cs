@@ -53,7 +53,10 @@ namespace OtripleS.Portal.Web.Services.Teachers
             }
             catch (Exception serviceException)
             {
-                throw CreateAndLogServiceException(serviceException);
+                var failedTeacherServiceException =
+                    new FailedTeacherServiceException(serviceException);
+
+                throw CreateAndLogServiceException(failedTeacherServiceException);
             }
         }
 
