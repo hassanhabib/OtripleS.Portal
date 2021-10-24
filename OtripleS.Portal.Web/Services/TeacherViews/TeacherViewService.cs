@@ -27,7 +27,19 @@ namespace OtripleS.Portal.Web.Services.TeacherViews
             List<Teacher> teachers = 
                 await teacherService.RetrieveAllTeachersAsync();
 
-            return new List<TeacherView>();
+            return teachers.Select(MapToTeacherView())
+                            .ToList();
         }
+
+        private static Func<Teacher, TeacherView> MapToTeacherView() =>
+            (teacher) => new TeacherView
+            {
+                EmployeeNumber = teacher.EmployeeNumber,
+                FirstName = teacher.FirstName,
+                MiddleName = teacher.MiddleName,
+                LastName = teacher.LastName,
+                Gender = (TeacherGenderView)teacher.Gender,
+                Status = (TeacherStatusView)teacher.Status,
+            };
     }
 }
