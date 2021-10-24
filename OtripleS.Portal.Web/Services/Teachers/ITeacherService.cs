@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using OtripleS.Portal.Web.Models.Teachers;
 
-namespace OtripleS.Portal.Web.Services
+namespace OtripleS.Portal.Web.Services.Teachers
 {
     public interface ITeacherService
     {
