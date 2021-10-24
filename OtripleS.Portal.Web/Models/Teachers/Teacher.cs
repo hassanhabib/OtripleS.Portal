@@ -16,7 +16,7 @@ namespace OtripleS.Portal.Web.Models.Teachers
             public string FirstName { get; set; }
             public string MiddleName { get; set; }
             public string LastName { get; set; }
-            public Gender Gender { get; set; }
+            public TeacherGender Gender { get; set; }
             public TeacherStatus Status { get; set; }
             public DateTimeOffset CreatedDate { get; set; }
             public DateTimeOffset UpdatedDate { get; set; }

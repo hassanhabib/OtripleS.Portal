@@ -5,7 +5,7 @@
 
 namespace OtripleS.Portal.Web.Models.Genders
 {
-    public enum Gender
+    public enum TeacherGender
     {
         Female,
         Male,
