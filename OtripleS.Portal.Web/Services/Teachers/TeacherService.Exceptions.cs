@@ -15,9 +15,9 @@ namespace OtripleS.Portal.Web.Services.Teachers
 {
     public partial class TeacherService
     {
-        private delegate ValueTask<IReadOnlyList<Teacher>> ReturningTeacherFunction();
+        private delegate ValueTask<List<Teacher>> ReturningTeacherFunction();
 
-        private async ValueTask<IReadOnlyList<Teacher>> TryCatch(ReturningTeacherFunction returningTeacherFunction)
+        private async ValueTask<List<Teacher>> TryCatch(ReturningTeacherFunction returningTeacherFunction)
         {
             try
             {

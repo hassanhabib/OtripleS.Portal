@@ -11,7 +11,7 @@ namespace OtripleS.Portal.Web.Services.Teachers
 {
     public partial class TeacherService
     {
-        private void ValidateGetAllTeachersApiResponse(IReadOnlyList<Teacher> teachers)
+        private void ValidateGetAllTeachersApiResponse(List<Teacher> teachers)
         {
             if (!teachers.Any())
             {

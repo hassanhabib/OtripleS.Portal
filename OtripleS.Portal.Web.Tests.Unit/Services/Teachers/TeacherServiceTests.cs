@@ -39,7 +39,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
         private static DateTimeOffset GetRandomDateTime() =>
             new DateTimeRange(earliestDate: new DateTime()).GetValue();
 
-        private IReadOnlyList<Teacher> CreateRandomTeachers() =>
+        private List<Teacher> CreateRandomTeachers() =>
             CreateTeacherFiller().Create(count: GetRandomNumber()).ToList();
 
         private static Expression<Func<Exception, bool>> SameExceptionAs(

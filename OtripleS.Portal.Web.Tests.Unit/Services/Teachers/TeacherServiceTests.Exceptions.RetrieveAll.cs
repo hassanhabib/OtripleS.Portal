@@ -56,7 +56,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
                 broker.GetAllTeachersAsync())
                     .ThrowsAsync(criticalApiException);
 
-            ValueTask<IReadOnlyList<Teacher>> retrieveAllTeachersTask =
+            ValueTask<List<Teacher>> retrieveAllTeachersTask =
                 this.teacherService.RetrieveAllTeachersAsync();
 
             await Assert.ThrowsAsync<TeacherDependencyException>(() =>
@@ -113,7 +113,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
                 broker.GetAllTeachersAsync())
                     .Throws(dependencyApiException);
 
-            ValueTask<IReadOnlyList<Teacher>> retrieveAllTeachersTask =
+            ValueTask<List<Teacher>> retrieveAllTeachersTask =
                 teacherService.RetrieveAllTeachersAsync();
 
             await Assert.ThrowsAsync<TeacherDependencyException>(() => 
@@ -145,7 +145,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
                     .Throws(serviceException);
 
             // when
-            ValueTask<IReadOnlyList<Teacher>> retrieveAllTeachersTask =
+            ValueTask<List<Teacher>> retrieveAllTeachersTask =
                 this.teacherService.RetrieveAllTeachersAsync();
 
             // then
