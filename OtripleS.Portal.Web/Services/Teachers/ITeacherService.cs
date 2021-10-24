@@ -3,12 +3,14 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
-namespace OtripleS.Portal.Web.Models.Teachers
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using OtripleS.Portal.Web.Models.Teachers;
+
+namespace OtripleS.Portal.Web.Services.Teachers
 {
-    public enum TeacherGender
+    public interface ITeacherService
     {
-        Female,
-        Male,
-        Other
+        ValueTask<List<Teacher>> RetrieveAllTeachersAsync();
     }
 }

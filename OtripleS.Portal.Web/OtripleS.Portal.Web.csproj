@@ -8,6 +8,7 @@
     <PackageReference Include="RESTFulSense" Version="2.3.0" />
     <PackageReference Include="Syncfusion.Blazor" Version="19.3.0.46" />
     <PackageReference Include="Syncfusion.Blazor.Themes" Version="19.3.0.46" />
+    <PackageReference Include="Xeption" Version="1.6.0" />
   </ItemGroup>
 
 </Project>

@@ -1,12 +1,13 @@
-// ---------------------------------------------------------------
+﻿// ---------------------------------------------------------------
 // Copyright (c) Coalition of the Good-Hearted Engineers
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
 using System;
+
 namespace OtripleS.Portal.Web.Models.Teachers
 {
-      public class Teacher
+    public class Teacher
       {
             public Guid Id { get; set; }
             public string UserId { get; set; }
