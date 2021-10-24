@@ -17,7 +17,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
 {
     public partial class TeacherServiceTests
     {
-        public static TheoryData CriticalApiExceptions()
+        public static TheoryData CriticalDependencyExceptions()
         {
             string exceptionMessage = GetRandomString();
             var responseMessage = new HttpResponseMessage();
@@ -44,12 +44,12 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
         }
 
         [Theory]
-        [MemberData(nameof(CriticalApiExceptions))]
-        public async Task ShouldThrowCriticalDependencyExceptionOnRetrieveAllIfCriticalApiExceptionOccursAndLogItAsync(
-            Exception criticalApiException)
+        [MemberData(nameof(CriticalDependencyExceptions))]
+        public async Task ShouldThrowCriticalDependencyExceptionOnRetrieveAllIfCriticalDependencyExceptionOccursAndLogItAsync(
+            Exception criticalDependencyException)
         {
             var failedRequestToTeacherDependencyException =
-                new FailedRequestToTeacherDependencyException(criticalApiException);
+                new FailedRequestToTeacherDependencyException(criticalDependencyException);
 
             var expectedTeacherDependencyException =
                 new TeacherDependencyException(
@@ -57,7 +57,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
 
             this.apiBrokerMock.Setup(broker =>
                 broker.GetAllTeachersAsync())
-                    .ThrowsAsync(criticalApiException);
+                    .ThrowsAsync(criticalDependencyException);
 
             ValueTask<List<Teacher>> retrieveAllTeachersTask =
                 this.teacherService.RetrieveAllTeachersAsync();
