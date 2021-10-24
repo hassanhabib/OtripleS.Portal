@@ -4,11 +4,10 @@
 // ---------------------------------------------------------------
 
 using System;
-using OtripleS.Portal.Web.Models.Genders;
 
 namespace OtripleS.Portal.Web.Models.Teachers
 {
-      public class Teacher
+    public class Teacher
       {
             public Guid Id { get; set; }
             public string UserId { get; set; }
