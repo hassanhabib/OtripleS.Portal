@@ -48,9 +48,12 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
         public async Task ShouldThrowCriticalDependencyExceptionOnRetrieveAllIfCriticalApiExceptionOccursAndLogItAsync(
             Exception criticalApiException)
         {
+            var failedRequestToTeacherDependencyException =
+                new FailedRequestToTeacherDependencyException(criticalApiException);
+
             var expectedTeacherDependencyException =
                 new TeacherDependencyException(
-                    criticalApiException);
+                    failedRequestToTeacherDependencyException);
 
             this.apiBrokerMock.Setup(broker =>
                 broker.GetAllTeachersAsync())
