@@ -15,13 +15,13 @@ namespace OtripleS.Portal.Web.Services.Teachers
 {
     public partial class TeacherService
     {
-        private delegate ValueTask<List<Teacher>> ReturningTeacherFunction();
+        private delegate ValueTask<List<Teacher>> ReturningTeachersFunction();
 
-        private async ValueTask<List<Teacher>> TryCatch(ReturningTeacherFunction returningTeacherFunction)
+        private async ValueTask<List<Teacher>> TryCatch(ReturningTeachersFunction returningTeachersFunction)
         {
             try
             {
-                return await returningTeacherFunction();
+                return await returningTeachersFunction();
             }
             catch (HttpRequestException httpRequestException)
             {
