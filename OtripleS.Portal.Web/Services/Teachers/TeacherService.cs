@@ -32,8 +32,6 @@ namespace OtripleS.Portal.Web.Services.Teachers
             List<Teacher> teachers =
                 await this.apiBroker.GetAllTeachersAsync();
 
-            ValidateGetAllTeachersApiResponse(teachers);
-
             return teachers;
         });
     }
