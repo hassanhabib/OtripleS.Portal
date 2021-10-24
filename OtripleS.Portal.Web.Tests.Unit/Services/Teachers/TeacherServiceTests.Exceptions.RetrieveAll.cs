@@ -124,8 +124,11 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
         {
             var serviceException = new Exception();
 
+            var failedTeacherServiceException =
+                new FailedTeacherServiceException(serviceException);
+
             var expectedTeacherServiceException = 
-                new TeacherServiceException(serviceException);
+                new TeacherServiceException(failedTeacherServiceException);
 
             this.apiBrokerMock.Setup(broker => 
                 broker.GetAllTeachersAsync())
