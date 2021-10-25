@@ -39,7 +39,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
         private static DateTimeOffset GetRandomDateTime() =>
             new DateTimeRange(earliestDate: new DateTime()).GetValue();
 
-        private List<Teacher> CreateRandomTeachers() =>
+        private static List<Teacher> CreateRandomTeachers() =>
             CreateTeacherFiller().Create(count: GetRandomNumber()).ToList();
 
         private static List<TeacherView> CreateExpectedTeachersViews(List<Teacher> retrievedServiceTeachers)
