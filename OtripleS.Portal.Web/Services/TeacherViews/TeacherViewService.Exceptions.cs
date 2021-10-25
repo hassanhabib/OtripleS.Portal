@@ -30,6 +30,13 @@ namespace OtripleS.Portal.Web.Services.TeacherViews
             {
                 throw CreateAndLogDependencyException(teacherServiceException);
             }
+            catch (Exception serviceException)
+            {
+                var failedTeacherViewServiceException = 
+                    new FailedTeacherViewServiceException(serviceException);
+
+                throw CreateAndLogServiceException(failedTeacherViewServiceException);
+            }
         }
 
         private TeacherViewDependencyException CreateAndLogDependencyException(Exception innerException)
@@ -38,6 +45,13 @@ namespace OtripleS.Portal.Web.Services.TeacherViews
             this.loggingBroker.LogError(teacherViewDependencyException);
 
             return teacherViewDependencyException;
+        }
+        private TeacherViewServiceException CreateAndLogServiceException(Exception innerException)
+        {
+            var teacherViewServiceException = new TeacherViewServiceException(innerException);
+            this.loggingBroker.LogError(teacherViewServiceException);
+
+            return teacherViewServiceException;
         }
     }
 }
