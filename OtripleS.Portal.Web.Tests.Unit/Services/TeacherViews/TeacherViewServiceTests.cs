@@ -39,21 +39,52 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
         private static DateTimeOffset GetRandomDateTime() =>
             new DateTimeRange(earliestDate: new DateTime()).GetValue();
 
-        private static List<Teacher> CreateRandomTeachers() =>
-            CreateTeacherFiller().Create(count: GetRandomNumber()).ToList();
+        private static string GetRandomName() => 
+            new RealNames(NameStyle.FirstName).GetValue();
 
-        private static List<TeacherView> CreateExpectedTeachersViews(List<Teacher> retrievedServiceTeachers)
+        private static string GetRandomString() => new MnemonicString().GetValue();
+
+        private static TeacherGender GetRandomGender()
         {
-            return retrievedServiceTeachers.Select(retrievedServiceTeacher =>
-                    new TeacherView
-                    {
-                        EmployeeNumber = retrievedServiceTeacher.EmployeeNumber,
-                        FirstName = retrievedServiceTeacher.FirstName,
-                        MiddleName = retrievedServiceTeacher.MiddleName,
-                        LastName = retrievedServiceTeacher.LastName,
-                        Gender = (TeacherGenderView)retrievedServiceTeacher.Gender,
-                        Status = (TeacherStatusView)retrievedServiceTeacher.Status,
-                    }).ToList();
+            int teacherGenderCount = 
+                Enum.GetValues(typeof(TeacherGender)).Length;
+
+            int randomTeacherGenderValue =
+                new IntRange(min: 0, max: teacherGenderCount).GetValue();
+
+            return (TeacherGender)randomTeacherGenderValue;
+        }
+
+        private static TeacherStatus GetRandomStatus()
+        {
+            int teacherStatusCount =
+                Enum.GetValues(typeof(TeacherStatus)).Length;
+
+            int randomTeacherStatusValue =
+                new IntRange(min: 0, max: teacherStatusCount).GetValue();
+
+            return (TeacherStatus)randomTeacherStatusValue;
+        }
+
+        private static dynamic CreateRandomTeacherProperties(
+            DateTimeOffset auditDates,
+            Guid auditIds)
+        {
+            return new
+            {
+                Id = Guid.NewGuid(),
+                UserId = Guid.NewGuid().ToString(),
+                EmployeeNumber = GetRandomString(),
+                FirstName = GetRandomName(),
+                MiddleName = GetRandomName(),
+                LastName = GetRandomName(),
+                Gender = GetRandomGender(),
+                Status = GetRandomStatus(),
+                CreatedDate = auditDates,
+                UpdatedDate = auditDates,
+                CreatedBy = auditIds,
+                UpdateBy = auditIds
+            };
         }
 
         private static Expression<Func<Exception, bool>> SameExceptionAs(
@@ -62,16 +93,6 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
             return actualException =>
                 actualException.Message == expectedException.Message
                 && actualException.InnerException.Message == expectedException.InnerException.Message;
-        }
-
-        private static Filler<Teacher> CreateTeacherFiller()
-        {
-            var filler = new Filler<Teacher>();
-
-            filler.Setup()
-                .OnType<DateTimeOffset>().Use(valueToUse: GetRandomDateTime());
-
-            return filler;
         }
     }
 }

@@ -3,6 +3,7 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using FluentAssertions;
@@ -18,10 +19,43 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
         [Fact]
         public async Task ShouldRetrieveTeachersViews()
         {
-            List<Teacher> randomTeachers = CreateRandomTeachers();
-            List<Teacher> retrievedServiceTeachers = randomTeachers;
-            List<TeacherView> expectedTeachers = 
-                CreateExpectedTeachersViews(retrievedServiceTeachers);
+            var randomUserId = Guid.NewGuid();
+            DateTimeOffset randomDateTime = GetRandomDateTime();
+
+            dynamic dynamicTeacherViewProperties = 
+                CreateRandomTeacherProperties(
+                    auditDates: randomDateTime,
+                    auditIds: randomUserId);
+
+            var teacher = new Teacher
+            {
+                Id = dynamicTeacherViewProperties.Id,
+                UserId = dynamicTeacherViewProperties.UserId,
+                EmployeeNumber = dynamicTeacherViewProperties.EmployeeNumber,
+                FirstName = dynamicTeacherViewProperties.FirstName,
+                MiddleName = dynamicTeacherViewProperties.MiddleName,
+                LastName = dynamicTeacherViewProperties.LastName,
+                Gender = dynamicTeacherViewProperties.Gender,
+                Status = dynamicTeacherViewProperties.Status,
+                CreatedDate = randomDateTime,
+                UpdatedDate = randomDateTime,
+                CreatedBy = randomUserId,
+                UpdatedBy = randomUserId
+            };
+
+            var teacherView = new TeacherView
+            {
+                EmployeeNumber = dynamicTeacherViewProperties.EmployeeNumber,
+                FirstName = dynamicTeacherViewProperties.FirstName,
+                MiddleName = dynamicTeacherViewProperties.MiddleName,
+                LastName = dynamicTeacherViewProperties.LastName,
+                Gender = (TeacherGenderView)dynamicTeacherViewProperties.Gender,
+                Status = (TeacherStatusView)dynamicTeacherViewProperties.Status
+            };
+
+            var randomTeachers = new List<Teacher> { teacher };
+            var retrievedServiceTeachers = randomTeachers;
+            var expectedTeachers = new List<TeacherView> { teacherView };
 
             this.teacherServiceMock.Setup(service =>
                 service.RetrieveAllTeachersAsync())
