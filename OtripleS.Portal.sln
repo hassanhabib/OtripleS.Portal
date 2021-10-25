@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OtripleS.Portal.Web", "Otri
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OtripleS.Portal.Web.Tests.Unit", "OtripleS.Portal.Web.Tests.Unit\OtripleS.Portal.Web.Tests.Unit.csproj", "{0123BDE1-43D4-4616-8F54-C494BD409ECC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtripleS.Portal.Web.Infrastructure.Build", "OtripleS.Portal.Web.Infrastructure.Build\OtripleS.Portal.Web.Infrastructure.Build.csproj", "{C3FD5F7F-EC5A-4845-A15E-CA10594BF957}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OtripleS.Portal.Web.Infrastructure.Build", "OtripleS.Portal.Web.Infrastructure.Build\OtripleS.Portal.Web.Infrastructure.Build.csproj", "{C3FD5F7F-EC5A-4845-A15E-CA10594BF957}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
