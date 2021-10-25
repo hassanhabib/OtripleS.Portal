@@ -4,6 +4,7 @@
 // ---------------------------------------------------------------
 
 using Moq;
+using OtripleS.Portal.Web.Models.Teachers.Exceptions;
 using OtripleS.Portal.Web.Models.TeacherViews;
 using OtripleS.Portal.Web.Models.TeacherViews.Exceptions;
 using System;
@@ -20,15 +21,15 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
         {
             var exception = new Exception();
 
-            var failedTeacherViewDependencyException =
-                new FailedTeacherViewDependencyException(exception);
+            var teacherDependencyException =
+                new TeacherDependencyException(exception);
 
             var expectedTeacherViewDependencyException =
-                new TeacherViewDependencyException(failedTeacherViewDependencyException);
+                new TeacherViewDependencyException(teacherDependencyException);
 
             this.teacherServiceMock.Setup(teacherService =>
                 teacherService.RetrieveAllTeachersAsync())
-                    .Throws(exception);
+                    .Throws(teacherDependencyException);
 
             ValueTask<List<TeacherView>> retrieveAllTeachersTask = 
                 this.teacherViewService.RetrieveAllTeachers();
@@ -40,7 +41,13 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
                 teacherService.RetrieveAllTeachersAsync(),
                     Times.Once);
 
+            this.loggingBrokerMock.Verify(loggingBroker =>
+                loggingBroker.LogError(It.Is(SameExceptionAs(
+                    expectedTeacherViewDependencyException))),
+                        Times.Once);
+
             this.teacherServiceMock.VerifyNoOtherCalls();
+            this.loggingBrokerMock.VerifyNoOtherCalls();
         } 
     }
 }

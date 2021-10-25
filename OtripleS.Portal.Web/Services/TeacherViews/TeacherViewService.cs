@@ -7,29 +7,35 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using OtripleS.Portal.Web.Brokers.Logging;
 using OtripleS.Portal.Web.Models.Teachers;
 using OtripleS.Portal.Web.Models.TeacherViews;
 using OtripleS.Portal.Web.Services.Teachers;
 
 namespace OtripleS.Portal.Web.Services.TeacherViews
 {
-    public class TeacherViewService : ITeacherViewService
+    public partial class TeacherViewService : ITeacherViewService
     {
         private readonly ITeacherService teacherService;
+        private readonly ILoggingBroker loggingBroker;
 
-        public TeacherViewService(ITeacherService teacherService)
+        public TeacherViewService(
+            ITeacherService teacherService,
+            ILoggingBroker loggingBroker)
         {
             this.teacherService = teacherService;
+            this.loggingBroker = loggingBroker;
         }
 
-        public async ValueTask<List<TeacherView>> RetrieveAllTeachers()
+        public ValueTask<List<TeacherView>> RetrieveAllTeachers() =>
+        TryCatch(async () =>
         {
-            List<Teacher> teachers = 
+            List<Teacher> teachers =
                 await teacherService.RetrieveAllTeachersAsync();
 
             return teachers.Select(MapToTeacherView())
                             .ToList();
-        }
+        });
 
         private static Func<Teacher, TeacherView> MapToTeacherView() =>
             (teacher) => new TeacherView
