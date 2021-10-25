@@ -27,7 +27,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
                 service.RetrieveAllTeachersAsync())
                     .ReturnsAsync(retrievedServiceTeachers);
 
-            IReadOnlyList<TeacherView> retrievedTeachers =
+            List<TeacherView> retrievedTeachers =
                 await this.teacherViewService.RetrieveAllTeachers();
 
             retrievedTeachers.Should().BeEquivalentTo(expectedTeachers);

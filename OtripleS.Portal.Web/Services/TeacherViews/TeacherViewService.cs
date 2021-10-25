@@ -34,7 +34,7 @@ namespace OtripleS.Portal.Web.Services.TeacherViews
                 await teacherService.RetrieveAllTeachersAsync();
 
             return teachers.Select(MapToTeacherView())
-                            .ToList();
+                           .ToList();
         });
 
         private static Func<Teacher, TeacherView> MapToTeacherView() =>

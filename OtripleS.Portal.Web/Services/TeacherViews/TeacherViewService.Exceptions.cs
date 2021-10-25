@@ -46,6 +46,7 @@ namespace OtripleS.Portal.Web.Services.TeacherViews
 
             return teacherViewDependencyException;
         }
+
         private TeacherViewServiceException CreateAndLogServiceException(Exception innerException)
         {
             var teacherViewServiceException = new TeacherViewServiceException(innerException);
