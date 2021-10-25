@@ -4,13 +4,10 @@
 // ---------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using Moq;
 using OtripleS.Portal.Web.Brokers.Logging;
 using OtripleS.Portal.Web.Models.Teachers;
-using OtripleS.Portal.Web.Models.TeacherViews;
 using OtripleS.Portal.Web.Services.Teachers;
 using OtripleS.Portal.Web.Services.TeacherViews;
 using Tynamix.ObjectFiller;
