@@ -16,14 +16,28 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
 {
     public partial class TeacherViewServiceTests
     {
-        [Fact]
-        public async Task ShouldThrowTeacherViewDependencyExceptionIfDependecyErrorOccursAndLogIt()
+        public static TheoryData TeacherServiceDependencyExceptions()
         {
             var exception = new Exception();
 
-            var teacherDependencyException =
+            var teacherServiceDependencyException =
                 new TeacherDependencyException(exception);
 
+            var teacherServiceException =
+                new TeacherServiceException(exception);
+
+            return new TheoryData<Exception>
+            {
+                teacherServiceDependencyException,
+                teacherServiceException
+            };
+        }
+
+        [Theory]
+        [MemberData(nameof(TeacherServiceDependencyExceptions))]
+        public async Task ShouldThrowTeacherViewDependencyExceptionIfDependecyErrorOccursAndLogIt(
+            Exception teacherDependencyException)
+        {
             var expectedTeacherViewDependencyException =
                 new TeacherViewDependencyException(teacherDependencyException);
 
