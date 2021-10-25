@@ -18,6 +18,7 @@ using OtripleS.Portal.Web.Models.Configurations;
 using OtripleS.Portal.Web.Services.Students;
 using OtripleS.Portal.Web.Services.StudentViews;
 using OtripleS.Portal.Web.Services.Teachers;
+using OtripleS.Portal.Web.Services.TeacherViews;
 using OtripleS.Portal.Web.Services.Users;
 using RESTFulSense.Clients;
 using Syncfusion.Blazor;
@@ -48,6 +49,7 @@ namespace OtripleS.Portal.Web
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<IStudentViewService, StudentViewService>();
             services.AddScoped<ITeacherService, TeacherService>();
+            services.AddScoped<ITeacherViewService, TeacherViewService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
