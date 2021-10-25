@@ -26,6 +26,10 @@ namespace OtripleS.Portal.Web.Services.TeacherViews
             {
                 throw CreateAndLogDependencyException(teacherDependencyException);
             }
+            catch (TeacherServiceException teacherServiceException)
+            {
+                throw CreateAndLogDependencyException(teacherServiceException);
+            }
         }
 
         private TeacherViewDependencyException CreateAndLogDependencyException(Exception innerException)
