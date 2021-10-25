@@ -8,10 +8,10 @@ using Xeptions;
 
 namespace OtripleS.Portal.Web.Models.TeacherViews.Exceptions
 {
-    public class FailedTeacherViewDependencyException : Xeption
+    public class TeacherViewServiceException : Xeption
     {
-        public FailedTeacherViewDependencyException(Exception innerException)
-            : base(message: "Failed teacher view dependency error occurred, please contact support.", innerException)
+        public TeacherViewServiceException(Exception innerException)
+            : base(message: "Teacher view service error occurred, please contact support.", innerException)
         { }
     }
 }
