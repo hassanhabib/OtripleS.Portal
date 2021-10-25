@@ -3,28 +3,28 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Moq;
 using OtripleS.Portal.Web.Models.Teachers.Exceptions;
 using OtripleS.Portal.Web.Models.TeacherViews;
 using OtripleS.Portal.Web.Models.TeacherViews.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
 {
     public partial class TeacherViewServiceTests
     {
-        public static TheoryData TeacherServiceDependencyExceptions()
+        public static TheoryData TeacherServiceExceptions()
         {
-            var exception = new Exception();
+            var innerException = new Exception();
 
             var teacherServiceDependencyException =
-                new TeacherDependencyException(exception);
+                new TeacherDependencyException(innerException);
 
             var teacherServiceException =
-                new TeacherServiceException(exception);
+                new TeacherServiceException(innerException);
 
             return new TheoryData<Exception>
             {
@@ -34,16 +34,16 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
         }
 
         [Theory]
-        [MemberData(nameof(TeacherServiceDependencyExceptions))]
+        [MemberData(nameof(TeacherServiceExceptions))]
         public async Task ShouldThrowTeacherViewDependencyExceptionIfDependecyErrorOccursAndLogIt(
-            Exception teacherDependencyException)
+            Exception teacherServiceException)
         {
             var expectedTeacherViewDependencyException =
-                new TeacherViewDependencyException(teacherDependencyException);
+                new TeacherViewDependencyException(teacherServiceException);
 
             this.teacherServiceMock.Setup(teacherService =>
                 teacherService.RetrieveAllTeachersAsync())
-                    .Throws(teacherDependencyException);
+                    .Throws(teacherServiceException);
 
             ValueTask<List<TeacherView>> retrieveAllTeachersTask = 
                 this.teacherViewService.RetrieveAllTeachers();
@@ -67,17 +67,17 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
         [Fact]
         public async Task ShouldThrowTeacherViewServiceExceptionWhenServiceErrorOccursAndLogIt()
         {
-            var exception = new Exception();
+            var innerException = new Exception();
 
             var failedTeacherViewServiceException =
-                    new FailedTeacherViewServiceException(exception);
+                    new FailedTeacherViewServiceException(innerException);
 
             var expectedTeacherViewServiceException =
                 new TeacherViewServiceException(failedTeacherViewServiceException);
 
             this.teacherServiceMock.Setup(teacherService =>
                 teacherService.RetrieveAllTeachersAsync())
-                    .Throws(exception);
+                    .Throws(innerException);
 
             ValueTask<List<TeacherView>> retrieveAllTeachersTask =
                 this.teacherViewService.RetrieveAllTeachers();
