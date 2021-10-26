@@ -70,7 +70,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
             var innerException = new Exception();
 
             var failedTeacherViewServiceException =
-                    new FailedTeacherViewServiceException(innerException);
+                new FailedTeacherViewServiceException(innerException);
 
             var expectedTeacherViewServiceException =
                 new TeacherViewServiceException(failedTeacherViewServiceException);
