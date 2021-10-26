@@ -8,9 +8,12 @@ using System.Linq.Expressions;
 using Moq;
 using OtripleS.Portal.Web.Brokers.Logging;
 using OtripleS.Portal.Web.Models.Teachers;
+using OtripleS.Portal.Web.Models.Teachers.Exceptions;
 using OtripleS.Portal.Web.Services.Teachers;
 using OtripleS.Portal.Web.Services.TeacherViews;
 using Tynamix.ObjectFiller;
+using Xeptions;
+using Xunit;
 
 namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
 {
@@ -29,6 +32,23 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
                 new TeacherViewService(
                     teacherService: teacherServiceMock.Object,
                     loggingBroker: loggingBrokerMock.Object);
+        }
+
+        public static TheoryData TeacherServiceExceptions()
+        {
+            var innerException = new Exception();
+
+            var teacherServiceDependencyException =
+                new TeacherDependencyException(innerException);
+
+            var teacherServiceException =
+                new TeacherServiceException(innerException);
+
+            return new TheoryData<Exception>
+            {
+                teacherServiceDependencyException,
+                teacherServiceException
+            };
         }
 
         private static int GetRandomNumber() => new IntRange(min: 2, max: 10).GetValue();
@@ -89,7 +109,8 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
         {
             return actualException =>
                 actualException.Message == expectedException.Message
-                && actualException.InnerException.Message == expectedException.InnerException.Message;
+                && actualException.InnerException.Message == expectedException.InnerException.Message
+                && (actualException.InnerException as Xeption).DataEquals(expectedException.InnerException.Data);
         }
     }
 }

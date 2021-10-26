@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Moq;
-using OtripleS.Portal.Web.Models.Teachers.Exceptions;
 using OtripleS.Portal.Web.Models.TeacherViews;
 using OtripleS.Portal.Web.Models.TeacherViews.Exceptions;
 using Xunit;
@@ -16,23 +15,6 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
 {
     public partial class TeacherViewServiceTests
     {
-        public static TheoryData TeacherServiceExceptions()
-        {
-            var innerException = new Exception();
-
-            var teacherServiceDependencyException =
-                new TeacherDependencyException(innerException);
-
-            var teacherServiceException =
-                new TeacherServiceException(innerException);
-
-            return new TheoryData<Exception>
-            {
-                teacherServiceDependencyException,
-                teacherServiceException
-            };
-        }
-
         [Theory]
         [MemberData(nameof(TeacherServiceExceptions))]
         public async Task ShouldThrowTeacherViewDependencyExceptionIfDependecyErrorOccursAndLogIt(
