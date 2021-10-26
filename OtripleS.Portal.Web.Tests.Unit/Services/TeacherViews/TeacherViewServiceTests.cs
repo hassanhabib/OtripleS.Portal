@@ -34,7 +34,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
                     loggingBroker: loggingBrokerMock.Object);
         }
 
-        public static TheoryData TeacherServiceExceptions()
+        public static TheoryData DependencyExceptions()
         {
             var innerException = new Exception();
 
@@ -61,26 +61,15 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
 
         private static string GetRandomString() => new MnemonicString().GetValue();
 
-        private static TeacherGender GetRandomGender()
+        private static T GetRandomEnumValue<T>()
         {
-            int teacherGenderCount = 
-                Enum.GetValues(typeof(TeacherGender)).Length;
+            int enumValuesCount =
+                Enum.GetValues(typeof(T)).Length;
 
-            int randomTeacherGenderValue =
-                new IntRange(min: 0, max: teacherGenderCount).GetValue();
+            int randomEnumValue =
+                new IntRange(min: 0, max: enumValuesCount).GetValue();
 
-            return (TeacherGender)randomTeacherGenderValue;
-        }
-
-        private static TeacherStatus GetRandomStatus()
-        {
-            int teacherStatusCount =
-                Enum.GetValues(typeof(TeacherStatus)).Length;
-
-            int randomTeacherStatusValue =
-                new IntRange(min: 0, max: teacherStatusCount).GetValue();
-
-            return (TeacherStatus)randomTeacherStatusValue;
+            return (T)(object)randomEnumValue;
         }
 
         private static dynamic CreateRandomTeacherProperties(
@@ -95,8 +84,8 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
                 FirstName = GetRandomName(),
                 MiddleName = GetRandomName(),
                 LastName = GetRandomName(),
-                Gender = GetRandomGender(),
-                Status = GetRandomStatus(),
+                Gender = GetRandomEnumValue<TeacherGender>(),
+                Status = GetRandomEnumValue<TeacherStatus>(),
                 CreatedDate = auditDates,
                 UpdatedDate = auditDates,
                 CreatedBy = auditIds,

@@ -11,6 +11,6 @@ namespace OtripleS.Portal.Web.Services.TeacherViews
 {
     public interface ITeacherViewService
     {
-        ValueTask<List<TeacherView>> RetrieveAllTeachers();
+        ValueTask<List<TeacherView>> RetrieveAllTeachersAsync();
     }
 }

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Moq;
 using OtripleS.Portal.Web.Models.TeacherViews;
 using OtripleS.Portal.Web.Models.TeacherViews.Exceptions;
+using Xeptions;
 using Xunit;
 
 namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
@@ -16,29 +17,29 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
     public partial class TeacherViewServiceTests
     {
         [Theory]
-        [MemberData(nameof(TeacherServiceExceptions))]
-        public async Task ShouldThrowTeacherViewDependencyExceptionIfDependecyErrorOccursAndLogIt(
-            Exception teacherServiceException)
+        [MemberData(nameof(DependencyExceptions))]
+        public async Task ShouldThrowTeacherViewDependencyExceptionIfDependecyErrorOccursAndLogItAsync(
+            Exception dependencyException)
         {
             var expectedTeacherViewDependencyException =
-                new TeacherViewDependencyException(teacherServiceException);
+                new TeacherViewDependencyException(dependencyException);
 
-            this.teacherServiceMock.Setup(teacherService =>
-                teacherService.RetrieveAllTeachersAsync())
-                    .Throws(teacherServiceException);
+            this.teacherServiceMock.Setup(service =>
+                service.RetrieveAllTeachersAsync())
+                    .ThrowsAsync(dependencyException);
 
             ValueTask<List<TeacherView>> retrieveAllTeachersTask = 
-                this.teacherViewService.RetrieveAllTeachers();
+                this.teacherViewService.RetrieveAllTeachersAsync();
 
             await Assert.ThrowsAsync<TeacherViewDependencyException>(() => 
                 retrieveAllTeachersTask.AsTask());
 
-            this.teacherServiceMock.Verify(teacherService => 
-                teacherService.RetrieveAllTeachersAsync(),
+            this.teacherServiceMock.Verify(service => 
+                service.RetrieveAllTeachersAsync(),
                     Times.Once);
 
-            this.loggingBrokerMock.Verify(loggingBroker =>
-                loggingBroker.LogError(It.Is(SameExceptionAs(
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameExceptionAs(
                     expectedTeacherViewDependencyException))),
                         Times.Once);
 
@@ -47,32 +48,32 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
         }
 
         [Fact]
-        public async Task ShouldThrowTeacherViewServiceExceptionWhenServiceErrorOccursAndLogIt()
+        public async Task ShouldThrowTeacherViewServiceExceptionWhenServiceErrorOccursAndLogItAsync()
         {
-            var innerException = new Exception();
+            var serviceException = new Exception();
 
             var failedTeacherViewServiceException =
-                new FailedTeacherViewServiceException(innerException);
+                new FailedTeacherViewServiceException(serviceException);
 
             var expectedTeacherViewServiceException =
                 new TeacherViewServiceException(failedTeacherViewServiceException);
 
-            this.teacherServiceMock.Setup(teacherService =>
-                teacherService.RetrieveAllTeachersAsync())
-                    .Throws(innerException);
+            this.teacherServiceMock.Setup(service =>
+                service.RetrieveAllTeachersAsync())
+                    .ThrowsAsync(serviceException);
 
             ValueTask<List<TeacherView>> retrieveAllTeachersTask =
-                this.teacherViewService.RetrieveAllTeachers();
+                this.teacherViewService.RetrieveAllTeachersAsync();
 
             await Assert.ThrowsAsync<TeacherViewServiceException>(() =>
                 retrieveAllTeachersTask.AsTask());
 
-            this.teacherServiceMock.Verify(teacherService =>
-                teacherService.RetrieveAllTeachersAsync(),
+            this.teacherServiceMock.Verify(service =>
+                service.RetrieveAllTeachersAsync(),
                     Times.Once);
 
-            this.loggingBrokerMock.Verify(loggingBroker =>
-                loggingBroker.LogError(It.Is(SameExceptionAs(
+            this.loggingBrokerMock.Verify(broker => 
+                broker.LogError(It.Is(SameExceptionAs(
                     expectedTeacherViewServiceException))),
                         Times.Once);
 

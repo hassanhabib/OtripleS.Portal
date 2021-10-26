@@ -7,13 +7,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net.Http;
 using Moq;
 using OtripleS.Portal.Web.Brokers.API;
 using OtripleS.Portal.Web.Brokers.Logging;
 using OtripleS.Portal.Web.Models.Teachers;
 using OtripleS.Portal.Web.Services.Teachers;
+using RESTFulSense.Exceptions;
 using Tynamix.ObjectFiller;
 using Xeptions;
+using Xunit;
 
 namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
 {
@@ -32,7 +35,32 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
                 apiBroker: apiBrokerMock.Object,
                 loggingBroker: loggingBrokerMock.Object);
         }
-        
+        public static TheoryData CriticalDependencyExceptions()
+        {
+            string exceptionMessage = GetRandomString();
+            var responseMessage = new HttpResponseMessage();
+
+            var httpRequestException =
+                new HttpRequestException();
+
+            var httpResponseUrlNotFoundException =
+                new HttpResponseUrlNotFoundException(
+                    responseMessage: responseMessage,
+                    message: exceptionMessage);
+
+            var httpResponseUnAuthorizedException =
+                new HttpResponseUnauthorizedException(
+                    responseMessage: responseMessage,
+                    message: exceptionMessage);
+
+            return new TheoryData<Exception>
+            {
+                httpRequestException,
+                httpResponseUrlNotFoundException,
+                httpResponseUnAuthorizedException
+            };
+        }
+
         private static int GetRandomNumber() => new IntRange(min: 2, max: 10).GetValue();
         private static string GetRandomString() => new MnemonicString().GetValue();
 

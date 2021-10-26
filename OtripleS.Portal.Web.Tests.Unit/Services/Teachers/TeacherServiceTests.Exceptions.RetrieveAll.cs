@@ -17,32 +17,6 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
 {
     public partial class TeacherServiceTests
     {
-        public static TheoryData CriticalDependencyExceptions()
-        {
-            string exceptionMessage = GetRandomString();
-            var responseMessage = new HttpResponseMessage();
-
-            var httpRequestException =
-                new HttpRequestException();
-
-            var httpResponseUrlNotFoundException =
-                new HttpResponseUrlNotFoundException(
-                    responseMessage: responseMessage,
-                    message: exceptionMessage);
-
-            var httpResponseUnAuthorizedException =
-                new HttpResponseUnauthorizedException(
-                    responseMessage: responseMessage,
-                    message: exceptionMessage);
-
-            return new TheoryData<Exception>
-            {
-                httpRequestException,
-                httpResponseUrlNotFoundException,
-                httpResponseUnAuthorizedException
-            };
-        }
-
         [Theory]
         [MemberData(nameof(CriticalDependencyExceptions))]
         public async Task ShouldThrowCriticalDependencyExceptionOnRetrieveAllIfCriticalDependencyExceptionOccursAndLogItAsync(
@@ -98,7 +72,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
 
             this.apiBrokerMock.Setup(broker => 
                 broker.GetAllTeachersAsync())
-                    .Throws(httpResponseException);
+                    .ThrowsAsync(httpResponseException);
 
             ValueTask<List<Teacher>> retrieveAllTeachersTask =
                 teacherService.RetrieveAllTeachersAsync();
@@ -132,7 +106,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
 
             this.apiBrokerMock.Setup(broker => 
                 broker.GetAllTeachersAsync())
-                    .Throws(serviceException);
+                    .ThrowsAsync(serviceException);
 
             // when
             ValueTask<List<Teacher>> retrieveAllTeachersTask =

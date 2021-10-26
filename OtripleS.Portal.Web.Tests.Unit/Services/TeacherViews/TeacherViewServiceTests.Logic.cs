@@ -17,26 +17,26 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
     public partial class TeacherViewServiceTests
     {
         [Fact]
-        public async Task ShouldRetrieveTeachersViews()
+        public async Task ShouldRetrieveTeacherViewsAsync()
         {
             var randomUserId = Guid.NewGuid();
             DateTimeOffset randomDateTime = GetRandomDateTime();
 
-            dynamic dynamicTeacherViewProperties = 
+            dynamic dynamicTeacherProperties = 
                 CreateRandomTeacherProperties(
                     auditDates: randomDateTime,
                     auditIds: randomUserId);
 
             var teacher = new Teacher
             {
-                Id = dynamicTeacherViewProperties.Id,
-                UserId = dynamicTeacherViewProperties.UserId,
-                EmployeeNumber = dynamicTeacherViewProperties.EmployeeNumber,
-                FirstName = dynamicTeacherViewProperties.FirstName,
-                MiddleName = dynamicTeacherViewProperties.MiddleName,
-                LastName = dynamicTeacherViewProperties.LastName,
-                Gender = dynamicTeacherViewProperties.Gender,
-                Status = dynamicTeacherViewProperties.Status,
+                Id = dynamicTeacherProperties.Id,
+                UserId = dynamicTeacherProperties.UserId,
+                EmployeeNumber = dynamicTeacherProperties.EmployeeNumber,
+                FirstName = dynamicTeacherProperties.FirstName,
+                MiddleName = dynamicTeacherProperties.MiddleName,
+                LastName = dynamicTeacherProperties.LastName,
+                Gender = dynamicTeacherProperties.Gender,
+                Status = dynamicTeacherProperties.Status,
                 CreatedDate = randomDateTime,
                 UpdatedDate = randomDateTime,
                 CreatedBy = randomUserId,
@@ -45,26 +45,26 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
 
             var teacherView = new TeacherView
             {
-                EmployeeNumber = dynamicTeacherViewProperties.EmployeeNumber,
-                FirstName = dynamicTeacherViewProperties.FirstName,
-                MiddleName = dynamicTeacherViewProperties.MiddleName,
-                LastName = dynamicTeacherViewProperties.LastName,
-                Gender = (TeacherGenderView)dynamicTeacherViewProperties.Gender,
-                Status = (TeacherStatusView)dynamicTeacherViewProperties.Status
+                EmployeeNumber = dynamicTeacherProperties.EmployeeNumber,
+                FirstName = dynamicTeacherProperties.FirstName,
+                MiddleName = dynamicTeacherProperties.MiddleName,
+                LastName = dynamicTeacherProperties.LastName,
+                Gender = (TeacherGenderView)dynamicTeacherProperties.Gender,
+                Status = (TeacherStatusView)dynamicTeacherProperties.Status
             };
 
             var randomTeachers = new List<Teacher> { teacher };
             var retrievedServiceTeachers = randomTeachers;
-            var expectedTeachers = new List<TeacherView> { teacherView };
+            var expectedTeacherViews = new List<TeacherView> { teacherView };
 
             this.teacherServiceMock.Setup(service =>
                 service.RetrieveAllTeachersAsync())
                     .ReturnsAsync(retrievedServiceTeachers);
 
-            List<TeacherView> retrievedTeachers =
-                await this.teacherViewService.RetrieveAllTeachers();
+            List<TeacherView> retrievedTeacherViews =
+                await this.teacherViewService.RetrieveAllTeachersAsync();
 
-            retrievedTeachers.Should().BeEquivalentTo(expectedTeachers);
+            retrievedTeacherViews.Should().BeEquivalentTo(expectedTeacherViews);
 
             this.teacherServiceMock.Verify(service =>
                 service.RetrieveAllTeachersAsync(),
