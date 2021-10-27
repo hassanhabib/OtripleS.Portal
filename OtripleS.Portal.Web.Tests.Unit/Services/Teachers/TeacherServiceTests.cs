@@ -35,6 +35,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
                 apiBroker: apiBrokerMock.Object,
                 loggingBroker: loggingBrokerMock.Object);
         }
+
         public static TheoryData CriticalDependencyExceptions()
         {
             string exceptionMessage = GetRandomString();
