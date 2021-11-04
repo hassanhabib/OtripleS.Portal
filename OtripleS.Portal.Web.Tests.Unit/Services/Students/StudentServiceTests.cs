@@ -4,6 +4,8 @@
 // ---------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using Moq;
 using OtripleS.Portal.Web.Brokers.API;
@@ -33,6 +35,9 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
         private static Student CreateRandomStudent() =>
             CreateStudentFiller().Create();
 
+        private static List<Student> CreateRandomStudents() =>
+            CreateStudentFiller().Create(count:GetRandomNumber()).ToList();
+
         private static Expression<Func<Exception, bool>> SameExceptionAs(
             Exception expectedException)
         {
@@ -41,6 +46,8 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
         }
 
         private static string GetRandomString() => new MnemonicString().GetValue();
+        
+        private static int GetRandomNumber() => new IntRange(min: 2, max:10).GetValue();
 
         private static Filler<Student> CreateStudentFiller()
         {
