@@ -9,7 +9,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Net.Http;
 using Moq;
-using OtripleS.Portal.Web.Brokers.API;
+using OtripleS.Portal.Web.Brokers.Apis;
 using OtripleS.Portal.Web.Brokers.Logging;
 using OtripleS.Portal.Web.Models.Teachers;
 using OtripleS.Portal.Web.Services.Teachers;
@@ -74,7 +74,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
         private static Expression<Func<Exception, bool>> SameExceptionAs(
             Exception expectedException)
         {
-            return actualException => 
+            return actualException =>
                 actualException.Message == expectedException.Message
                 && actualException.InnerException.Message == expectedException.InnerException.Message;
         }

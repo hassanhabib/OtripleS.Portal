@@ -6,7 +6,7 @@
 using System;
 using System.Linq.Expressions;
 using Moq;
-using OtripleS.Portal.Web.Brokers.API;
+using OtripleS.Portal.Web.Brokers.Apis;
 using OtripleS.Portal.Web.Brokers.Logging;
 using OtripleS.Portal.Web.Models.Students;
 using OtripleS.Portal.Web.Services.Students;

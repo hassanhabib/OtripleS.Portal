@@ -5,7 +5,7 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using OtripleS.Portal.Web.Brokers.API;
+using OtripleS.Portal.Web.Brokers.Apis;
 using OtripleS.Portal.Web.Brokers.Logging;
 using OtripleS.Portal.Web.Models.Teachers;
 
@@ -25,7 +25,7 @@ namespace OtripleS.Portal.Web.Services.Teachers
         }
 
         public ValueTask<List<Teacher>> RetrieveAllTeachersAsync() =>
-        TryCatch(async () => 
+        TryCatch(async () =>
         {
             List<Teacher> teachers =
                 await this.apiBroker.GetAllTeachersAsync();
