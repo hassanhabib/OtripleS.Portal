@@ -55,5 +55,47 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
             this.apiBrokerMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
         }
+
+        [Fact]
+        public async Task ShouldThrowStudentDependencyExceptionOnRetrieveAllIfDependencyApiErrorOccursAndLogItAsync()
+        {
+            // given
+            var randomExceptionMessage = GetRandomString();
+            var responseMessage = new HttpResponseMessage();
+
+            var httpResponseException =
+                new HttpResponseException(
+                    httpResponseMessage: responseMessage,
+                    message: randomExceptionMessage);
+
+            var failedStudentDependencyException =
+                new FailedStudentDependencyException(httpResponseException);
+
+            var expectedStudentDependencyException =
+                new StudentDependencyException(failedStudentDependencyException);
+
+            this.apiBrokerMock.Setup(broker =>
+                broker.GetAllStudentsAsync())
+                    .ThrowsAsync(httpResponseException);
+            // when
+            ValueTask<List<Student>> retrievedStudentsTask =
+                this.studentService.RetrieveAllStudentsAsync();
+
+            // then
+            await Assert.ThrowsAsync<StudentDependencyException>(() =>
+                retrievedStudentsTask.AsTask());
+
+            this.apiBrokerMock.Verify(broker =>
+                broker.GetAllStudentsAsync(),
+                    Times.Once);
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameExceptionAs(
+                    expectedStudentDependencyException))),
+                        Times.Once);
+
+            this.apiBrokerMock.VerifyNoOtherCalls();
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+        }
     }
 }
