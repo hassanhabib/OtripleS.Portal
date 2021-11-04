@@ -16,7 +16,7 @@ namespace OtripleS.Portal.Web.Brokers.API
         public async ValueTask<Student> PostStudentAsync(Student student) =>
             await this.PostAsync(StudentsRelativeUrl, student);
 
-        public async ValueTask<List<Student>> GetAllStudentAsync() =>
+        public async ValueTask<List<Student>> GetAllStudentsAsync() =>
             await this.GetAsync<List<Student>>(StudentsRelativeUrl);
     }
 }
