@@ -104,11 +104,11 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
             // given
             var serviceException = new Exception();
 
-            var failedStudentDependencyExcption =
-                new FailedStudentDependencyException(serviceException);
+            var failedStudentServiceExcption =
+                new FailedStudentServiceException(serviceException);
 
             var expectedStudentServiceException =
-                new StudentServiceException(failedStudentDependencyExcption);
+                new StudentServiceException(failedStudentServiceExcption);
 
             this.apiBrokerMock.Setup(broker => 
                 broker.GetAllStudentsAsync())

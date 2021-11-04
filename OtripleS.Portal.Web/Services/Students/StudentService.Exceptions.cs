@@ -101,6 +101,13 @@ namespace OtripleS.Portal.Web.Services.Students
 
                 throw CreateAndLogDependencyException(failedStudentDependencyException);
             }
+            catch(Exception serviceException)
+            {
+                var failedStudentDependencyException =
+                   new FailedStudentServiceException(serviceException);
+
+                throw CreateAndLogServiceException(failedStudentDependencyException);
+            }
 
         }
         private StudentValidationException CreateAndLogValidationException(Exception exception)
