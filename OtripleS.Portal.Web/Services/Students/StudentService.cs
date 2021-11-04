@@ -32,9 +32,7 @@ namespace OtripleS.Portal.Web.Services.Students
             return await this.apiBroker.PostStudentAsync(student);
         });
 
-        public ValueTask<List<Student>> RetrieveAllStudentsAsync()
-        {
-            throw new System.NotImplementedException();
-        }
+        public async ValueTask<List<Student>> RetrieveAllStudentsAsync() =>
+            await this.apiBroker.GetAllStudentsAsync();
     }
 }
