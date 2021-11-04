@@ -89,10 +89,17 @@ namespace OtripleS.Portal.Web.Services.Students
             }
             catch (HttpResponseUnauthorizedException httpResponseUnauthorizedException)
             {
-                var failedStudentDependencyExcpetion =
+                var failedStudentDependencyException =
                     new FailedStudentDependencyException(httpResponseUnauthorizedException);
 
-                throw CreateAndLogCriticalDependencyException(failedStudentDependencyExcpetion);
+                throw CreateAndLogCriticalDependencyException(failedStudentDependencyException);
+            }
+            catch(HttpResponseException httpResponseException) 
+            {
+                var failedStudentDependencyException =
+                    new FailedStudentDependencyException(httpResponseException);
+
+                throw CreateAndLogDependencyException(failedStudentDependencyException);
             }
 
         }
