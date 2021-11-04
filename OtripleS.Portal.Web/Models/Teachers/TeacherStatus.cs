@@ -5,10 +5,10 @@
 
 namespace OtripleS.Portal.Web.Models.Teachers
 {
-      public enum TeacherStatus
-      {
-            Active,
-            Retired,
-            Terminated
-      }
+    public enum TeacherStatus
+    {
+        Active,
+        Retired,
+        Terminated
+    }
 }

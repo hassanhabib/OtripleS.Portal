@@ -110,7 +110,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
             var expectedStudentServiceException =
                 new StudentServiceException(failedStudentServiceExcption);
 
-            this.apiBrokerMock.Setup(broker => 
+            this.apiBrokerMock.Setup(broker =>
                 broker.GetAllStudentsAsync())
                     .ThrowsAsync(serviceException);
 

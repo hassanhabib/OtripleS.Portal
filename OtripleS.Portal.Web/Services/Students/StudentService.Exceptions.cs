@@ -66,7 +66,7 @@ namespace OtripleS.Portal.Web.Services.Students
                 throw CreateAndLogServiceException(serviceException);
             }
         }
-        
+
         private async ValueTask<List<Student>> TryCatch(ReturningStudentsFunction returningStudentsFunction)
         {
             try
@@ -79,7 +79,7 @@ namespace OtripleS.Portal.Web.Services.Students
                     new FailedStudentDependencyException(httpRequestException);
 
                 throw CreateAndLogCriticalDependencyException(failedStudentDependencyException);
-            } 
+            }
             catch (HttpResponseUrlNotFoundException httpResponseUrlNotFoundException)
             {
                 var failedStudentDependencyException =
@@ -94,14 +94,14 @@ namespace OtripleS.Portal.Web.Services.Students
 
                 throw CreateAndLogCriticalDependencyException(failedStudentDependencyException);
             }
-            catch(HttpResponseException httpResponseException) 
+            catch (HttpResponseException httpResponseException)
             {
                 var failedStudentDependencyException =
                     new FailedStudentDependencyException(httpResponseException);
 
                 throw CreateAndLogDependencyException(failedStudentDependencyException);
             }
-            catch(Exception serviceException)
+            catch (Exception serviceException)
             {
                 var failedStudentDependencyException =
                    new FailedStudentServiceException(serviceException);

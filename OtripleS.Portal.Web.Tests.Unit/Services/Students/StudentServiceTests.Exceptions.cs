@@ -4,12 +4,10 @@
 // ---------------------------------------------------------------
 
 using System;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Moq;
 using OtripleS.Portal.Web.Models.Students;
 using OtripleS.Portal.Web.Models.Students.Exceptions;
-using RESTFulSense.Exceptions;
 using Xunit;
 
 namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
@@ -52,7 +50,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
             this.apiBrokerMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
         }
- 
+
         [Theory]
         [MemberData(nameof(CriticalApiExceptions))]
         public async Task ShouldThrowCriticalDependencyExceptionOnRegisterIfUrlNotFoundErrorOccursAndLogItAsync(
