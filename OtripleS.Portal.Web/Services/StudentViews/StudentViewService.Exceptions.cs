@@ -4,10 +4,13 @@
 // ---------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using OtripleS.Portal.Web.Models.Students.Exceptions;
 using OtripleS.Portal.Web.Models.StudentViews;
 using OtripleS.Portal.Web.Models.StudentViews.Exceptions;
+using RESTFulSense.Exceptions;
 
 namespace OtripleS.Portal.Web.Services.StudentViews
 {
@@ -15,6 +18,7 @@ namespace OtripleS.Portal.Web.Services.StudentViews
     {
         private delegate ValueTask<StudentView> ReturningStudentViewFunction();
         private delegate void ReturningNothingFunction();
+        private delegate ValueTask<List<StudentView>> ReturningStudentsViewFunction();
 
         private async ValueTask<StudentView> TryCatch(ReturningStudentViewFunction returningStudentViewFunction)
         {
@@ -65,6 +69,49 @@ namespace OtripleS.Portal.Web.Services.StudentViews
             catch (Exception serviceException)
             {
                 throw CreateAndLogServiceException(serviceException);
+            }
+        }
+
+        private async ValueTask<List<StudentView>> TryCatch(ReturningStudentsViewFunction returningStudentsViewFunction)
+        {
+            try
+            {
+                return await returningStudentsViewFunction();
+            }
+            catch (HttpRequestException httpRequestException)
+            {
+                var studentDependencyException =
+                    new StudentDependencyException(httpRequestException);
+
+                throw CreateAndLogDependencyException(studentDependencyException);
+            }
+            catch (HttpResponseUrlNotFoundException httpResponseUrlNotFoundException)
+            {
+                var studentDependencyException =
+                    new StudentDependencyException(httpResponseUrlNotFoundException);
+
+                throw CreateAndLogDependencyException(studentDependencyException);
+            }
+            catch (HttpResponseUnauthorizedException httpResponseUnauthorizedException)
+            {
+                var studentServiceException =
+                    new StudentDependencyException(httpResponseUnauthorizedException);
+
+                throw CreateAndLogDependencyException(studentServiceException);
+            }
+            catch (HttpResponseException httpResponseException)
+            {
+                var studentServiceException =
+                    new StudentDependencyException(httpResponseException);
+
+                throw CreateAndLogDependencyException(studentServiceException);
+            }
+            catch (Exception serviceException)
+            {
+                var studentServiceException =
+                    new StudentServiceException(serviceException);
+
+                throw CreateAndLogServiceException(studentServiceException);
             }
         }
 

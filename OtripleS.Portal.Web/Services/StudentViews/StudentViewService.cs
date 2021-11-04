@@ -4,6 +4,8 @@
 // ---------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using OtripleS.Portal.Web.Brokers.DateTimes;
 using OtripleS.Portal.Web.Brokers.Logging;
@@ -53,6 +55,26 @@ namespace OtripleS.Portal.Web.Services.StudentViews
             ValidateRoute(route);
             this.navigationBroker.NavigateTo(route);
         });
+
+        public ValueTask<List<StudentView>> RetrieveAllStudentsViewAsync() =>
+        TryCatch(async () =>
+        {
+            List<Student> students = 
+                await studentService.RetrieveAllStudentsAsync();
+
+            return students.Select(AsStudentView).ToList();
+        });
+
+        private static Func<Student, StudentView> AsStudentView =>
+            student => new StudentView
+            {
+                IdentityNumber = student.IdentityNumber,
+                FirstName = student.FirstName,
+                MiddleName = student.MiddleName,
+                LastName = student.LastName,
+                BirthDate = student.BirthDate,
+                Gender =  (StudentViewGender) student.Gender
+            };
 
         private Student MapToStudent(StudentView studentView)
         {
