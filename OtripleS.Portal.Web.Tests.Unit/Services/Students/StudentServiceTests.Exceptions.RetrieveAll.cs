@@ -5,12 +5,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Moq;
 using OtripleS.Portal.Web.Models.Students;
 using OtripleS.Portal.Web.Models.Students.Exceptions;
-using RESTFulSense.Exceptions;
 using Xunit;
 
 namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
@@ -18,7 +16,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
     public partial class StudentServiceTests
     {
         [Theory]
-        [MemberData(nameof(CriticalApiExceptions))]
+        [MemberData(nameof(CriticalApiException))]
         public async Task ShouldThrowCriticalDependencyExceptionOnRetrieveAllIfCriticalDependencyExceptionOccursAndLogItAsync(
             Exception criticalDependencyException)
         {
@@ -27,7 +25,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
                 new FailedStudentDependencyException(
                     criticalDependencyException);
 
-            var expectedStudentDepndencyException =
+            var expectedStudentDependencyException =
                 new StudentDependencyException(
                     failedStudentDependencyException);
 
@@ -49,34 +47,28 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
 
             this.loggingBrokerMock.Verify(broker =>
                 broker.LogCritical(It.Is(SameExceptionAs(
-                    expectedStudentDepndencyException))),
+                    expectedStudentDependencyException))),
                         Times.Once);
 
             this.apiBrokerMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
         }
 
-        [Fact]
-        public async Task ShouldThrowStudentDependencyExceptionOnRetrieveAllIfDependencyApiErrorOccursAndLogItAsync()
+        [Theory]
+        [MemberData(nameof(DependencyApiException))]
+        public async Task ShouldThrowDependencyExceptionOnRetrieveAllIfDependencyApiErrorOccursAndLogItAsync(
+            Exception dependencyApiException)
         {
             // given
-            var randomExceptionMessage = GetRandomString();
-            var responseMessage = new HttpResponseMessage();
-
-            var httpResponseException =
-                new HttpResponseException(
-                    httpResponseMessage: responseMessage,
-                    message: randomExceptionMessage);
-
             var failedStudentDependencyException =
-                new FailedStudentDependencyException(httpResponseException);
+                new FailedStudentDependencyException(dependencyApiException);
 
             var expectedStudentDependencyException =
                 new StudentDependencyException(failedStudentDependencyException);
 
             this.apiBrokerMock.Setup(broker =>
                 broker.GetAllStudentsAsync())
-                    .ThrowsAsync(httpResponseException);
+                    .ThrowsAsync(dependencyApiException);
             // when
             ValueTask<List<Student>> retrievedStudentsTask =
                 this.studentService.RetrieveAllStudentsAsync();

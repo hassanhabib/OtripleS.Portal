@@ -16,7 +16,6 @@ namespace OtripleS.Portal.Web.Services.Students
     public partial class StudentService
     {
         private delegate ValueTask<Student> ReturningStudentFunction();
-
         private delegate ValueTask<List<Student>> ReturningStudentsFunction();
 
         private async ValueTask<Student> TryCatch(ReturningStudentFunction returningStudentFunction)

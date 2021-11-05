@@ -20,12 +20,12 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
         {
             // given
             List<Student> randomStudents = CreateRandomStudents();
-            List<Student> apiStudents = randomStudents;
-            List<Student> expetedStudents = apiStudents.DeepClone();
+            List<Student> rerievedStudents = randomStudents;
+            List<Student> expetedStudents = rerievedStudents.DeepClone();
 
             this.apiBrokerMock.Setup(broker =>
                 broker.GetAllStudentsAsync())
-                    .ReturnsAsync(apiStudents);
+                    .ReturnsAsync(rerievedStudents);
 
             // when
             List<Student> retrievedStudents =

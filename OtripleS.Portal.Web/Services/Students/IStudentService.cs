@@ -12,7 +12,6 @@ namespace OtripleS.Portal.Web.Services.Students
     public interface IStudentService
     {
         ValueTask<Student> RegisterStudentAsync(Student student);
-
         ValueTask<List<Student>> RetrieveAllStudentsAsync();
     }
 }

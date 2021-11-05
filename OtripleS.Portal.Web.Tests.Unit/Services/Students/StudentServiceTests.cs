@@ -34,7 +34,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
                 apiBroker: this.apiBrokerMock.Object,
                 loggingBroker: this.loggingBrokerMock.Object);
         }
-        public static TheoryData ValidationApiExceptions()
+        public static TheoryData ValidationApiException()
         {
             string exceptionMessage = GetRandomString();
             var responseMessage = new HttpResponseMessage();
@@ -56,7 +56,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
             };
         }
 
-        public static TheoryData CriticalApiExceptions()
+        public static TheoryData CriticalApiException()
         {
             string exceptionMessage = GetRandomString();
             var responseMessage = new HttpResponseMessage();
@@ -82,7 +82,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
             };
         }
 
-        public static TheoryData DependencyApiExceptions()
+        public static TheoryData DependencyApiException()
         {
             string exceptionMessage = GetRandomString();
             var responseMessage = new HttpResponseMessage();

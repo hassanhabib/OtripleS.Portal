@@ -15,7 +15,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
     public partial class StudentServiceTests
     {
         [Theory]
-        [MemberData(nameof(ValidationApiExceptions))]
+        [MemberData(nameof(ValidationApiException))]
         public async Task ShouldThrowDependencyValidationExceptionOnRegisterIfBadRequestErrorOccursAndLogItAsync(
             Exception validationApiException)
         {
@@ -52,7 +52,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
         }
 
         [Theory]
-        [MemberData(nameof(CriticalApiExceptions))]
+        [MemberData(nameof(CriticalApiException))]
         public async Task ShouldThrowCriticalDependencyExceptionOnRegisterIfUrlNotFoundErrorOccursAndLogItAsync(
             Exception httpResponseCriticalException)
         {
@@ -89,7 +89,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
         }
 
         [Theory]
-        [MemberData(nameof(DependencyApiExceptions))]
+        [MemberData(nameof(DependencyApiException))]
         public async Task ShouldThrowDependencyExceptionOnRegisterIfDependencyApiErrorOccursAndLogItAsync(
             Exception dependencyApiException)
         {
