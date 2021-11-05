@@ -28,11 +28,11 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
                     .ReturnsAsync(rerievedStudents);
 
             // when
-            List<Student> retrievedStudents =
+            List<Student> actualStudents =
                 await this.studentService.RetrieveAllStudentsAsync();
 
             // then
-            retrievedStudents.Should().BeEquivalentTo(expetedStudents);
+            actualStudents.Should().BeEquivalentTo(expetedStudents);
 
             this.apiBrokerMock.Verify(broker =>
                 broker.GetAllStudentsAsync(),
