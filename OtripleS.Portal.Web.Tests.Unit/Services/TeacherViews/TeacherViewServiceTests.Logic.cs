@@ -22,7 +22,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
             var randomUserId = Guid.NewGuid();
             DateTimeOffset randomDateTime = GetRandomDateTime();
 
-            dynamic dynamicTeacherProperties = 
+            dynamic dynamicTeacherProperties =
                 CreateRandomTeacherProperties(
                     auditDates: randomDateTime,
                     auditIds: randomUserId);

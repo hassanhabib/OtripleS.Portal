@@ -9,11 +9,11 @@ using OtripleS.Portal.Web.Models.Teachers;
 
 namespace OtripleS.Portal.Web.Brokers.API
 {
-      public partial class ApiBroker
-      {
-            private const string TeachersRelativeUrl = "api/teachers";
+    public partial class ApiBroker
+    {
+        private const string TeachersRelativeUrl = "api/teachers";
 
-            public async ValueTask<List<Teacher>> GetAllTeachersAsync() =>
-                await this.GetAsync<List<Teacher>>(TeachersRelativeUrl);
-      }
+        public async ValueTask<List<Teacher>> GetAllTeachersAsync() =>
+            await this.GetAsync<List<Teacher>>(TeachersRelativeUrl);
+    }
 }

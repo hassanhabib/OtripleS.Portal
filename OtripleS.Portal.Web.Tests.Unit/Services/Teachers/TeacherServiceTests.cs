@@ -74,7 +74,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
         private static Expression<Func<Exception, bool>> SameExceptionAs(
             Exception expectedException)
         {
-            return actualException => 
+            return actualException =>
                 actualException.Message == expectedException.Message
                 && actualException.InnerException.Message == expectedException.InnerException.Message;
         }

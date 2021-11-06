@@ -3,12 +3,12 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
-namespace OtripleS.Portal.Web.Models.Teachers
+namespace OtripleS.Portal.Web.Models.Views.Components.TeachersComponents
 {
-    public enum TeacherStatus
+    public enum TeacherComponentState
     {
-        Active,
-        Retired,
-        Terminated
+        Loading,
+        Content,
+        Error
     }
 }

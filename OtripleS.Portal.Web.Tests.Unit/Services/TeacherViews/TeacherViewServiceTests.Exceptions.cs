@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using Moq;
 using OtripleS.Portal.Web.Models.TeacherViews;
 using OtripleS.Portal.Web.Models.TeacherViews.Exceptions;
-using Xeptions;
 using Xunit;
 
 namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
@@ -28,13 +27,13 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
                 service.RetrieveAllTeachersAsync())
                     .ThrowsAsync(dependencyException);
 
-            ValueTask<List<TeacherView>> retrieveAllTeachersTask = 
+            ValueTask<List<TeacherView>> retrieveAllTeachersTask =
                 this.teacherViewService.RetrieveAllTeachersAsync();
 
-            await Assert.ThrowsAsync<TeacherViewDependencyException>(() => 
+            await Assert.ThrowsAsync<TeacherViewDependencyException>(() =>
                 retrieveAllTeachersTask.AsTask());
 
-            this.teacherServiceMock.Verify(service => 
+            this.teacherServiceMock.Verify(service =>
                 service.RetrieveAllTeachersAsync(),
                     Times.Once);
 
@@ -72,7 +71,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
                 service.RetrieveAllTeachersAsync(),
                     Times.Once);
 
-            this.loggingBrokerMock.Verify(broker => 
+            this.loggingBrokerMock.Verify(broker =>
                 broker.LogError(It.Is(SameExceptionAs(
                     expectedTeacherViewServiceException))),
                         Times.Once);

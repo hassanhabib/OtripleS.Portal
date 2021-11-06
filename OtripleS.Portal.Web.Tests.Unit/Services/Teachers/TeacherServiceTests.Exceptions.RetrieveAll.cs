@@ -58,7 +58,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
             var randomExceptionMessage = GetRandomString();
             var responseMessage = new HttpResponseMessage();
 
-            var httpResponseException = 
+            var httpResponseException =
                 new HttpResponseException(
                     httpResponseMessage: responseMessage,
                     message: randomExceptionMessage);
@@ -66,21 +66,21 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
             var failedTeacherDependencyException =
                 new FailedTeacherDependencyException(httpResponseException);
 
-            var expectedDependencyException = 
+            var expectedDependencyException =
                 new TeacherDependencyException(
                     failedTeacherDependencyException);
 
-            this.apiBrokerMock.Setup(broker => 
+            this.apiBrokerMock.Setup(broker =>
                 broker.GetAllTeachersAsync())
                     .ThrowsAsync(httpResponseException);
 
             ValueTask<List<Teacher>> retrieveAllTeachersTask =
                 teacherService.RetrieveAllTeachersAsync();
 
-            await Assert.ThrowsAsync<TeacherDependencyException>(() => 
+            await Assert.ThrowsAsync<TeacherDependencyException>(() =>
                 retrieveAllTeachersTask.AsTask());
 
-            this.apiBrokerMock.Verify(broker => 
+            this.apiBrokerMock.Verify(broker =>
                 broker.GetAllTeachersAsync(),
                     Times.Once);
 
@@ -101,10 +101,10 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
             var failedTeacherServiceException =
                 new FailedTeacherServiceException(serviceException);
 
-            var expectedTeacherServiceException = 
+            var expectedTeacherServiceException =
                 new TeacherServiceException(failedTeacherServiceException);
 
-            this.apiBrokerMock.Setup(broker => 
+            this.apiBrokerMock.Setup(broker =>
                 broker.GetAllTeachersAsync())
                     .ThrowsAsync(serviceException);
 
@@ -116,7 +116,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Teachers
             await Assert.ThrowsAsync<TeacherServiceException>(() =>
                retrieveAllTeachersTask.AsTask());
 
-            this.apiBrokerMock.Verify(broker => 
+            this.apiBrokerMock.Verify(broker =>
                 broker.GetAllTeachersAsync(),
                     Times.Once);
 

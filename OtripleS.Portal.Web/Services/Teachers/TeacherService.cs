@@ -25,7 +25,7 @@ namespace OtripleS.Portal.Web.Services.Teachers
         }
 
         public ValueTask<List<Teacher>> RetrieveAllTeachersAsync() =>
-        TryCatch(async () => 
+        TryCatch(async () =>
         {
             List<Teacher> teachers =
                 await this.apiBroker.GetAllTeachersAsync();
