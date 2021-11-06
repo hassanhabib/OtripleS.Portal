@@ -4,6 +4,7 @@
 // ---------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using OtripleS.Portal.Web.Brokers.DateTimes;
 using OtripleS.Portal.Web.Brokers.Logging;
@@ -53,6 +54,11 @@ namespace OtripleS.Portal.Web.Services.StudentViews
             ValidateRoute(route);
             this.navigationBroker.NavigateTo(route);
         });
+
+        public ValueTask<List<StudentView>> RetrieveAllStudentsViewAsync()
+        {
+            throw new NotImplementedException();
+        }
 
         private Student MapToStudent(StudentView studentView)
         {
