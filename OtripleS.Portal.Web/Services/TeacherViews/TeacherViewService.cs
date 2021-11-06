@@ -32,7 +32,7 @@ namespace OtripleS.Portal.Web.Services.TeacherViews
         {
             List<Teacher> teachers =
                 await teacherService.RetrieveAllTeachersAsync();
-            
+
             return teachers.Select(AsTeacherView).ToList();
         });
 

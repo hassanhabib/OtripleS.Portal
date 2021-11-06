@@ -22,9 +22,9 @@ namespace OtripleS.Portal.Web.Views.Bases
         [Parameter]
         public bool IsDisabled { get; set; }
 
-		public bool IsEnabled => IsDisabled is false;
+        public bool IsEnabled => IsDisabled is false;
 
-		public async Task SetValue(string value)
+        public async Task SetValue(string value)
         {
             this.Value = value;
             await ValueChanged.InvokeAsync(this.Value);
