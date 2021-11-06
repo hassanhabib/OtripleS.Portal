@@ -3,6 +3,7 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
@@ -27,10 +28,18 @@ namespace OtripleS.Portal.Web.Views.Components.TeachersComponents
 
         protected async override Task OnInitializedAsync()
         {
-            this.TeacherViews = 
-                await this.TeacherViewService.RetrieveAllTeachersAsync();
+            try
+            {
+                this.TeacherViews =
+                    await this.TeacherViewService.RetrieveAllTeachersAsync();
 
-            this.State = TeacherComponentState.Content;
+                this.State = TeacherComponentState.Content;
+            }
+            catch(Exception exception)
+            {
+                this.ErrorMessage = exception.Message;
+                this.State = TeacherComponentState.Error;
+            }
         }
     }
 }
