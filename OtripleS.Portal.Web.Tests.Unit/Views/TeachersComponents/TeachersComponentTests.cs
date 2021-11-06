@@ -19,7 +19,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.TeachersComponents
     public partial class TeachersComponentTests : TestContext
     {
         private readonly Mock<ITeacherViewService> teacherViewServiceMock;
-        private IRenderedComponent<TeachersComponent> teachersRenderedComponent;
+        private IRenderedComponent<TeachersComponent> renderedTeachersComponent;
 
         public TeachersComponentTests()
         {
