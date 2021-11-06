@@ -3,6 +3,7 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 using Bunit;
 using FluentAssertions;
@@ -77,6 +78,52 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.TeachersComponents
                 .BeNull();
 
             this.renderedTeachersComponent.Instance.ErrorLabel.Should()
+                .BeNull();
+
+            this.teacherViewServiceMock.Verify(service =>
+                service.RetrieveAllTeachersAsync(),
+                    Times.Once);
+
+            this.teacherViewServiceMock.VerifyNoOtherCalls();
+        }
+
+        [Fact]
+        public void ShouldRenderErrorIfExceptionOccurs()
+        {
+            // given
+            TeacherComponentState expectedState =
+                TeacherComponentState.Error;
+
+            string randomMessage = GetRandomMessage();
+            string exceptionErrorMessage = randomMessage;
+            string expectedErrorMessage = exceptionErrorMessage;
+            var exception = new Exception(exceptionErrorMessage);
+
+            this.teacherViewServiceMock.Setup(service =>
+                service.RetrieveAllTeachersAsync())
+                    .ThrowsAsync(exception);
+
+            // when
+            this.renderedTeachersComponent =
+                RenderComponent<TeachersComponent>();
+
+            // then
+            this.renderedTeachersComponent.Instance.State.Should()
+                .Be(expectedState);
+
+            this.renderedTeachersComponent.Instance.ErrorMessage.Should()
+                .Be(expectedErrorMessage);
+
+            this.renderedTeachersComponent.Instance.ErrorLabel.Should()
+                .NotBeNull();
+
+            this.renderedTeachersComponent.Instance.ErrorLabel.Value.Should()
+                .Be(expectedErrorMessage);
+
+            this.renderedTeachersComponent.Instance.TeacherViews.Should()
+                .BeNull();
+
+            this.renderedTeachersComponent.Instance.Grid.Should()
                 .BeNull();
 
             this.teacherViewServiceMock.Verify(service =>

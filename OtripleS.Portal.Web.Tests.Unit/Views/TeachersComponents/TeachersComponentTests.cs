@@ -30,6 +30,9 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.TeachersComponents
             this.JSInterop.Mode = JSRuntimeMode.Loose;
         }
 
+        private static string GetRandomMessage() =>
+            new MnemonicString(wordCount: GetRandomNumber()).GetValue();
+
         private static List<TeacherView> CreateRandomTeacherViews() =>
             CreateTeacherViewFiller().Create(count: GetRandomNumber()).ToList();
 
