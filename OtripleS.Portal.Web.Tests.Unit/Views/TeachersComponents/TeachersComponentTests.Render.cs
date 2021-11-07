@@ -6,10 +6,12 @@
 using System;
 using System.Collections.Generic;
 using Bunit;
+using Bunit.TestDoubles;
 using FluentAssertions;
 using Moq;
 using OtripleS.Portal.Web.Models.TeacherViews;
 using OtripleS.Portal.Web.Models.Views.Components.TeachersComponents;
+using OtripleS.Portal.Web.Views.Bases;
 using OtripleS.Portal.Web.Views.Components.TeachersComponents;
 using Xunit;
 
@@ -32,7 +34,6 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.TeachersComponents
             initialTeachersComponent.TeacherViewService.Should().BeNull();
             initialTeachersComponent.State.Should().Be(expectedState);
             initialTeachersComponent.TeacherViews.Should().BeNull();
-            initialTeachersComponent.Grid.Should().BeNull();
             initialTeachersComponent.ErrorMessage.Should().BeNull();
             initialTeachersComponent.ErrorLabel.Should().BeNull();
         }
@@ -41,6 +42,8 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.TeachersComponents
         public void ShouldRenderTeachers()
         {
             // given
+            ComponentFactories.AddStub<GridBase<TeacherView>>();
+
             TeacherComponentState expectedState =
                 TeacherComponentState.Content;
 
@@ -68,11 +71,12 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.TeachersComponents
             this.renderedTeachersComponent.Instance.TeacherViews.Should()
                 .BeEquivalentTo(expectedTeacherViews);
 
-            this.renderedTeachersComponent.Instance.Grid.Should()
-                .NotBeNull();
+            IRenderedComponent<Stub<GridBase<TeacherView>>> teacherViewGridStub =
+                this.renderedTeachersComponent.FindComponent<Stub<GridBase<TeacherView>>>();
 
-            this.renderedTeachersComponent.Instance.Grid.DataSource.Should()
-                .BeEquivalentTo(expectedTeacherViews);
+            teacherViewGridStub.Instance
+                .Parameters[nameof(GridBase<TeacherView>.DataSource)]
+                    .Should().BeEquivalentTo(expectedTeacherViews);
 
             this.renderedTeachersComponent.Instance.ErrorMessage.Should()
                 .BeNull();
@@ -123,8 +127,8 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.TeachersComponents
             this.renderedTeachersComponent.Instance.TeacherViews.Should()
                 .BeNull();
 
-            this.renderedTeachersComponent.Instance.Grid.Should()
-                .BeNull();
+            //this.renderedTeachersComponent.Instance.Grid.Should()
+            //    .BeNull();
 
             this.teacherViewServiceMock.Verify(service =>
                 service.RetrieveAllTeachersAsync(),

@@ -21,7 +21,6 @@ namespace OtripleS.Portal.Web.Views.Components.TeachersComponents
 
         public TeacherComponentState State { get; set; }
         public List<TeacherView> TeacherViews { get; set; }
-        public GridBase<TeacherView> Grid { get; set; }
         public string ErrorMessage { get; set; }
         public LabelBase ErrorLabel { get; set; }
 

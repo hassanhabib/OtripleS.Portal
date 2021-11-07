@@ -25,9 +25,6 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.TeachersComponents
         {
             this.teacherViewServiceMock = new Mock<ITeacherViewService>();
             this.Services.AddTransient(service => this.teacherViewServiceMock.Object);
-            this.Services.AddSyncfusionBlazor();
-            this.Services.AddOptions();
-            this.JSInterop.Mode = JSRuntimeMode.Loose;
         }
 
         private static string GetRandomMessage() =>
