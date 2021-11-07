@@ -4,12 +4,14 @@
 // ---------------------------------------------------------------
 
 using System;
+using Xeptions;
 
 namespace OtripleS.Portal.Web.Models.Students.Exceptions
 {
-    public class NullStudentException : Exception
+    public class FailedStudentServiceException : Xeption
     {
-        public NullStudentException()
-            : base(message: "Null student error occurred.") { }
+        public FailedStudentServiceException(Exception innerException)
+            : base(message: "Failed student service occurred, please contact support", innerException)
+        { }
     }
 }

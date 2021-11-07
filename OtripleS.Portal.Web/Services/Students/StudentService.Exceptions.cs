@@ -4,6 +4,7 @@
 // ---------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using OtripleS.Portal.Web.Models.Students;
@@ -15,6 +16,7 @@ namespace OtripleS.Portal.Web.Services.Students
     public partial class StudentService
     {
         private delegate ValueTask<Student> ReturningStudentFunction();
+        private delegate ValueTask<List<Student>> ReturningStudentsFunction();
 
         private async ValueTask<Student> TryCatch(ReturningStudentFunction returningStudentFunction)
         {
@@ -64,6 +66,49 @@ namespace OtripleS.Portal.Web.Services.Students
             }
         }
 
+        private async ValueTask<List<Student>> TryCatch(ReturningStudentsFunction returningStudentsFunction)
+        {
+            try
+            {
+                return await returningStudentsFunction();
+            }
+            catch (HttpRequestException httpRequestException)
+            {
+                var failedStudentDependencyException =
+                    new FailedStudentDependencyException(httpRequestException);
+
+                throw CreateAndLogCriticalDependencyException(failedStudentDependencyException);
+            }
+            catch (HttpResponseUrlNotFoundException httpResponseUrlNotFoundException)
+            {
+                var failedStudentDependencyException =
+                    new FailedStudentDependencyException(httpResponseUrlNotFoundException);
+
+                throw CreateAndLogCriticalDependencyException(failedStudentDependencyException);
+            }
+            catch (HttpResponseUnauthorizedException httpResponseUnauthorizedException)
+            {
+                var failedStudentDependencyException =
+                    new FailedStudentDependencyException(httpResponseUnauthorizedException);
+
+                throw CreateAndLogCriticalDependencyException(failedStudentDependencyException);
+            }
+            catch (HttpResponseException httpResponseException)
+            {
+                var failedStudentDependencyException =
+                    new FailedStudentDependencyException(httpResponseException);
+
+                throw CreateAndLogDependencyException(failedStudentDependencyException);
+            }
+            catch (Exception serviceException)
+            {
+                var failedStudentDependencyException =
+                   new FailedStudentServiceException(serviceException);
+
+                throw CreateAndLogServiceException(failedStudentDependencyException);
+            }
+
+        }
         private StudentValidationException CreateAndLogValidationException(Exception exception)
         {
             var studentValidationException = new StudentValidationException(exception);
