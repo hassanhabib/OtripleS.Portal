@@ -177,7 +177,10 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
                 service.RetrieveAllStudentsAsync(),
                     Times.Once());
 
-            this.studentServiceMock.VerifyNoOtherCalls();
+            this.studentServiceMock.VerifyNoOtherCalls(); 
+            this.navigationBrokerMock.VerifyNoOtherCalls();
+            this.dateTimeBrokerMock.VerifyNoOtherCalls();
+            this.userServiceMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
         }
     }
