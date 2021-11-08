@@ -4,6 +4,7 @@
 // ---------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using OtripleS.Portal.Web.Models.Students.Exceptions;
 using OtripleS.Portal.Web.Models.StudentViews;
@@ -14,6 +15,7 @@ namespace OtripleS.Portal.Web.Services.StudentViews
     public partial class StudentViewService
     {
         private delegate ValueTask<StudentView> ReturningStudentViewFunction();
+        private delegate ValueTask<List<StudentView>> ReturningStudentsViewFunction();
         private delegate void ReturningNothingFunction();
 
         private async ValueTask<StudentView> TryCatch(ReturningStudentViewFunction returningStudentViewFunction)
@@ -68,6 +70,17 @@ namespace OtripleS.Portal.Web.Services.StudentViews
             }
         }
 
+        private async ValueTask<List<StudentView>> TryCatch(ReturningStudentsViewFunction returningStudentsViewFunction)
+        {
+            try
+            {
+                return await returningStudentsViewFunction();
+            }
+            catch(StudentDependencyException studentDependencyException)
+            {
+                throw CreateAndLogDependencyException(studentDependencyException);
+            }
+        }
         private StudentViewValidationException CreateAndLogValidationException(Exception exception)
         {
             var studentViewValidationException = new StudentViewValidationException(exception);
