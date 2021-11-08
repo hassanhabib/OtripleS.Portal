@@ -58,9 +58,13 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
             var studentServiceDependencyException =
                 new StudentDependencyException(innerException);
 
+            var studentServiceException =
+                new StudentServiceException(innerException);
+
             return new TheoryData<Exception>
             {
-                studentServiceDependencyException
+                studentServiceDependencyException,
+                studentServiceException
             };
         }
 
