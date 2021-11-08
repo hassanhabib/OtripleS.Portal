@@ -52,5 +52,39 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
             this.studentServiceMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
         }
+
+        [Fact]
+        public async Task ShouldThrowStudentViewServiceExceptionWhenServiceErrorOccursAndLogItAsync()
+        {
+            var serviceException = new Exception();
+
+            var failedStudentViewServiceException =
+                new FailedStudentViewServiceException(serviceException);
+
+            var expectedStudentViewServiceException =
+                new StudentViewServiceException(failedStudentViewServiceException);
+
+            this.studentServiceMock.Setup(service =>
+                service.RetrieveAllStudentsAsync())
+                    .ThrowsAsync(serviceException);
+
+            ValueTask<List<StudentView>> retrieveAllStudentsTask =
+                this.studentViewService.RetrieveAllStudentsViewAsync();
+
+            await Assert.ThrowsAsync<StudentViewServiceException>(() =>
+                retrieveAllStudentsTask.AsTask());
+
+            this.studentServiceMock.Verify(service =>
+                service.RetrieveAllStudentsAsync(),
+                    Times.Once);
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameExceptionAs(
+                    expectedStudentViewServiceException))),
+                        Times.Once);
+
+            this.studentServiceMock.VerifyNoOtherCalls();
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+        }
     }
 }
