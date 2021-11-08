@@ -30,7 +30,7 @@ namespace OtripleS.Portal.Web.Views.Components.TeachersComponents
             try
             {
                 this.TeacherViews =
-                    await this.TeacherViewService.RetrieveAllTeachersAsync();
+                    await this.TeacherViewService.RetrieveAllTeacherViewsAsync();
 
                 this.State = TeacherComponentState.Content;
             }
