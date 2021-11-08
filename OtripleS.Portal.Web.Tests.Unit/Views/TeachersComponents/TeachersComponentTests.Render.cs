@@ -21,8 +21,8 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.TeachersComponents
         public void ShouldInitComponent()
         {
             // given
-            TeacherComponentState expectedState =
-                TeacherComponentState.Loading;
+            TeachersComponentState expectedState =
+                TeachersComponentState.Loading;
 
             // when
             var initialTeachersComponent =
@@ -41,8 +41,8 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.TeachersComponents
         public void ShouldRenderTeachers()
         {
             // given
-            TeacherComponentState expectedState =
-                TeacherComponentState.Content;
+            TeachersComponentState expectedState =
+                TeachersComponentState.Content;
 
             List<TeacherView> randomTeacherViews =
                 CreateRandomTeacherViews();
@@ -91,8 +91,8 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.TeachersComponents
         public void ShouldRenderErrorIfExceptionOccurs()
         {
             // given
-            TeacherComponentState expectedState =
-                TeacherComponentState.Error;
+            TeachersComponentState expectedState =
+                TeachersComponentState.Error;
 
             string randomMessage = GetRandomMessage();
             string exceptionErrorMessage = randomMessage;

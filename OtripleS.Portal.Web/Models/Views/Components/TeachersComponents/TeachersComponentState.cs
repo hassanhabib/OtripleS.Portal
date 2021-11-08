@@ -5,7 +5,7 @@
 
 namespace OtripleS.Portal.Web.Models.Views.Components.TeachersComponents
 {
-    public enum TeacherComponentState
+    public enum TeachersComponentState
     {
         Loading,
         Content,
