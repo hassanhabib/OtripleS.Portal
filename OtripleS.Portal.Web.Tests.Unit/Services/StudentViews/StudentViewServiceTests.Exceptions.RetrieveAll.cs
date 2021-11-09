@@ -34,7 +34,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
 
             // when
             ValueTask<List<StudentView>> retrieveAllStudentsTask =
-                this.studentViewService.RetrieveAllStudentsViewAsync();
+                this.studentViewService.RetrieveAllStudentViewsAsync();
 
             // then
             await Assert.ThrowsAsync<StudentViewDependencyException>(() =>
@@ -69,7 +69,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
                     .ThrowsAsync(serviceException);
 
             ValueTask<List<StudentView>> retrieveAllStudentsTask =
-                this.studentViewService.RetrieveAllStudentsViewAsync();
+                this.studentViewService.RetrieveAllStudentViewsAsync();
 
             await Assert.ThrowsAsync<StudentViewServiceException>(() =>
                 retrieveAllStudentsTask.AsTask());

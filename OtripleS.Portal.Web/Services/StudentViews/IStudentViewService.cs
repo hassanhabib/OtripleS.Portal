@@ -12,7 +12,7 @@ namespace OtripleS.Portal.Web.Services.StudentViews
     public interface IStudentViewService
     {
         ValueTask<StudentView> AddStudentViewAsync(StudentView studentView);
-        ValueTask<List<StudentView>> RetrieveAllStudentsViewAsync();
+        ValueTask<List<StudentView>> RetrieveAllStudentViewsAsync();
         void NavigateTo(string route);
     }
 }

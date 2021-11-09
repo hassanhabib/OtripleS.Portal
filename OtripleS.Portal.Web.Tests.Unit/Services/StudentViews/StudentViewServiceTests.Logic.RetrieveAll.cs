@@ -62,7 +62,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
                     .ReturnsAsync(retrievedServiceStudents);
 
             List<StudentView> retrievedStudentViews =
-                await this.studentViewService.RetrieveAllStudentsViewAsync();
+                await this.studentViewService.RetrieveAllStudentViewsAsync();
 
             retrievedStudentViews.Should().BeEquivalentTo(expectedStudentViews);
 

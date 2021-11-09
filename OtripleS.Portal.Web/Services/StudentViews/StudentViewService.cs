@@ -56,7 +56,7 @@ namespace OtripleS.Portal.Web.Services.StudentViews
             this.navigationBroker.NavigateTo(route);
         });
 
-        public ValueTask<List<StudentView>> RetrieveAllStudentsViewAsync() =>
+        public ValueTask<List<StudentView>> RetrieveAllStudentViewsAsync() =>
         TryCatch(async () =>
         {
             List<Student> students =
