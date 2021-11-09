@@ -27,11 +27,11 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
                 service.RetrieveAllTeachersAsync())
                     .ThrowsAsync(dependencyException);
 
-            ValueTask<List<TeacherView>> retrieveAllTeachersTask =
+            ValueTask<List<TeacherView>> retrieveAllTeacherViewsTask =
                 this.teacherViewService.RetrieveAllTeacherViewsAsync();
 
             await Assert.ThrowsAsync<TeacherViewDependencyException>(() =>
-                retrieveAllTeachersTask.AsTask());
+                retrieveAllTeacherViewsTask.AsTask());
 
             this.teacherServiceMock.Verify(service =>
                 service.RetrieveAllTeachersAsync(),
@@ -61,11 +61,11 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
                 service.RetrieveAllTeachersAsync())
                     .ThrowsAsync(serviceException);
 
-            ValueTask<List<TeacherView>> retrieveAllTeachersTask =
+            ValueTask<List<TeacherView>> retrieveAllTeacherViewsTask =
                 this.teacherViewService.RetrieveAllTeacherViewsAsync();
 
             await Assert.ThrowsAsync<TeacherViewServiceException>(() =>
-                retrieveAllTeachersTask.AsTask());
+                retrieveAllTeacherViewsTask.AsTask());
 
             this.teacherServiceMock.Verify(service =>
                 service.RetrieveAllTeachersAsync(),
