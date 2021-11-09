@@ -19,6 +19,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
         [Fact]
         public async Task ShouldRetrieveAllStudentsViewAsync()
         {
+            // given
             var randomUserId = Guid.NewGuid();
             DateTimeOffset randomDateTime = GetRandomDate();
 
@@ -35,7 +36,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
                 FirstName = dynamicStudentProperties.FirstName,
                 MiddleName = dynamicStudentProperties.MiddleName,
                 LastName = dynamicStudentProperties.LastName,
-                Gender = dynamicStudentProperties.Gender,
+                Gender = (StudentGender)dynamicStudentProperties.Gender,
                 BirthDate = dynamicStudentProperties.BirthDate,
                 CreatedDate = randomDateTime,
                 UpdatedDate = randomDateTime,
@@ -54,27 +55,29 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
             };
 
             var randomStudents = new List<Student> { student };
-            var retrievedServiceStudents = randomStudents;
+            var actualStudentViews = randomStudents;
             var expectedStudentViews = new List<StudentView> { studentView };
 
             this.studentServiceMock.Setup(service =>
                 service.RetrieveAllStudentsAsync())
-                    .ReturnsAsync(retrievedServiceStudents);
+                    .ReturnsAsync(actualStudentViews);
 
+            // when
             List<StudentView> retrievedStudentViews =
-                await this.studentViewService.RetrieveAllStudentsViewAsync();
+                await this.studentViewService.RetrieveAllStudentViewsAsync();
 
+            // then
             retrievedStudentViews.Should().BeEquivalentTo(expectedStudentViews);
 
             this.studentServiceMock.Verify(service =>
                 service.RetrieveAllStudentsAsync(),
                     Times.Once());
 
-            this.studentServiceMock.VerifyNoOtherCalls(); 
-            this.navigationBrokerMock.VerifyNoOtherCalls();
+            this.studentServiceMock.VerifyNoOtherCalls();
             this.dateTimeBrokerMock.VerifyNoOtherCalls();
-            this.userServiceMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
+            this.navigationBrokerMock.VerifyNoOtherCalls();
+            this.userServiceMock.VerifyNoOtherCalls();
         }
     }
 }

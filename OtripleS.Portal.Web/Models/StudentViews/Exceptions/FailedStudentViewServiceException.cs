@@ -4,13 +4,14 @@
 // ---------------------------------------------------------------
 
 using System;
+using Xeptions;
 
 namespace OtripleS.Portal.Web.Models.StudentViews.Exceptions
 {
-    public class FailedStudentViewServiceException : Exception
+    public class FailedStudentViewServiceException : Xeption
     {
         public FailedStudentViewServiceException(Exception innerException)
-            : base(message: "Failed student view service occurred, please contact support", innerException)
+            : base(message: "Failed student view service error occurred, please contact support", innerException)
         { }
     }
 }

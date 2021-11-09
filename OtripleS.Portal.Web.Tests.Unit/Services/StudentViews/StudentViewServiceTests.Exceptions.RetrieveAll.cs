@@ -7,12 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Moq;
-using OtripleS.Portal.Web.Models.Students;
-using OtripleS.Portal.Web.Models.Students.Exceptions;
 using OtripleS.Portal.Web.Models.StudentViews;
 using OtripleS.Portal.Web.Models.StudentViews.Exceptions;
-using OtripleS.Portal.Web.Models.TeacherViews.Exceptions;
-using OtripleS.Portal.Web.Models.TeacherViews;
 using Xunit;
 
 namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
@@ -21,7 +17,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
     {
         [Theory]
         [MemberData(nameof(DependencyExceptions))]
-        public async Task ShouldThrowStudentViewDependencyExceptionIfDependecyErrorOccursAndLogItAsync(
+        public async Task ShouldThrowStudentViewDependencyExceptionIfDependencyErrorOccursAndLogItAsync(
            Exception dependencyException)
         {
             // given
@@ -34,7 +30,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
 
             // when
             ValueTask<List<StudentView>> retrieveAllStudentsTask =
-                this.studentViewService.RetrieveAllStudentsViewAsync();
+                this.studentViewService.RetrieveAllStudentViewsAsync();
 
             // then
             await Assert.ThrowsAsync<StudentViewDependencyException>(() =>
@@ -50,12 +46,16 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
                         Times.Once);
 
             this.studentServiceMock.VerifyNoOtherCalls();
+            this.dateTimeBrokerMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
+            this.navigationBrokerMock.VerifyNoOtherCalls();
+            this.userServiceMock.VerifyNoOtherCalls();
         }
 
         [Fact]
-        public async Task ShouldThrowStudentViewServiceExceptionWhenServiceErrorOccursAndLogItAsync()
+        public async Task ShouldThrowStudentViewServiceExceptionIfServiceErrorOccursAndLogItAsync()
         {
+            // given
             var serviceException = new Exception();
 
             var failedStudentViewServiceException =
@@ -68,9 +68,11 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
                 service.RetrieveAllStudentsAsync())
                     .ThrowsAsync(serviceException);
 
+            // when
             ValueTask<List<StudentView>> retrieveAllStudentsTask =
-                this.studentViewService.RetrieveAllStudentsViewAsync();
+                this.studentViewService.RetrieveAllStudentViewsAsync();
 
+            // then
             await Assert.ThrowsAsync<StudentViewServiceException>(() =>
                 retrieveAllStudentsTask.AsTask());
 
@@ -84,7 +86,10 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
                         Times.Once);
 
             this.studentServiceMock.VerifyNoOtherCalls();
+            this.dateTimeBrokerMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
+            this.navigationBrokerMock.VerifyNoOtherCalls();
+            this.userServiceMock.VerifyNoOtherCalls();
         }
     }
 }

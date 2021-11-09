@@ -56,7 +56,7 @@ namespace OtripleS.Portal.Web.Services.StudentViews
             this.navigationBroker.NavigateTo(route);
         });
 
-        public ValueTask<List<StudentView>> RetrieveAllStudentsViewAsync() =>
+        public ValueTask<List<StudentView>> RetrieveAllStudentViewsAsync() =>
         TryCatch(async () =>
         {
             List<Student> students =
@@ -86,16 +86,18 @@ namespace OtripleS.Portal.Web.Services.StudentViews
                 UpdatedDate = currentDateTime
             };
         }
-
-        private static Func<Student, StudentView> AsStudentView =>
-            student => new StudentView
+        
+        private static Func<Student, StudentView> AsStudentView = delegate (Student student)
+        {
+            return new StudentView
             {
                 IdentityNumber = student.IdentityNumber,
                 FirstName = student.FirstName,
                 MiddleName = student.MiddleName,
                 LastName = student.LastName,
                 BirthDate = student.BirthDate,
-                Gender = (StudentViewGender)student.Gender,
+                Gender = (StudentViewGender) student.Gender,
             };
+        };
     }
 }
