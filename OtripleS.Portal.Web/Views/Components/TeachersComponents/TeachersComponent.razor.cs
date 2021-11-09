@@ -19,7 +19,7 @@ namespace OtripleS.Portal.Web.Views.Components.TeachersComponents
         [Inject]
         public ITeacherViewService TeacherViewService { get; set; }
 
-        public TeacherComponentState State { get; set; }
+        public TeachersComponentState State { get; set; }
         public List<TeacherView> TeacherViews { get; set; }
         public GridBase<TeacherView> Grid { get; set; }
         public string ErrorMessage { get; set; }
@@ -32,12 +32,12 @@ namespace OtripleS.Portal.Web.Views.Components.TeachersComponents
                 this.TeacherViews =
                     await this.TeacherViewService.RetrieveAllTeachersAsync();
 
-                this.State = TeacherComponentState.Content;
+                this.State = TeachersComponentState.Content;
             }
             catch(Exception exception)
             {
                 this.ErrorMessage = exception.Message;
-                this.State = TeacherComponentState.Error;
+                this.State = TeachersComponentState.Error;
             }
         }
     }

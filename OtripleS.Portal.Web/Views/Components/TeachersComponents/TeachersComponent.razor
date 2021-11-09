@@ -2,13 +2,13 @@
 @using PrettyBlazor
 @using OtripleS.Portal.Web.Models.Views.Components.TeachersComponents
 
-<Condition Evaluation=@(State == TeacherComponentState.Content)>
+<Condition Evaluation=@(State == TeachersComponentState.Content)>
     <Match>
         <GridBase @ref=Grid DataSource=TeacherViews />
     </Match>
 </Condition>
 
-<Condition Evaluation=@(State == TeacherComponentState.Error)>
+<Condition Evaluation=@(State == TeachersComponentState.Error)>
     <Match>
         <LabelBase @ref=ErrorLabel Value=@ErrorMessage />
     </Match>
