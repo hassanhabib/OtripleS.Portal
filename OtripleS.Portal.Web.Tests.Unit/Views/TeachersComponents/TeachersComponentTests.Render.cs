@@ -54,7 +54,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.TeachersComponents
                 retrievedTeacherViews;
 
             this.teacherViewServiceMock.Setup(service =>
-                service.RetrieveAllTeachersAsync())
+                service.RetrieveAllTeacherViewsAsync())
                     .ReturnsAsync(retrievedTeacherViews);
 
             // when
@@ -81,7 +81,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.TeachersComponents
                 .BeNull();
 
             this.teacherViewServiceMock.Verify(service =>
-                service.RetrieveAllTeachersAsync(),
+                service.RetrieveAllTeacherViewsAsync(),
                     Times.Once);
 
             this.teacherViewServiceMock.VerifyNoOtherCalls();
@@ -100,7 +100,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.TeachersComponents
             var exception = new Exception(exceptionErrorMessage);
 
             this.teacherViewServiceMock.Setup(service =>
-                service.RetrieveAllTeachersAsync())
+                service.RetrieveAllTeacherViewsAsync())
                     .ThrowsAsync(exception);
 
             // when
@@ -127,7 +127,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.TeachersComponents
                 .BeNull();
 
             this.teacherViewServiceMock.Verify(service =>
-                service.RetrieveAllTeachersAsync(),
+                service.RetrieveAllTeacherViewsAsync(),
                     Times.Once);
 
             this.teacherViewServiceMock.VerifyNoOtherCalls();

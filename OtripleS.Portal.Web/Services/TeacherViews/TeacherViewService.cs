@@ -27,7 +27,7 @@ namespace OtripleS.Portal.Web.Services.TeacherViews
             this.loggingBroker = loggingBroker;
         }
 
-        public ValueTask<List<TeacherView>> RetrieveAllTeachersAsync() =>
+        public ValueTask<List<TeacherView>> RetrieveAllTeacherViewsAsync() =>
         TryCatch(async () =>
         {
             List<Teacher> teachers =
