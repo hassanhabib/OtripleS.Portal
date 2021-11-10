@@ -23,6 +23,7 @@ namespace OtripleS.Portal.Web.Views.Components.TeachersComponents
         public List<TeacherView> TeacherViews { get; set; }
         public string ErrorMessage { get; set; }
         public LabelBase ErrorLabel { get; set; }
+        public GridBase<TeacherView> Grid { get; set; }
 
         protected async override Task OnInitializedAsync()
         {
