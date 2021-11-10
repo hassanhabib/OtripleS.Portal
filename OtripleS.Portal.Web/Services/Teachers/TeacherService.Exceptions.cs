@@ -46,7 +46,7 @@ namespace OtripleS.Portal.Web.Services.Teachers
             }
             catch (HttpResponseException httpResponseException)
             {
-                var failedTeacherDependencyException = 
+                var failedTeacherDependencyException =
                     new FailedTeacherDependencyException(httpResponseException);
 
                 throw CreateAndLogDependencyException(failedTeacherDependencyException);

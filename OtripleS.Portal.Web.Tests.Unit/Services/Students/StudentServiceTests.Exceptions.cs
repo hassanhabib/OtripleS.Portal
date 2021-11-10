@@ -4,42 +4,18 @@
 // ---------------------------------------------------------------
 
 using System;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Moq;
 using OtripleS.Portal.Web.Models.Students;
 using OtripleS.Portal.Web.Models.Students.Exceptions;
-using RESTFulSense.Exceptions;
 using Xunit;
 
 namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
 {
     public partial class StudentServiceTests
     {
-        public static TheoryData ValidationApiExceptions()
-        {
-            string exceptionMessage = GetRandomString();
-            var responseMessage = new HttpResponseMessage();
-
-            var httpResponseBadRequestException =
-                new HttpResponseBadRequestException(
-                    responseMessage: responseMessage,
-                    message: exceptionMessage);
-
-            var httpResponseConflictException =
-                new HttpResponseConflictException(
-                    responseMessage: responseMessage,
-                    message: exceptionMessage);
-
-            return new TheoryData<Exception>
-            {
-                httpResponseBadRequestException,
-                httpResponseConflictException
-            };
-        }
-
         [Theory]
-        [MemberData(nameof(ValidationApiExceptions))]
+        [MemberData(nameof(ValidationApiException))]
         public async Task ShouldThrowDependencyValidationExceptionOnRegisterIfBadRequestErrorOccursAndLogItAsync(
             Exception validationApiException)
         {
@@ -75,34 +51,8 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
             this.loggingBrokerMock.VerifyNoOtherCalls();
         }
 
-        public static TheoryData CriticalApiExceptions()
-        {
-            string exceptionMessage = GetRandomString();
-            var responseMessage = new HttpResponseMessage();
-
-            var httpRequestException =
-                new HttpRequestException();
-
-            var httpResponseUrlNotFoundException =
-                new HttpResponseUrlNotFoundException(
-                    responseMessage: responseMessage,
-                    message: exceptionMessage);
-
-            var httpResponseUnAuthorizedException =
-                new HttpResponseUnauthorizedException(
-                    responseMessage: responseMessage,
-                    message: exceptionMessage);
-
-            return new TheoryData<Exception>
-            {
-                httpRequestException,
-                httpResponseUrlNotFoundException,
-                httpResponseUnAuthorizedException
-            };
-        }
-
         [Theory]
-        [MemberData(nameof(CriticalApiExceptions))]
+        [MemberData(nameof(CriticalApiException))]
         public async Task ShouldThrowCriticalDependencyExceptionOnRegisterIfUrlNotFoundErrorOccursAndLogItAsync(
             Exception httpResponseCriticalException)
         {
@@ -138,31 +88,8 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
             this.loggingBrokerMock.VerifyNoOtherCalls();
         }
 
-
-        public static TheoryData DependencyApiExceptions()
-        {
-            string exceptionMessage = GetRandomString();
-            var responseMessage = new HttpResponseMessage();
-
-            var httpResponseException =
-                new HttpResponseException(
-                    httpResponseMessage: responseMessage,
-                    message: exceptionMessage);
-
-            var httpResponseInternalServerErrorException =
-                new HttpResponseInternalServerErrorException(
-                    responseMessage: responseMessage,
-                    message: exceptionMessage);
-
-            return new TheoryData<Exception>
-            {
-                httpResponseException,
-                httpResponseInternalServerErrorException
-            };
-        }
-
         [Theory]
-        [MemberData(nameof(DependencyApiExceptions))]
+        [MemberData(nameof(DependencyApiException))]
         public async Task ShouldThrowDependencyExceptionOnRegisterIfDependencyApiErrorOccursAndLogItAsync(
             Exception dependencyApiException)
         {

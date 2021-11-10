@@ -28,7 +28,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
             this.teacherServiceMock = new Mock<ITeacherService>();
             this.loggingBrokerMock = new Mock<ILoggingBroker>();
 
-            this.teacherViewService = 
+            this.teacherViewService =
                 new TeacherViewService(
                     teacherService: teacherServiceMock.Object,
                     loggingBroker: loggingBrokerMock.Object);
@@ -56,7 +56,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
         private static DateTimeOffset GetRandomDateTime() =>
             new DateTimeRange(earliestDate: new DateTime()).GetValue();
 
-        private static string GetRandomName() => 
+        private static string GetRandomName() =>
             new RealNames(NameStyle.FirstName).GetValue();
 
         private static string GetRandomString() => new MnemonicString().GetValue();

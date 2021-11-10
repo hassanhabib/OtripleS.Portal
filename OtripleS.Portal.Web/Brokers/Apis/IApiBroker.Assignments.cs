@@ -3,12 +3,14 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
-namespace OtripleS.Portal.Web.Models.Teachers
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using OtripleS.Portal.Web.Models.Assignments;
+
+namespace OtripleS.Portal.Web.Brokers.API
 {
-    public enum TeacherStatus
+    public partial interface IApiBroker
     {
-        Active,
-        Retired,
-        Terminated
+        ValueTask<List<Assignment>> GetAllAssignmentsAsync();
     }
 }

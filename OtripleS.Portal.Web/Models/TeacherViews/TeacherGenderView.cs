@@ -9,6 +9,7 @@ namespace OtripleS.Portal.Web.Models.TeacherViews
     {
         Female,
         Male,
-        Other
+        Other,
+        Unknown
     }
 }

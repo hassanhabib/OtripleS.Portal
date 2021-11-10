@@ -3,12 +3,15 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
-namespace OtripleS.Portal.Web.Models.Teachers
+using System;
+
+namespace OtripleS.Portal.Web.Models.Assignments
 {
-    public enum TeacherStatus
+    public class Assignment
     {
-        Active,
-        Retired,
-        Terminated
+        public Guid Id { get; set; }
+        public string Label { get; set; }
+        public string Content { get; set; }
+        public AssignmentStatus Status { get; set; }
     }
 }

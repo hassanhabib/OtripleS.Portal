@@ -32,7 +32,7 @@ namespace OtripleS.Portal.Web.Services.TeacherViews
             }
             catch (Exception serviceException)
             {
-                var failedTeacherViewServiceException = 
+                var failedTeacherViewServiceException =
                     new FailedTeacherViewServiceException(serviceException);
 
                 throw CreateAndLogServiceException(failedTeacherViewServiceException);
