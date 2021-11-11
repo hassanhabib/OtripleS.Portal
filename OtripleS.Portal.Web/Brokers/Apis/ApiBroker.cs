@@ -6,7 +6,7 @@
 using System.Threading.Tasks;
 using RESTFulSense.Clients;
 
-namespace OtripleS.Portal.Web.Brokers.API
+namespace OtripleS.Portal.Web.Brokers.Apis
 {
     public partial class ApiBroker : IApiBroker
     {
