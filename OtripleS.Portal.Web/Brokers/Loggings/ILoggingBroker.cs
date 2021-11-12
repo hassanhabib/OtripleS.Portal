@@ -5,7 +5,7 @@
 
 using System;
 
-namespace OtripleS.Portal.Web.Brokers.Logging
+namespace OtripleS.Portal.Web.Brokers.Loggings
 {
     public interface ILoggingBroker
     {
