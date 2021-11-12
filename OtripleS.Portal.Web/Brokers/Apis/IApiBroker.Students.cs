@@ -5,12 +5,13 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using OtripleS.Portal.Web.Models.Assignments;
+using OtripleS.Portal.Web.Models.Students;
 
-namespace OtripleS.Portal.Web.Brokers.API
+namespace OtripleS.Portal.Web.Brokers.Apis
 {
     public partial interface IApiBroker
     {
-        ValueTask<List<Assignment>> GetAllAssignmentsAsync();
+        ValueTask<Student> PostStudentAsync(Student student);
+        ValueTask<List<Student>> GetAllStudentsAsync();
     }
 }

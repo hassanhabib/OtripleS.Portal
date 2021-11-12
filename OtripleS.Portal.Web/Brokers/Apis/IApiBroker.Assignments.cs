@@ -7,13 +7,10 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using OtripleS.Portal.Web.Models.Assignments;
 
-namespace OtripleS.Portal.Web.Brokers.API
+namespace OtripleS.Portal.Web.Brokers.Apis
 {
-    public partial class ApiBroker
+    public partial interface IApiBroker
     {
-        private const string AssignmentsRelativeUrl = "api/assignments";
-
-        public async ValueTask<List<Assignment>> GetAllAssignmentsAsync() =>
-            await this.GetAsync<List<Assignment>>(AssignmentsRelativeUrl);
+        ValueTask<List<Assignment>> GetAllAssignmentsAsync();
     }
 }

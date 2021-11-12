@@ -5,12 +5,12 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using OtripleS.Portal.Web.Models.Teachers;
+using OtripleS.Portal.Web.Models.Courses;
 
-namespace OtripleS.Portal.Web.Brokers.API
+namespace OtripleS.Portal.Web.Brokers.Apis
 {
     public partial interface IApiBroker
     {
-        ValueTask<List<Teacher>> GetAllTeachersAsync();
+        ValueTask<List<Course>> GetAllCoursesAsync();
     }
 }
