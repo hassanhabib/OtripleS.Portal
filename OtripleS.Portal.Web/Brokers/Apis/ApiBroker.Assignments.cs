@@ -5,15 +5,15 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using OtripleS.Portal.Web.Models.Courses;
+using OtripleS.Portal.Web.Models.Assignments;
 
-namespace OtripleS.Portal.Web.Brokers.API
+namespace OtripleS.Portal.Web.Brokers.Apis
 {
     public partial class ApiBroker
     {
-        private const string CoursesRelativeUrl = "api/courses";
+        private const string AssignmentsRelativeUrl = "api/assignments";
 
-        public async ValueTask<List<Course>> GetAllCoursesAsync() =>
-            await GetAsync<List<Course>>(CoursesRelativeUrl);
+        public async ValueTask<List<Assignment>> GetAllAssignmentsAsync() =>
+            await this.GetAsync<List<Assignment>>(AssignmentsRelativeUrl);
     }
 }
