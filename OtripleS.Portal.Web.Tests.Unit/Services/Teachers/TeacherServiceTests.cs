@@ -10,7 +10,7 @@ using System.Linq.Expressions;
 using System.Net.Http;
 using Moq;
 using OtripleS.Portal.Web.Brokers.Apis;
-using OtripleS.Portal.Web.Brokers.Logging;
+using OtripleS.Portal.Web.Brokers.Loggings;
 using OtripleS.Portal.Web.Models.Teachers;
 using OtripleS.Portal.Web.Services.Teachers;
 using RESTFulSense.Exceptions;
