@@ -8,26 +8,11 @@ using System;
 
 namespace OtripleS.Portal.Web.Models.Users
 {
-    public class User : IdentityUser<Guid>
+    public class User
     {
-        public override Guid Id
-        {
-            get => base.Id;
-            set => base.Id = value;
-        }
-
-        public override string UserName
-        {
-            get => base.Email;
-            set => base.Email = value;
-        }
-
-        public override string PhoneNumber
-        {
-            get => base.PhoneNumber;
-            set => base.PhoneNumber = value;
-        }
-
+        public Guid Id { get; set; }
+        public string UserName { get; set; }
+        public string PhoneNumber { get; set; }
         public string Name { get; set; }
         public string FamilyName { get; set; }
         public UserStatus Status { get; set; }
