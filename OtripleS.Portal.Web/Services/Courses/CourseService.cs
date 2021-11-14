@@ -20,9 +20,9 @@ namespace OtripleS.Portal.Web.Services.Courses
             this.loggingBroker = loggingBroker;
         }
 
-        public ValueTask<List<Course>> RetrieveAllCoursesAsync()
+        public async ValueTask<List<Course>> RetrieveAllCoursesAsync()
         {
-            throw new NotImplementedException();
+            return await this.apiBroker.GetAllCoursesAsync();
         }
     }
 }
