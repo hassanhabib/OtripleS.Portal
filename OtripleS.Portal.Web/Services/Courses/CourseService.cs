@@ -7,7 +7,7 @@ using OtripleS.Portal.Web.Models.Courses;
 
 namespace OtripleS.Portal.Web.Services.Courses
 {
-    public class CourseService : ICourseService
+    public partial class CourseService : ICourseService
     {
         private readonly IApiBroker apiBroker;
         private readonly ILoggingBroker loggingBroker;
@@ -20,9 +20,8 @@ namespace OtripleS.Portal.Web.Services.Courses
             this.loggingBroker = loggingBroker;
         }
 
-        public async ValueTask<List<Course>> RetrieveAllCoursesAsync()
-        {
-            return await this.apiBroker.GetAllCoursesAsync();
-        }
+        public ValueTask<List<Course>> RetrieveAllCoursesAsync() =>
+            TryCatch(async () => await apiBroker.GetAllCoursesAsync());
+
     }
 }
