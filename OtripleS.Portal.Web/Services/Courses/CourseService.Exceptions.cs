@@ -39,6 +39,13 @@ namespace OtripleS.Portal.Web.Services.Courses
 
                 throw CreateAndLogCriticalDependencyException(failedCourseDependencyException);
             }
+            catch (HttpResponseException httpResponseException)
+            {
+                var failedCourseDependencyException =
+                    new FailedCourseDependencyException(httpResponseException);
+
+                throw CreateAndLogDependencyException(failedCourseDependencyException);
+            }
         }
 
         private CourseDependencyException CreateAndLogCriticalDependencyException(
@@ -48,6 +55,17 @@ namespace OtripleS.Portal.Web.Services.Courses
                 new CourseDependencyException(exception);
 
             this.loggingBroker.LogCritical(courseDependencyException);
+
+            return courseDependencyException;
+        }
+
+        private CourseDependencyException CreateAndLogDependencyException(
+            Exception exception)
+        {
+            var courseDependencyException =
+                new CourseDependencyException(exception);
+
+            this.loggingBroker.LogError(courseDependencyException);
 
             return courseDependencyException;
         }
