@@ -84,5 +84,43 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Courses
             this.apiBrokerMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
         }
+
+        [Fact]
+        public async Task ShouldThrowServiceExceptionOnRetrieveAllIfServiceErrorOccursAndLogItAsync()
+        {
+            // given
+            var serviceException = new Exception();
+
+            var failedCourseServiceExcption =
+                new FailedCourseServiceException(serviceException);
+
+            var expectedCourseServiceException =
+                new CourseServiceException(failedCourseServiceExcption);
+
+            this.apiBrokerMock.Setup(broker =>
+                broker.GetAllCoursesAsync())
+                    .ThrowsAsync(serviceException);
+
+            // when
+            ValueTask<List<Course>> retrievedCourseTask =
+                this.courseService.RetrieveAllCoursesAsync();
+
+            // then
+            await Assert.ThrowsAsync<CourseServiceException>(() =>
+                retrievedCourseTask.AsTask());
+
+            this.apiBrokerMock.Verify(broker =>
+                broker.GetAllCoursesAsync(),
+                    Times.Once);
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameExceptionAs(
+                    expectedCourseServiceException))),
+                        Times.Once);
+
+            this.apiBrokerMock.VerifyNoOtherCalls();
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+        }
+
     }
 }
