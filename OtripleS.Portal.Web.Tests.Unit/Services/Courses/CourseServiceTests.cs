@@ -56,6 +56,28 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Courses
             };
         }
 
+        public static TheoryData DependencyApiException()
+        {
+            string exceptionMessage = GetRandomString();
+            var responseMessage = new HttpResponseMessage();
+
+            var httpResponseException =
+                new HttpResponseException(
+                    httpResponseMessage: responseMessage,
+                    message: exceptionMessage);
+
+            var httpResponseInternalServerErrorException =
+                new HttpResponseInternalServerErrorException(
+                    responseMessage: responseMessage,
+                    message: exceptionMessage);
+
+            return new TheoryData<Exception>
+            {
+                httpResponseException,
+                httpResponseInternalServerErrorException
+            };
+        }
+
         private static List<Course> CreateRandomCourses() =>
             CreateCourseFiller().Create(count: GetRandomNumber()).ToList();
 

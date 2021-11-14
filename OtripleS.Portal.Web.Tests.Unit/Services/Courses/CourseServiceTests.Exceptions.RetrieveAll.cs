@@ -48,5 +48,41 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Courses
             this.apiBrokerMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
         }
+
+        [Theory]
+        [MemberData(nameof(DependencyApiException))]
+        public async Task ShouldThrowDependencyExceptionOnRetrieveAllIfDependencyApiErrorOccursAndLogItAsync(
+            Exception dependencyApiException)
+        {
+            // given
+            var failedCourseDependencyException =
+                new FailedCourseDependencyException(dependencyApiException);
+
+            var expectedCourseDependencyException =
+                new CourseDependencyException(failedCourseDependencyException);
+
+            this.apiBrokerMock.Setup(broker =>
+                broker.GetAllCoursesAsync())
+                    .ThrowsAsync(dependencyApiException);
+            // when
+            ValueTask<List<Course>> retrievedCoursesTask =
+                this.courseService.RetrieveAllCoursesAsync();
+
+            // then
+            await Assert.ThrowsAsync<CourseDependencyException>(() =>
+                retrievedCoursesTask.AsTask());
+
+            this.apiBrokerMock.Verify(broker =>
+                broker.GetAllCoursesAsync(),
+                    Times.Once);
+
+            this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameExceptionAs(
+                    expectedCourseDependencyException))),
+                        Times.Once);
+
+            this.apiBrokerMock.VerifyNoOtherCalls();
+            this.loggingBrokerMock.VerifyNoOtherCalls();
+        }
     }
 }
