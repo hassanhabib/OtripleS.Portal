@@ -3,10 +3,10 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
-using System.Threading.Tasks;
 using RESTFulSense.Clients;
+using System.Threading.Tasks;
 
-namespace OtripleS.Portal.Web.Brokers.API
+namespace OtripleS.Portal.Web.Brokers.Apis
 {
     public partial class ApiBroker : IApiBroker
     {
