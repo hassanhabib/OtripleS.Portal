@@ -126,6 +126,5 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Courses
             this.apiBrokerMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
         }
-
     }
 }
