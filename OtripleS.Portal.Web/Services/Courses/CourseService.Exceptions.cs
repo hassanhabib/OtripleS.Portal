@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using OtripleS.Portal.Web.Models.Courses;
 using OtripleS.Portal.Web.Models.Courses.Exceptions;
 using RESTFulSense.Exceptions;
+using Xeptions;
 
 namespace OtripleS.Portal.Web.Services.Courses
 {
@@ -61,7 +62,7 @@ namespace OtripleS.Portal.Web.Services.Courses
         }
 
         private CourseDependencyException CreateAndLogCriticalDependencyException(
-            Exception exception)
+            Xeption exception)
         {
             var courseDependencyException =
                 new CourseDependencyException(exception);
@@ -72,7 +73,7 @@ namespace OtripleS.Portal.Web.Services.Courses
         }
 
         private CourseDependencyException CreateAndLogDependencyException(
-            Exception exception)
+            Xeption exception)
         {
             var courseDependencyException =
                 new CourseDependencyException(exception);
@@ -83,7 +84,7 @@ namespace OtripleS.Portal.Web.Services.Courses
         }
 
         private CourseServiceException CreateAndLogServiceException(
-            Exception exception)
+            Xeption exception)
         {
             var courseServiceException =
                 new CourseServiceException(exception);
@@ -92,6 +93,5 @@ namespace OtripleS.Portal.Web.Services.Courses
 
             return courseServiceException;
         }
-
     }
 }
