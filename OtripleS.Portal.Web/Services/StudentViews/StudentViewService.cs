@@ -87,9 +87,8 @@ namespace OtripleS.Portal.Web.Services.StudentViews
             };
         }
         
-        private static Func<Student, StudentView> AsStudentView = delegate (Student student)
-        {
-            return new StudentView
+        private static Func<Student, StudentView> AsStudentView =>
+            student => new StudentView
             {
                 IdentityNumber = student.IdentityNumber,
                 FirstName = student.FirstName,
@@ -98,6 +97,5 @@ namespace OtripleS.Portal.Web.Services.StudentViews
                 BirthDate = student.BirthDate,
                 Gender = (StudentViewGender) student.Gender,
             };
-        };
     }
 }
