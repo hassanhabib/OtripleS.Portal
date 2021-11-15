@@ -3,8 +3,6 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
-using System;
-using System.Threading.Tasks;
 using OtripleS.Portal.Web.Brokers.DateTimes;
 using OtripleS.Portal.Web.Brokers.Loggings;
 using OtripleS.Portal.Web.Brokers.Navigations;
@@ -12,6 +10,8 @@ using OtripleS.Portal.Web.Models.Students;
 using OtripleS.Portal.Web.Models.StudentViews;
 using OtripleS.Portal.Web.Services.Students;
 using OtripleS.Portal.Web.Services.Users;
+using System;
+using System.Threading.Tasks;
 
 namespace OtripleS.Portal.Web.Services.StudentViews
 {
