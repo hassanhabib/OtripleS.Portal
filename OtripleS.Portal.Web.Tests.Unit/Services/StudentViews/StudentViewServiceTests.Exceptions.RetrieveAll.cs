@@ -29,12 +29,12 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
                     .ThrowsAsync(dependencyException);
 
             // when
-            ValueTask<List<StudentView>> retrieveAllStudentsTask =
+            ValueTask<List<StudentView>> retrieveAllStudentViewsTask =
                 this.studentViewService.RetrieveAllStudentViewsAsync();
 
             // then
             await Assert.ThrowsAsync<StudentViewDependencyException>(() =>
-                retrieveAllStudentsTask.AsTask());
+                retrieveAllStudentViewsTask.AsTask());
 
             this.studentServiceMock.Verify(service =>
                 service.RetrieveAllStudentsAsync(),
@@ -46,8 +46,8 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
                         Times.Once);
 
             this.studentServiceMock.VerifyNoOtherCalls();
-            this.dateTimeBrokerMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
+            this.dateTimeBrokerMock.VerifyNoOtherCalls();
             this.navigationBrokerMock.VerifyNoOtherCalls();
             this.userServiceMock.VerifyNoOtherCalls();
         }
@@ -69,12 +69,12 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
                     .ThrowsAsync(serviceException);
 
             // when
-            ValueTask<List<StudentView>> retrieveAllStudentsTask =
+            ValueTask<List<StudentView>> retrieveAllStudentViewsTask =
                 this.studentViewService.RetrieveAllStudentViewsAsync();
 
             // then
             await Assert.ThrowsAsync<StudentViewServiceException>(() =>
-                retrieveAllStudentsTask.AsTask());
+                retrieveAllStudentViewsTask.AsTask());
 
             this.studentServiceMock.Verify(service =>
                 service.RetrieveAllStudentsAsync(),
@@ -86,8 +86,8 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
                         Times.Once);
 
             this.studentServiceMock.VerifyNoOtherCalls();
-            this.dateTimeBrokerMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
+            this.dateTimeBrokerMock.VerifyNoOtherCalls();
             this.navigationBrokerMock.VerifyNoOtherCalls();
             this.userServiceMock.VerifyNoOtherCalls();
         }
