@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
@@ -17,50 +18,54 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
     public partial class StudentViewServiceTests
     {
         [Fact]
-        public async Task ShouldRetrieveAllStudentsViewAsync()
+        public async Task ShouldRetrieveAllStudentViewsAsync()
         {
             // given
             var randomUserId = Guid.NewGuid();
             DateTimeOffset randomDateTime = GetRandomDate();
 
-            dynamic dynamicStudentProperties =
-                CreateRandomStudentViewProperties(
+            List<dynamic> dynamicStudentViewPropertiesCollection =
+                CreateRandomStudentViewCollections(
                     auditDates: randomDateTime,
                     auditIds: randomUserId);
 
-            var student = new Student
-            {
-                Id = dynamicStudentProperties.Id,
-                UserId = dynamicStudentProperties.UserId,
-                IdentityNumber = dynamicStudentProperties.IdentityNumber,
-                FirstName = dynamicStudentProperties.FirstName,
-                MiddleName = dynamicStudentProperties.MiddleName,
-                LastName = dynamicStudentProperties.LastName,
-                Gender = (StudentGender)dynamicStudentProperties.Gender,
-                BirthDate = dynamicStudentProperties.BirthDate,
-                CreatedDate = randomDateTime,
-                UpdatedDate = randomDateTime,
-                CreatedBy = randomUserId,
-                UpdatedBy = randomUserId
-            };
+            List<Student> randomStudents = 
+                dynamicStudentViewPropertiesCollection.Select(property =>
+                new Student
+                {
+                    Id = property.Id,
+                    UserId = property.UserId,
+                    IdentityNumber = property.IdentityNumber,
+                    FirstName = property.FirstName,
+                    MiddleName = property.MiddleName,
+                    LastName = property.LastName,
+                    Gender = (StudentGender) property.Gender,
+                    BirthDate = property.BirthDate,
+                    CreatedDate = randomDateTime,
+                    UpdatedDate = randomDateTime,
+                    CreatedBy = randomUserId,
+                    UpdatedBy = randomUserId
+                }).ToList();
 
-            var studentView = new StudentView
-            {
-                IdentityNumber = dynamicStudentProperties.IdentityNumber,
-                FirstName = dynamicStudentProperties.FirstName,
-                MiddleName = dynamicStudentProperties.MiddleName,
-                LastName = dynamicStudentProperties.LastName,
-                Gender = (StudentViewGender)dynamicStudentProperties.Gender,
-                BirthDate = dynamicStudentProperties.BirthDate
-            };
+            List<Student> retrievedStudents = randomStudents;
 
-            var randomStudents = new List<Student> { student };
-            var actualStudentViews = randomStudents;
-            var expectedStudentViews = new List<StudentView> { studentView };
+            List<StudentView> randomStudentViews = 
+                dynamicStudentViewPropertiesCollection.Select(property => 
+                new StudentView
+                {
+                    IdentityNumber = property.IdentityNumber,
+                    FirstName = property.FirstName,
+                    MiddleName = property.MiddleName,
+                    LastName = property.LastName,
+                    Gender = (StudentViewGender)property.Gender,
+                    BirthDate = property.BirthDate
+                }).ToList();
+
+            List<StudentView> expectedStudentViews = randomStudentViews;
 
             this.studentServiceMock.Setup(service =>
                 service.RetrieveAllStudentsAsync())
-                    .ReturnsAsync(actualStudentViews);
+                    .ReturnsAsync(retrievedStudents);
 
             // when
             List<StudentView> retrievedStudentViews =
@@ -74,8 +79,8 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
                     Times.Once());
 
             this.studentServiceMock.VerifyNoOtherCalls();
-            this.dateTimeBrokerMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
+            this.dateTimeBrokerMock.VerifyNoOtherCalls();
             this.navigationBrokerMock.VerifyNoOtherCalls();
             this.userServiceMock.VerifyNoOtherCalls();
         }

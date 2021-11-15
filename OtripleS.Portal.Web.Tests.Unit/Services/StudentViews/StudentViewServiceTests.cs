@@ -4,6 +4,7 @@
 // ---------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using KellermanSoftware.CompareNetObjects;
 using Moq;
@@ -55,7 +56,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
         {
             var innerException = new Exception();
 
-            var studentServiceDependencyException =
+            var studentDependencyException =
                 new StudentDependencyException(innerException);
 
             var studentServiceException =
@@ -63,7 +64,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
 
             return new TheoryData<Exception>
             {
-                studentServiceDependencyException,
+                studentDependencyException,
                 studentServiceException
             };
         }
@@ -90,6 +91,18 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
                 CreatedBy = auditIds,
                 UpdatedBy = auditIds
             };
+        }
+
+        private static List<dynamic> CreateRandomStudentViewCollections(
+            DateTimeOffset auditDates,
+            Guid auditIds)
+        {
+            dynamic randomStudentViewDynamicProperties = 
+                CreateRandomStudentViewProperties(
+                    auditDates: auditDates,
+                    auditIds: auditIds);
+
+            return new List<dynamic> { randomStudentViewDynamicProperties };
         }
 
         private Expression<Func<Student, bool>> SameStudentAs(Student expectedStudent)
