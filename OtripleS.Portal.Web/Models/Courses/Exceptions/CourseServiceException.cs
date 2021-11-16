@@ -4,10 +4,11 @@
 // ---------------------------------------------------------------
 
 using System;
+using Xeptions;
 
 namespace OtripleS.Portal.Web.Models.Courses.Exceptions
 {
-    public class CourseServiceException : Exception
+    public class CourseServiceException : Xeption
     {
         public CourseServiceException(Exception innerException)
             : base(message: "Course service error occurred, contact support.", innerException) { }
