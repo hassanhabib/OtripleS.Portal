@@ -16,7 +16,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Courses
     public partial class CourseServiceTests
     {
         [Theory]
-        [MemberData(nameof(CriticalApiException))]
+        [MemberData(nameof(CriticalApiExceptions))]
         public async Task ShouldThrowCriticalDependencyExceptionOnRetrieveAllIfCriticalDependencyExceptionOccursAndLogItAsync(
             Exception criticalDependencyException)
         {
@@ -55,7 +55,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Courses
         }
 
         [Theory]
-        [MemberData(nameof(DependencyApiException))]
+        [MemberData(nameof(DependencyApiExceptions))]
         public async Task ShouldThrowDependencyExceptionOnRetrieveAllIfDependencyApiErrorOccursAndLogItAsync(
             Exception dependencyApiException)
         {
@@ -107,12 +107,12 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Courses
                     .ThrowsAsync(serviceException);
 
             // when
-            ValueTask<List<Course>> retrievedCourseTask =
+            ValueTask<List<Course>> retrievedCoursesTask =
                 this.courseService.RetrieveAllCoursesAsync();
 
             // then
             await Assert.ThrowsAsync<CourseServiceException>(() =>
-                retrievedCourseTask.AsTask());
+                retrievedCoursesTask.AsTask());
 
             this.apiBrokerMock.Verify(broker =>
                 broker.GetAllCoursesAsync(),

@@ -15,6 +15,7 @@ using OtripleS.Portal.Web.Models.Courses;
 using OtripleS.Portal.Web.Services.Courses;
 using RESTFulSense.Exceptions;
 using Tynamix.ObjectFiller;
+using Xeptions;
 using Xunit;
 
 namespace OtripleS.Portal.Web.Tests.Unit.Services.Courses
@@ -35,7 +36,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Courses
                 loggingBroker: this.loggingBrokerMock.Object);
         }
 
-        public static TheoryData CriticalApiException()
+        public static TheoryData CriticalApiExceptions()
         {
             string exceptionMessage = GetRandomString();
             var responseMessage = new HttpResponseMessage();
@@ -61,7 +62,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Courses
             };
         }
 
-        public static TheoryData DependencyApiException()
+        public static TheoryData DependencyApiExceptions()
         {
             string exceptionMessage = GetRandomString();
             var responseMessage = new HttpResponseMessage();
@@ -86,8 +87,8 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Courses
         private static List<Course> CreateRandomCourses() =>
             CreateCourseFiller().Create(count: GetRandomNumber()).ToList();
 
-        private static Expression<Func<Exception, bool>> SameExceptionAs(
-            Exception expectedException)
+        private static Expression<Func<Xeption, bool>> SameExceptionAs(
+            Xeption expectedException)
         {
             return actualException => actualException.Message == expectedException.Message
                 && actualException.InnerException.Message == expectedException.InnerException.Message;
@@ -95,13 +96,16 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Courses
 
         private static string GetRandomString() => new MnemonicString().GetValue();
         private static int GetRandomNumber() => new IntRange(min: 2, max: 10).GetValue();
+        
+        private static DateTimeOffset GetRandomDateTime() =>
+            new DateTimeRange(earliestDate: new DateTime()).GetValue();
 
         private static Filler<Course> CreateCourseFiller()
         {
             var filler = new Filler<Course>();
 
             filler.Setup()
-                .OnType<DateTimeOffset>().Use(DateTimeOffset.UtcNow);
+                .OnType<DateTimeOffset>().Use(valueToUse: GetRandomDateTime());
 
             return filler;
         }
