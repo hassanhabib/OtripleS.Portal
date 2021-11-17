@@ -70,21 +70,21 @@ namespace OtripleS.Portal.Web.Services.StudentViews
             }
         }
 
-        private async ValueTask<List<StudentView>> TryCatch(ReturningStudentViewsFunction returningStudentsViewFunction)
+        private async ValueTask<List<StudentView>> TryCatch(ReturningStudentViewsFunction returningStudentViewsFunction)
         {
             try
             {
-                return await returningStudentsViewFunction();
+                return await returningStudentViewsFunction();
             }
-            catch(StudentDependencyException studentDependencyException)
+            catch (StudentDependencyException studentDependencyException)
             {
                 throw CreateAndLogDependencyException(studentDependencyException);
             }
-            catch(StudentServiceException studentServiceException)
+            catch (StudentServiceException studentServiceException)
             {
                 throw CreateAndLogDependencyException(studentServiceException);
             }
-            catch(Exception serviceException)
+            catch (Exception serviceException)
             {
                 var failedStudentViewServiceException = new FailedStudentViewServiceException(serviceException);
 

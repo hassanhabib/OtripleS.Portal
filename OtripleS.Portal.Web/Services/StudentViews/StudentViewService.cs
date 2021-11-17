@@ -86,7 +86,7 @@ namespace OtripleS.Portal.Web.Services.StudentViews
                 UpdatedDate = currentDateTime
             };
         }
-        
+
         private static Func<Student, StudentView> AsStudentView =>
             student => new StudentView
             {
@@ -95,7 +95,7 @@ namespace OtripleS.Portal.Web.Services.StudentViews
                 MiddleName = student.MiddleName,
                 LastName = student.LastName,
                 BirthDate = student.BirthDate,
-                Gender = (StudentViewGender) student.Gender,
+                Gender = (StudentViewGender)student.Gender,
             };
     }
 }
