@@ -3,11 +3,11 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using OtripleS.Portal.Web.Brokers.Apis;
 using OtripleS.Portal.Web.Brokers.Loggings;
 using OtripleS.Portal.Web.Models.Students;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace OtripleS.Portal.Web.Services.Students
 {
