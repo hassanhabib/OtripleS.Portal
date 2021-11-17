@@ -5,6 +5,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using KellermanSoftware.CompareNetObjects;
 using Moq;
@@ -93,17 +94,34 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
             };
         }
 
-        private static List<dynamic> CreateRandomStudentViewCollections(
-            DateTimeOffset auditDates,
-            Guid auditIds)
+        private static List<dynamic> CreateRandomStudentViewCollections()
         {
-            dynamic randomStudentViewDynamicProperties = 
-                CreateRandomStudentViewProperties(
-                    auditDates: auditDates,
-                    auditIds: auditIds);
+            int randomCount = GetRandomNumber();
 
-            return new List<dynamic> { randomStudentViewDynamicProperties };
+            return Enumerable.Range(0, randomCount).Select(item =>
+            {
+                StudentGender studentGender = GetRandomGender();
+
+                return new
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = Guid.NewGuid().ToString(),
+                    IdentityNumber = GetRandomString(),
+                    FirstName = GetRandomName(),
+                    MiddleName = GetRandomName(),
+                    LastName = GetRandomName(),
+                    BirthDate = GetRandomDate(),
+                    Gender = studentGender,
+                    GenderView = (StudentViewGender)studentGender,
+                    CreatedDate = GetRandomDate(),
+                    UpdatedDate = GetRandomDate(),
+                    CreatedBy = Guid.NewGuid(),
+                    UpdatedBy = Guid.NewGuid()
+                };
+            }).ToList<dynamic>();
         }
+
+        private static int GetRandomNumber() => new IntRange(min: 2, max: 10).GetValue();
 
         private Expression<Func<Student, bool>> SameStudentAs(Student expectedStudent)
         {

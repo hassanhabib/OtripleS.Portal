@@ -3,7 +3,6 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,45 +20,40 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
         public async Task ShouldRetrieveAllStudentViewsAsync()
         {
             // given
-            var randomUserId = Guid.NewGuid();
-            DateTimeOffset randomDateTime = GetRandomDate();
-
             List<dynamic> dynamicStudentViewPropertiesCollection =
-                CreateRandomStudentViewCollections(
-                    auditDates: randomDateTime,
-                    auditIds: randomUserId);
+                CreateRandomStudentViewCollections();
 
-            List<Student> randomStudents = 
+            List<Student> randomStudents =
                 dynamicStudentViewPropertiesCollection.Select(property =>
-                new Student
-                {
-                    Id = property.Id,
-                    UserId = property.UserId,
-                    IdentityNumber = property.IdentityNumber,
-                    FirstName = property.FirstName,
-                    MiddleName = property.MiddleName,
-                    LastName = property.LastName,
-                    Gender = (StudentGender) property.Gender,
-                    BirthDate = property.BirthDate,
-                    CreatedDate = randomDateTime,
-                    UpdatedDate = randomDateTime,
-                    CreatedBy = randomUserId,
-                    UpdatedBy = randomUserId
-                }).ToList();
+                    new Student
+                    {
+                        Id = property.Id,
+                        UserId = property.UserId,
+                        IdentityNumber = property.IdentityNumber,
+                        FirstName = property.FirstName,
+                        MiddleName = property.MiddleName,
+                        LastName = property.LastName,
+                        Gender = (StudentGender)property.Gender,
+                        BirthDate = property.BirthDate,
+                        CreatedDate = property.CreatedDate,
+                        UpdatedDate = property.UpdatedDate,
+                        CreatedBy = property.CreatedBy,
+                        UpdatedBy = property.UpdatedBy
+                    }).ToList();
 
             List<Student> retrievedStudents = randomStudents;
 
-            List<StudentView> randomStudentViews = 
-                dynamicStudentViewPropertiesCollection.Select(property => 
-                new StudentView
-                {
-                    IdentityNumber = property.IdentityNumber,
-                    FirstName = property.FirstName,
-                    MiddleName = property.MiddleName,
-                    LastName = property.LastName,
-                    Gender = (StudentViewGender)property.Gender,
-                    BirthDate = property.BirthDate
-                }).ToList();
+            List<StudentView> randomStudentViews =
+                dynamicStudentViewPropertiesCollection.Select(property =>
+                    new StudentView
+                    {
+                        IdentityNumber = property.IdentityNumber,
+                        FirstName = property.FirstName,
+                        MiddleName = property.MiddleName,
+                        LastName = property.LastName,
+                        Gender = property.GenderView,
+                        BirthDate = property.BirthDate
+                    }).ToList();
 
             List<StudentView> expectedStudentViews = randomStudentViews;
 
