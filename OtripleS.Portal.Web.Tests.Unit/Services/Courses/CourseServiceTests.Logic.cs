@@ -20,12 +20,12 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Courses
         {
             // given
             List<Course> randomCourses = CreateRandomCourses();
-            List<Course> rerievedCourses = randomCourses;
-            List<Course> expetedCourses = rerievedCourses.DeepClone();
+            List<Course> retrievedCourses = randomCourses;
+            List<Course> expetedCourses = retrievedCourses.DeepClone();
 
             this.apiBrokerMock.Setup(broker =>
                 broker.GetAllCoursesAsync())
-                    .ReturnsAsync(rerievedCourses);
+                    .ReturnsAsync(retrievedCourses);
 
             // when
             List<Course> actualCourses =
