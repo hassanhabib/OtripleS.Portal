@@ -38,7 +38,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Courses
 
         public static TheoryData CriticalApiExceptions()
         {
-            string exceptionMessage = GetRandomString();
+            var exceptionMessage = GetRandomString();
             var responseMessage = new HttpResponseMessage();
 
             var httpRequestException =
@@ -64,7 +64,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Courses
 
         public static TheoryData DependencyApiExceptions()
         {
-            string exceptionMessage = GetRandomString();
+            var exceptionMessage = GetRandomString();
             var responseMessage = new HttpResponseMessage();
 
             var httpResponseException =

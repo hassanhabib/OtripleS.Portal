@@ -54,10 +54,10 @@ namespace OtripleS.Portal.Web.Services.Courses
             }
             catch (Exception serviceException)
             {
-                var failedCourseDependencyException =
+                var failedCourseServiceException =
                    new FailedCourseServiceException(serviceException);
 
-                throw CreateAndLogServiceException(failedCourseDependencyException);
+                throw CreateAndLogServiceException(failedCourseServiceException);
             }
         }
 

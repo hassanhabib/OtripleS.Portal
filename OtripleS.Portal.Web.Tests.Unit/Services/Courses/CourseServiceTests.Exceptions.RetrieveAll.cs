@@ -17,7 +17,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Courses
     {
         [Theory]
         [MemberData(nameof(CriticalApiExceptions))]
-        public async Task ShouldThrowCriticalDependencyOnRetrieveAllIfCriticialErrorOccursAndLogItAsync(
+        public async Task ShouldThrowCriticalDependencyExceptionOnRetrieveAllIfCriticialErrorOccursAndLogItAsync(
             Exception criticalDependencyException)
         {
             // given
@@ -34,12 +34,12 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Courses
                     .ThrowsAsync(criticalDependencyException);
 
             // when
-            ValueTask<List<Course>> retrievedCoursesTask =
+            ValueTask<List<Course>> retrievedAllCoursesTask =
                 this.courseService.RetrieveAllCoursesAsync();
 
             // then
             await Assert.ThrowsAsync<CourseDependencyException>(() =>
-               retrievedCoursesTask.AsTask());
+               retrievedAllCoursesTask.AsTask());
 
             this.apiBrokerMock.Verify(broker =>
                 broker.GetAllCoursesAsync(),
@@ -70,12 +70,12 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Courses
                 broker.GetAllCoursesAsync())
                     .ThrowsAsync(dependencyApiException);
             // when
-            ValueTask<List<Course>> retrievedCoursesTask =
+            ValueTask<List<Course>> retrievedAllCoursesTask =
                 this.courseService.RetrieveAllCoursesAsync();
 
             // then
             await Assert.ThrowsAsync<CourseDependencyException>(() =>
-                retrievedCoursesTask.AsTask());
+                retrievedAllCoursesTask.AsTask());
 
             this.apiBrokerMock.Verify(broker =>
                 broker.GetAllCoursesAsync(),
@@ -107,12 +107,12 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Courses
                     .ThrowsAsync(serviceException);
 
             // when
-            ValueTask<List<Course>> retrievedCoursesTask =
+            ValueTask<List<Course>> retrievedAllCoursesTask =
                 this.courseService.RetrieveAllCoursesAsync();
 
             // then
             await Assert.ThrowsAsync<CourseServiceException>(() =>
-                retrievedCoursesTask.AsTask());
+                retrievedAllCoursesTask.AsTask());
 
             this.apiBrokerMock.Verify(broker =>
                 broker.GetAllCoursesAsync(),
