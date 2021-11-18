@@ -17,7 +17,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Courses
     {
         [Theory]
         [MemberData(nameof(CriticalApiExceptions))]
-        public async Task ShouldThrowCriticalDependencyExceptionOnRetrieveAllIfCriticalDependencyExceptionOccursAndLogItAsync(
+        public async Task ShouldThrowCriticalDependencyOnRetrieveAllIfCriticialErrorOccursAndLogItAsync(
             Exception criticalDependencyException)
         {
             // given
