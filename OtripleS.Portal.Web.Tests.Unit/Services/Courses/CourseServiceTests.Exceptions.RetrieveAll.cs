@@ -34,12 +34,12 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Courses
                     .ThrowsAsync(criticalDependencyException);
 
             // when
-            ValueTask<List<Course>> retrievedAllCoursesTask =
+            ValueTask<List<Course>> retrieveAllCoursesTask =
                 this.courseService.RetrieveAllCoursesAsync();
 
             // then
             await Assert.ThrowsAsync<CourseDependencyException>(() =>
-               retrievedAllCoursesTask.AsTask());
+               retrieveAllCoursesTask.AsTask());
 
             this.apiBrokerMock.Verify(broker =>
                 broker.GetAllCoursesAsync(),
@@ -70,12 +70,12 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Courses
                 broker.GetAllCoursesAsync())
                     .ThrowsAsync(dependencyApiException);
             // when
-            ValueTask<List<Course>> retrievedAllCoursesTask =
+            ValueTask<List<Course>> retrieveAllCoursesTask =
                 this.courseService.RetrieveAllCoursesAsync();
 
             // then
             await Assert.ThrowsAsync<CourseDependencyException>(() =>
-                retrievedAllCoursesTask.AsTask());
+                retrieveAllCoursesTask.AsTask());
 
             this.apiBrokerMock.Verify(broker =>
                 broker.GetAllCoursesAsync(),
@@ -107,12 +107,12 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Courses
                     .ThrowsAsync(serviceException);
 
             // when
-            ValueTask<List<Course>> retrievedAllCoursesTask =
+            ValueTask<List<Course>> retrieveAllCoursesTask =
                 this.courseService.RetrieveAllCoursesAsync();
 
             // then
             await Assert.ThrowsAsync<CourseServiceException>(() =>
-                retrievedAllCoursesTask.AsTask());
+                retrieveAllCoursesTask.AsTask());
 
             this.apiBrokerMock.Verify(broker =>
                 broker.GetAllCoursesAsync(),
