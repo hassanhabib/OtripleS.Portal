@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using OtripleS.Portal.Web.Brokers.Logging;
+using OtripleS.Portal.Web.Brokers.Loggings;
 using OtripleS.Portal.Web.Models.Teachers;
 using OtripleS.Portal.Web.Models.TeacherViews;
 using OtripleS.Portal.Web.Services.Teachers;

@@ -12,7 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using OtripleS.Portal.Web.Brokers.Apis;
 using OtripleS.Portal.Web.Brokers.DateTimes;
-using OtripleS.Portal.Web.Brokers.Logging;
+using OtripleS.Portal.Web.Brokers.Loggings;
 using OtripleS.Portal.Web.Brokers.Navigations;
 using OtripleS.Portal.Web.Models.Configurations;
 using OtripleS.Portal.Web.Services.Students;

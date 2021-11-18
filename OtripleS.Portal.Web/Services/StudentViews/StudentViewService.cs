@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using OtripleS.Portal.Web.Brokers.DateTimes;
-using OtripleS.Portal.Web.Brokers.Logging;
+using OtripleS.Portal.Web.Brokers.Loggings;
 using OtripleS.Portal.Web.Brokers.Navigations;
 using OtripleS.Portal.Web.Models.Students;
 using OtripleS.Portal.Web.Models.StudentViews;
