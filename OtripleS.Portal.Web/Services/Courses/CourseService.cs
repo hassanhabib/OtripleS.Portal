@@ -6,7 +6,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using OtripleS.Portal.Web.Brokers.Apis;
-using OtripleS.Portal.Web.Brokers.Logging;
+using OtripleS.Portal.Web.Brokers.Loggings;
 using OtripleS.Portal.Web.Models.Courses;
 
 namespace OtripleS.Portal.Web.Services.Courses
