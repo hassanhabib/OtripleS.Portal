@@ -6,7 +6,7 @@
 using System;
 using Microsoft.Extensions.Logging;
 
-namespace OtripleS.Portal.Web.Brokers.Logging
+namespace OtripleS.Portal.Web.Brokers.Loggings
 {
     public class LoggingBroker : ILoggingBroker
     {

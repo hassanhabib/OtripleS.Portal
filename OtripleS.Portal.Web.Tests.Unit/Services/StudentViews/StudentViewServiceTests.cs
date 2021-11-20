@@ -4,18 +4,22 @@
 // ---------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using KellermanSoftware.CompareNetObjects;
 using Moq;
 using OtripleS.Portal.Web.Brokers.DateTimes;
-using OtripleS.Portal.Web.Brokers.Logging;
+using OtripleS.Portal.Web.Brokers.Loggings;
 using OtripleS.Portal.Web.Brokers.Navigations;
 using OtripleS.Portal.Web.Models.Students;
+using OtripleS.Portal.Web.Models.Students.Exceptions;
 using OtripleS.Portal.Web.Models.StudentViews;
 using OtripleS.Portal.Web.Services.Students;
 using OtripleS.Portal.Web.Services.StudentViews;
 using OtripleS.Portal.Web.Services.Users;
 using Tynamix.ObjectFiller;
+using Xunit;
 
 namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
 {
@@ -49,6 +53,23 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
                 loggingBroker: this.loggingBrokerMock.Object);
         }
 
+        public static TheoryData DependencyExceptions()
+        {
+            var innerException = new Exception();
+
+            var studentDependencyException =
+                new StudentDependencyException(innerException);
+
+            var studentServiceException =
+                new StudentServiceException(innerException);
+
+            return new TheoryData<Exception>
+            {
+                studentDependencyException,
+                studentServiceException
+            };
+        }
+
         private static dynamic CreateRandomStudentViewProperties(
             DateTimeOffset auditDates,
             Guid auditIds)
@@ -72,6 +93,35 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
                 UpdatedBy = auditIds
             };
         }
+
+        private static List<dynamic> CreateRandomStudentViewCollections()
+        {
+            int randomCount = GetRandomNumber();
+
+            return Enumerable.Range(0, randomCount).Select(item =>
+            {
+                StudentGender studentGender = GetRandomGender();
+
+                return new
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = Guid.NewGuid().ToString(),
+                    IdentityNumber = GetRandomString(),
+                    FirstName = GetRandomName(),
+                    MiddleName = GetRandomName(),
+                    LastName = GetRandomName(),
+                    BirthDate = GetRandomDate(),
+                    Gender = studentGender,
+                    GenderView = (StudentViewGender)studentGender,
+                    CreatedDate = GetRandomDate(),
+                    UpdatedDate = GetRandomDate(),
+                    CreatedBy = Guid.NewGuid(),
+                    UpdatedBy = Guid.NewGuid()
+                };
+            }).ToList<dynamic>();
+        }
+
+        private static int GetRandomNumber() => new IntRange(min: 2, max: 10).GetValue();
 
         private Expression<Func<Student, bool>> SameStudentAs(Student expectedStudent)
         {

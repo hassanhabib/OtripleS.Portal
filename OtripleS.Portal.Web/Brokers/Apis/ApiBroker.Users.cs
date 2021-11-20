@@ -5,14 +5,15 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using OtripleS.Portal.Web.Models.StudentViews;
+using OtripleS.Portal.Web.Models.Users;
 
-namespace OtripleS.Portal.Web.Services.StudentViews
+namespace OtripleS.Portal.Web.Brokers.Apis
 {
-    public interface IStudentViewService
+    public partial class ApiBroker
     {
-        ValueTask<StudentView> AddStudentViewAsync(StudentView studentView);
-        ValueTask<List<StudentView>> RetrieveAllStudentViewsAsync();
-        void NavigateTo(string route);
+        private const string UsersRelativeUrl = "api/users";
+
+        public async ValueTask<List<User>> GetAllUsersAsync() =>
+            await this.GetAsync<List<User>>(UsersRelativeUrl);
     }
 }

@@ -3,8 +3,8 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
-using RESTFulSense.Clients;
 using System.Threading.Tasks;
+using RESTFulSense.Clients;
 
 namespace OtripleS.Portal.Web.Brokers.Apis
 {
