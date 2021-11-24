@@ -3,8 +3,8 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Moq;
@@ -19,47 +19,46 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
         [Fact]
         public async Task ShouldRetrieveTeacherViewsAsync()
         {
-            var randomUserId = Guid.NewGuid();
-            DateTimeOffset randomDateTime = GetRandomDateTime();
+            List<dynamic> dynamicTeacherViewPropertiesCollection =
+                CreateRandomTeacherViewCollections();
 
-            dynamic dynamicTeacherProperties =
-                CreateRandomTeacherProperties(
-                    auditDates: randomDateTime,
-                    auditIds: randomUserId);
+            List<Teacher> randomTeachers =
+                dynamicTeacherViewPropertiesCollection.Select(property =>
+                    new Teacher
+                    {
+                        Id = property.Id,
+                        UserId = property.UserId,
+                        EmployeeNumber = property.EmployeeNumber,
+                        FirstName = property.FirstName,
+                        MiddleName = property.MiddleName,
+                        LastName = property.LastName,
+                        Gender = property.Gender,
+                        Status = property.Status,
+                        CreatedDate = property.CreatedDate,
+                        UpdatedDate = property.UpdatedDate,
+                        CreatedBy = property.CreatedBy,
+                        UpdatedBy = property.UpdatedBy
+                    }).ToList();
 
-            var teacher = new Teacher
-            {
-                Id = dynamicTeacherProperties.Id,
-                UserId = dynamicTeacherProperties.UserId,
-                EmployeeNumber = dynamicTeacherProperties.EmployeeNumber,
-                FirstName = dynamicTeacherProperties.FirstName,
-                MiddleName = dynamicTeacherProperties.MiddleName,
-                LastName = dynamicTeacherProperties.LastName,
-                Gender = dynamicTeacherProperties.Gender,
-                Status = dynamicTeacherProperties.Status,
-                CreatedDate = randomDateTime,
-                UpdatedDate = randomDateTime,
-                CreatedBy = randomUserId,
-                UpdatedBy = randomUserId
-            };
+            List<Teacher> retrievedTeachers = randomTeachers;
 
-            var teacherView = new TeacherView
-            {
-                EmployeeNumber = dynamicTeacherProperties.EmployeeNumber,
-                FirstName = dynamicTeacherProperties.FirstName,
-                MiddleName = dynamicTeacherProperties.MiddleName,
-                LastName = dynamicTeacherProperties.LastName,
-                Gender = (TeacherGenderView)dynamicTeacherProperties.Gender,
-                Status = (TeacherStatusView)dynamicTeacherProperties.Status
-            };
+            List<TeacherView> randomTeacherViews =
+                dynamicTeacherViewPropertiesCollection.Select(property =>
+                    new TeacherView
+                    {
+                        EmployeeNumber = property.EmployeeNumber,
+                        FirstName = property.FirstName,
+                        MiddleName = property.MiddleName,
+                        LastName = property.LastName,
+                        Gender = (TeacherGenderView)property.Gender,
+                        Status = (TeacherStatusView)property.Status
+                    }).ToList();
 
-            var randomTeachers = new List<Teacher> { teacher };
-            var retrievedServiceTeachers = randomTeachers;
-            var expectedTeacherViews = new List<TeacherView> { teacherView };
+            List<TeacherView> expectedTeacherViews = randomTeacherViews;
 
             this.teacherServiceMock.Setup(service =>
                 service.RetrieveAllTeachersAsync())
-                    .ReturnsAsync(retrievedServiceTeachers);
+                    .ReturnsAsync(retrievedTeachers);
 
             List<TeacherView> retrievedTeacherViews =
                 await this.teacherViewService.RetrieveAllTeacherViewsAsync();
