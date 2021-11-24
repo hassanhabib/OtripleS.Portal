@@ -39,12 +39,12 @@ namespace OtripleS.Portal.Web.Services.TeacherViews
         private static Func<Teacher, TeacherView> AsTeacherView =>
             teacher => new TeacherView
             {
-                //EmployeeNumber = teacher.EmployeeNumber,
-                //FirstName = teacher.FirstName,
-                //MiddleName = teacher.MiddleName,
-                //LastName = teacher.LastName,
-                //Gender = (TeacherGenderView)teacher.Gender,
-                //Status = (TeacherStatusView)teacher.Status,
+                EmployeeNumber = teacher.EmployeeNumber,
+                FirstName = teacher.FirstName,
+                MiddleName = teacher.MiddleName,
+                LastName = teacher.LastName,
+                Gender = (TeacherGenderView)teacher.Gender,
+                Status = (TeacherStatusView)teacher.Status,
             };
     }
 }
