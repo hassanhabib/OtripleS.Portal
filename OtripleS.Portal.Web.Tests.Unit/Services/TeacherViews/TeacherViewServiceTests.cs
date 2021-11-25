@@ -4,6 +4,8 @@
 // ---------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using Moq;
 using OtripleS.Portal.Web.Brokers.Loggings;
@@ -53,7 +55,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
 
         private static int GetRandomNumber() => new IntRange(min: 2, max: 10).GetValue();
 
-        private static DateTimeOffset GetRandomDateTime() =>
+        private static DateTimeOffset GetRandomDate() =>
             new DateTimeRange(earliestDate: new DateTime()).GetValue();
 
         private static string GetRandomName() =>
@@ -91,6 +93,30 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.TeacherViews
                 CreatedBy = auditIds,
                 UpdateBy = auditIds
             };
+        }
+
+        private static List<dynamic> CreateRandomTeacherViewCollections()
+        {
+            int randomCount = GetRandomNumber();
+
+            return Enumerable.Range(0, randomCount).Select(item =>
+            {
+                return new
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = Guid.NewGuid().ToString(),
+                    EmployeeNumber = GetRandomString(),
+                    FirstName = GetRandomName(),
+                    MiddleName = GetRandomName(),
+                    LastName = GetRandomName(),
+                    Gender = GetRandomEnumValue<TeacherGender>(),
+                    Status = GetRandomEnumValue<TeacherStatus>(),
+                    CreatedDate = GetRandomDate(),
+                    UpdatedDate = GetRandomDate(),
+                    CreatedBy = Guid.NewGuid(),
+                    UpdatedBy = Guid.NewGuid()
+                };
+            }).ToList<dynamic>();
         }
 
         private static Expression<Func<Exception, bool>> SameExceptionAs(
