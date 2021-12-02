@@ -23,7 +23,7 @@ namespace OtripleS.Portal.Web.Infrastructure.Provision.Brokers.Clouds
             this.clientId = Environment.GetEnvironmentVariable("AzureClientId");
             this.clientSecret = Environment.GetEnvironmentVariable("AzureClientSecret");
             this.tenantId = Environment.GetEnvironmentVariable("AzureTenantId");
-            this.azure = AutneticateAzure();
+            this.azure = AutneticateAzure(); 
         }
 
         private IAzure AutneticateAzure()
