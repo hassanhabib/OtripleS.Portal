@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OtripleS.Portal.Web.Tests.U
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OtripleS.Portal.Web.Infrastructure.Build", "OtripleS.Portal.Web.Infrastructure.Build\OtripleS.Portal.Web.Infrastructure.Build.csproj", "{C3FD5F7F-EC5A-4845-A15E-CA10594BF957}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OtripleS.Portal.Web.Infrastructure.Provision", "OtripleS.Portal.Web.Infrastructure.Provision\OtripleS.Portal.Web.Infrastructure.Provision.csproj", "{61EE72B3-A9AA-41E2-936B-7BA209B06791}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{C3FD5F7F-EC5A-4845-A15E-CA10594BF957}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3FD5F7F-EC5A-4845-A15E-CA10594BF957}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3FD5F7F-EC5A-4845-A15E-CA10594BF957}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61EE72B3-A9AA-41E2-936B-7BA209B06791}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61EE72B3-A9AA-41E2-936B-7BA209B06791}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61EE72B3-A9AA-41E2-936B-7BA209B06791}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61EE72B3-A9AA-41E2-936B-7BA209B06791}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
