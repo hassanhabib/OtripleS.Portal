@@ -10,11 +10,13 @@
     <None Remove="Brokers\" />
     <None Remove="Brokers\Clouds\" />
     <None Remove="Microsoft.Azure.Management.Fluent" />
+    <None Remove="Brokers\Loggins\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Brokers\" />
     <Folder Include="Brokers\Clouds\" />
+    <Folder Include="Brokers\Loggings\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.Management.Fluent" Version="1.38.0" />
