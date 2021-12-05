@@ -32,6 +32,10 @@ namespace OtripleS.Portal.Web.Infrastructure.Provision.Services.Processings.CLou
 			await ProvisionAsync(
 				projectName: cloudManagementConfiguration.ProjectName,
 				cloudAction: cloudManagementConfiguration.Up);
+
+			await DeprovisionAsync(
+				projectName: cloudManagementConfiguration.ProjectName,
+				cloudAction: cloudManagementConfiguration.Down);
 		}
 
 		private async ValueTask ProvisionAsync(
@@ -59,6 +63,20 @@ namespace OtripleS.Portal.Web.Infrastructure.Provision.Services.Processings.CLou
 						environmentName,
 						resourceGroup,
 						appServicePlan);
+			}
+		}
+
+		private async ValueTask DeprovisionAsync(
+			string projectName,
+			CloudAction cloudAction)
+		{
+			List<string> environments = RetrieveEnvironments(cloudAction);
+
+			foreach (string environmentName in environments)
+			{
+				await this.cloudManagementService.DeprovisionResouceGroupAsync(
+					projectName,
+					environmentName);
 			}
 		}
 
