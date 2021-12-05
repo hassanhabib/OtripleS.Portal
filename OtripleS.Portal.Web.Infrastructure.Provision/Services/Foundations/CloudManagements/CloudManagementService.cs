@@ -53,5 +53,25 @@ namespace OtripleS.Portal.Web.Infrastructure.Provision.Services.Foundations.Clou
 
 			return plan;
 		}
+
+		public async ValueTask<IWebApp> ProvisionWebAppAsync(
+			string projectName,
+			string environment,
+			IResourceGroup resourceGroup,
+			IAppServicePlan appServicePlan)
+		{
+			string webAppName = $"{projectName}-{environment}".ToLower();
+			this.loggingBroker.LogActivity(message: $"Provisioning {webAppName}");
+
+			IWebApp webApp =
+				await this.cloudBroker.CreateWebAppAsync(
+					webAppName,
+					appServicePlan,
+					resourceGroup);
+
+			this.loggingBroker.LogActivity(message: $"{webAppName} Provisioned");
+
+			return webApp;
+		}
 	}
 }

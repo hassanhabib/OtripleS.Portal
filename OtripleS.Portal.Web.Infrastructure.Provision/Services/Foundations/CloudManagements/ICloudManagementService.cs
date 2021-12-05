@@ -19,5 +19,11 @@ namespace OtripleS.Portal.Web.Infrastructure.Provision.Services.Foundations.Clou
 			string projectName,
 			string environment,
 			IResourceGroup resourceGroup);
+
+		ValueTask<IWebApp> ProvisionWebAppAsync(
+			string projectName,
+			string environment,
+			IResourceGroup resourceGroup,
+			IAppServicePlan appServicePlan);
 	}
 }
