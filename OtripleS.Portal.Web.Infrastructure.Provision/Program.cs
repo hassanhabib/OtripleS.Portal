@@ -3,15 +3,19 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
-using System;
+using System.Threading.Tasks;
+using OtripleS.Portal.Web.Infrastructure.Provision.Services.Processings.CLoudManagments;
 
 namespace OtripleS.Portal.Web.Infrastructure.Provision
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            ICloudManagementProcessingService cloudManagementProcessingService =
+                new CloudManagementProcessingService();
+
+            await cloudManagementProcessingService.ProcessAsync();
         }
     }
 }
