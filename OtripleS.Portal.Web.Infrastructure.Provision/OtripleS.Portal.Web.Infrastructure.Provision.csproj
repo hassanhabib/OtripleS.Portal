@@ -20,6 +20,8 @@
     <None Remove="Services\" />
     <None Remove="Services\Foundations\" />
     <None Remove="Services\Foundations\CloudManagements\" />
+    <None Remove="Services\Processings \" />
+    <None Remove="Services\Processings \CLoudManagments\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -31,6 +33,8 @@
     <Folder Include="Services\" />
     <Folder Include="Services\Foundations\" />
     <Folder Include="Services\Foundations\CloudManagements\" />
+    <Folder Include="Services\Processings \" />
+    <Folder Include="Services\Processings \CLoudManagments\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.Management.Fluent" Version="1.38.0" />
