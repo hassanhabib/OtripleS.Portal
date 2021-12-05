@@ -25,5 +25,9 @@ namespace OtripleS.Portal.Web.Infrastructure.Provision.Services.Foundations.Clou
 			string environment,
 			IResourceGroup resourceGroup,
 			IAppServicePlan appServicePlan);
+
+		ValueTask DeprovisionResouceGroupAsync(
+			string projectName,
+			string environment);
 	}
 }
