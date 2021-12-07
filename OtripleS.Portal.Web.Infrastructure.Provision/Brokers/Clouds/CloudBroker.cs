@@ -40,6 +40,5 @@ namespace OtripleS.Portal.Web.Infrastructure.Provision.Brokers.Clouds
 				.Authenticate(credentials)
 				.WithDefaultSubscription();
 		}
-
 	}
 }
