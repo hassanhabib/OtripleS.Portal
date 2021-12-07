@@ -56,7 +56,6 @@ namespace OtripleS.Portal.Web.Infrastructure.Provision.Services.Foundations.Clou
         public async ValueTask<IWebApp> ProvisionWebAppAsync(
             string projectName,
             string environment,
-            string databaseConnectionString,
             IResourceGroup resourceGroup,
             IAppServicePlan appServicePlan)
         {
