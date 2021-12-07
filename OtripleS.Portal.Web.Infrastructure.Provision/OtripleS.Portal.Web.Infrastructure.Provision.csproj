@@ -6,7 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Brokers\" />
+    <Folder Include="Brokers\Clouds\" />
+    <Folder Include="Brokers\Configurations\" />
     <Folder Include="Services\" />
   </ItemGroup>
 
