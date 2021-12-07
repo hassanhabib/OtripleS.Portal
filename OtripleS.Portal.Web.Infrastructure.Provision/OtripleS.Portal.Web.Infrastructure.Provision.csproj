@@ -22,7 +22,6 @@
 	</ItemGroup>
 	
   <ItemGroup>
-    <Folder Include="Brokers\Clouds\" />
     <Folder Include="Services\" />
   </ItemGroup>
 
