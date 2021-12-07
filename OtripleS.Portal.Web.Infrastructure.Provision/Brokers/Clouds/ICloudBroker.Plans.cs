@@ -13,6 +13,6 @@ namespace OtripleS.Portal.Web.Infrastructure.Provision.Brokers.Clouds
     {
         ValueTask<IAppServicePlan> CreatePlanAsync(
             string planName,
-            IResourceGroup resourceGroup)
+            IResourceGroup resourceGroup);
     }
 }

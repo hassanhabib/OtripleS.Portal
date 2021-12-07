@@ -19,7 +19,7 @@ namespace OtripleS.Portal.Web.Infrastructure.Provision.Brokers.Clouds
                 .CreateAsync();
         }
 
-        public async ValueTask<bool> ChekResourceGroupExistAsync(string resourceGroupName) =>
+        public async ValueTask<bool> CheckResourceGroupExistAsync(string resourceGroupName) =>
             await this.azure.ResourceGroups.ContainAsync(resourceGroupName);
 
         public async ValueTask DeleteResourceGroupAsync(string resourceGroupName) =>

@@ -11,7 +11,7 @@ namespace OtripleS.Portal.Web.Infrastructure.Provision.Brokers.Clouds
     public partial interface ICloudBroker
     {
         ValueTask<IResourceGroup> CreateResourceGroupAsync(string resourceGroupName);
-        ValueTask<bool> ChekResourceGroupExistAsync(string resourceGroupName);
+        ValueTask<bool> CheckResourceGroupExistAsync(string resourceGroupName);
         ValueTask DeleteResourceGroupAsync(string resourceGroupName);
     }
 }
