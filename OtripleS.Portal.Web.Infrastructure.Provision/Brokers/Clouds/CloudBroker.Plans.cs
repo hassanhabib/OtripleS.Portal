@@ -24,6 +24,5 @@ namespace OtripleS.Portal.Web.Infrastructure.Provision.Brokers.Clouds
 				.WithOperatingSystem(OperatingSystem.Windows)
 				.CreateAsync();
 		}
-
 	}
 }

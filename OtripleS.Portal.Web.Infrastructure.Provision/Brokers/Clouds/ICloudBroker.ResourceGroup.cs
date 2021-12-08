@@ -14,5 +14,4 @@ namespace OtripleS.Portal.Web.Infrastructure.Provision.Brokers.Clouds
 		ValueTask DeleteResourceGroupAsync(string resourceGroupName);
 		ValueTask<bool> CheckResourceGroupExistAsync(string resourceGroupName);
 	}
-
 }
