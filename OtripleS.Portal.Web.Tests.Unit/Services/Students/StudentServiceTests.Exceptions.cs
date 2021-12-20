@@ -141,14 +141,17 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
         }
 
         [Fact]
-        public async Task ShouldThrowServiceExceptionOnRegisterIfErrorOccursAndLogItAsync()
+        public async Task ShouldThrowServiceExceptionOnAddIfErrorOccursAndLogItAsync()
         {
             // given
             Student someStudent = CreateRandomStudent();
             var serviceException = new Exception();
 
+            var failedStudentServiceException =
+                new FailedStudentServiceException(serviceException);
+
             var expectedStudentServiceException =
-                new StudentServiceException(serviceException);
+                new StudentServiceException(failedStudentServiceException);
 
             this.apiBrokerMock.Setup(broker =>
                 broker.PostStudentAsync(It.IsAny<Student>()))
@@ -160,7 +163,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
 
             // then
             await Assert.ThrowsAsync<StudentServiceException>(() =>
-               registerStudentTask.AsTask());
+                registerStudentTask.AsTask());
 
             this.apiBrokerMock.Verify(broker =>
                 broker.PostStudentAsync(It.IsAny<Student>()),
