@@ -13,10 +13,9 @@ namespace OtripleS.Portal.Web.Services.StudentViews
     {
         private static void ValidateStudentView(StudentView studentView)
         {
-            switch (studentView)
-            {
-                case null:
-                    throw new NullStudentViewException();
+            if (studentView is null)
+            { 
+                throw new NullStudentViewException();
             }
         }
 
@@ -31,6 +30,5 @@ namespace OtripleS.Portal.Web.Services.StudentViews
         }
 
         private static bool IsInvalid(string text) => String.IsNullOrWhiteSpace(text);
-        private static bool IsInvalid(DateTimeOffset date) => date == default;
     }
 }
