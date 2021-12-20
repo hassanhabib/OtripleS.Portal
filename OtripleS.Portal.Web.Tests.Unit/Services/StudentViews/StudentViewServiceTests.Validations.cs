@@ -57,53 +57,6 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
             this.navigationBrokerMock.VerifyNoOtherCalls();
         }
 
-        [Fact]
-        public async Task ShouldThrowValidationExceptionOnAddIfStudentDateOfBirthIsInvalidAndLogItAsync()
-        {
-            // given
-            StudentView randomStudentView = CreateRandomStudentView();
-            StudentView invalidStudentView = randomStudentView;
-            invalidStudentView.BirthDate = default;
-
-            var invalidStudentViewException = new InvalidStudentViewException(
-                parameterName: nameof(StudentView.BirthDate),
-                parameterValue: invalidStudentView.BirthDate);
-
-            var expectedStudentViewValidationException =
-                new StudentViewValidationException(invalidStudentViewException);
-
-            // when
-            ValueTask<StudentView> addStudentViewTask =
-                this.studentViewService.AddStudentViewAsync(invalidStudentView);
-
-            // then
-            await Assert.ThrowsAsync<StudentViewValidationException>(() =>
-               addStudentViewTask.AsTask());
-
-            this.loggingBrokerMock.Verify(broker =>
-                broker.LogError(It.Is(SameExceptionAs(
-                    expectedStudentViewValidationException))),
-                        Times.Once);
-
-            this.userServiceMock.Verify(service =>
-                service.GetCurrentlyLoggedInUser(),
-                    Times.Never);
-
-            this.dateTimeBrokerMock.Verify(broker =>
-                broker.GetCurrentDateTime(),
-                    Times.Never);
-
-            this.studentServiceMock.Verify(service =>
-                service.AddStudentAsync(It.IsAny<Student>()),
-                    Times.Never);
-
-            this.loggingBrokerMock.VerifyNoOtherCalls();
-            this.userServiceMock.VerifyNoOtherCalls();
-            this.dateTimeBrokerMock.VerifyNoOtherCalls();
-            this.studentServiceMock.VerifyNoOtherCalls();
-            this.navigationBrokerMock.VerifyNoOtherCalls();
-        }
-
         [Theory]
         [InlineData(null)]
         [InlineData("")]
