@@ -32,7 +32,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
 
             // when
             ValueTask<Student> registerStudentTask =
-                this.studentService.RegisterStudentAsync(someStudent);
+                this.studentService.AddStudentAsync(someStudent);
 
             // then
             await Assert.ThrowsAsync<StudentDependencyValidationException>(() =>
@@ -69,7 +69,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
 
             // when
             ValueTask<Student> registerStudentTask =
-                this.studentService.RegisterStudentAsync(someStudent);
+                this.studentService.AddStudentAsync(someStudent);
 
             // then
             await Assert.ThrowsAsync<StudentDependencyException>(() =>
@@ -107,7 +107,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
 
             // when
             ValueTask<Student> registerStudentTask =
-                this.studentService.RegisterStudentAsync(someStudent);
+                this.studentService.AddStudentAsync(someStudent);
 
             // then
             await Assert.ThrowsAsync<StudentDependencyException>(() =>
@@ -142,7 +142,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
 
             // when
             ValueTask<Student> registerStudentTask =
-                this.studentService.RegisterStudentAsync(someStudent);
+                this.studentService.AddStudentAsync(someStudent);
 
             // then
             await Assert.ThrowsAsync<StudentServiceException>(() =>

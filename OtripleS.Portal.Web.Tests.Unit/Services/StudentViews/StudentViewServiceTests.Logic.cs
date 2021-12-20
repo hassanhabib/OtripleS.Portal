@@ -68,7 +68,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
                     .Returns(randomDateTime);
 
             this.studentServiceMock.Setup(service =>
-                service.RegisterStudentAsync(It.Is(
+                service.AddStudentAsync(It.Is(
                     SameStudentAs(expectedInputStudent))))
                         .ReturnsAsync(returnedStudent);
 
@@ -89,7 +89,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
                     Times.Once);
 
             this.studentServiceMock.Verify(service =>
-                service.RegisterStudentAsync(It.Is(
+                service.AddStudentAsync(It.Is(
                     SameStudentAs(expectedInputStudent))),
                         Times.Once);
 

@@ -44,7 +44,7 @@ namespace OtripleS.Portal.Web.Services.StudentViews
         {
             ValidateStudentView(studentView);
             Student student = MapToStudent(studentView);
-            await this.studentService.RegisterStudentAsync(student);
+            await this.studentService.AddStudentAsync(student);
 
             return studentView;
         });
