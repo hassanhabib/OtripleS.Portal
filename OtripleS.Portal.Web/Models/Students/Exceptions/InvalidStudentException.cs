@@ -3,16 +3,14 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
-using System;
+using Xeptions;
 
 namespace OtripleS.Portal.Web.Models.Students.Exceptions
 {
-    public class InvalidStudentException : Exception
+    public class InvalidStudentException : Xeption
     {
-        public InvalidStudentException(string parameterName, object parameterValue)
-            : base(message: "Invalid Student error occurred, " +
-                 $"parameter name: {parameterName}, " +
-                 $"parameter value: {parameterValue}")
+        public InvalidStudentException()
+            : base(message: "Invalid stuent error occurred, please fix the errors and try again.")
         { }
     }
 }

@@ -4,10 +4,11 @@
 // ---------------------------------------------------------------
 
 using System;
+using Xeptions;
 
 namespace OtripleS.Portal.Web.Models.Students.Exceptions
 {
-    public class StudentValidationException : Exception
+    public class StudentValidationException : Xeption
     {
         public StudentValidationException(Exception innerException)
             : base(message: "Student validation error occurred, try again.", innerException) { }

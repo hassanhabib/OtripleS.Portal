@@ -4,10 +4,11 @@
 // ---------------------------------------------------------------
 
 using System;
+using Xeptions;
 
 namespace OtripleS.Portal.Web.Models.Students.Exceptions
 {
-    public class StudentDependencyException : Exception
+    public class StudentDependencyException : Xeption
     {
         public StudentDependencyException(Exception innerException)
             : base(message: "Student dependency error occurred, contact support.", innerException) { }

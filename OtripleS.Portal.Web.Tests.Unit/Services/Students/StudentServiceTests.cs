@@ -15,6 +15,7 @@ using OtripleS.Portal.Web.Models.Students;
 using OtripleS.Portal.Web.Services.Students;
 using RESTFulSense.Exceptions;
 using Tynamix.ObjectFiller;
+using Xeptions;
 using Xunit;
 
 namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
@@ -111,11 +112,11 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
         private static List<Student> CreateRandomStudents() =>
             CreateStudentFiller().Create(count: GetRandomNumber()).ToList();
 
-        private static Expression<Func<Exception, bool>> SameExceptionAs(
-            Exception expectedException)
+        private static Expression<Func<Xeption, bool>> SameExceptionAs(Xeption expectedException)
         {
             return actualException => actualException.Message == expectedException.Message
-                && actualException.InnerException.Message == expectedException.InnerException.Message;
+                && actualException.InnerException.Message == expectedException.InnerException.Message
+                && (actualException.InnerException as Xeption).DataEquals(expectedException.InnerException.Data);
         }
 
         private static string GetRandomString() => new MnemonicString().GetValue();
