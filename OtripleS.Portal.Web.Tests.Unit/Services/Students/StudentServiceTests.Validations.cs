@@ -47,7 +47,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
         [Theory]
         [InlineData(null)]
         [InlineData("")]
-        [InlineData("     ")]
+        [InlineData("   ")]
         public async Task ShouldThrowValidationExceptionOnAddIfStudentIsInvalidAndLogItAsync(
             string invalidString)
         {
@@ -67,15 +67,15 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
 
             invalidStudentException.AddData(
                 key: nameof(Student.UserId),
-                values: "Id is required");
+                values: "Value is required");
 
             invalidStudentException.AddData(
                 key: nameof(Student.IdentityNumber),
-                values: "Id is required");
+                values: "Value is required");
 
             invalidStudentException.AddData(
                 key: nameof(Student.FirstName),
-                values: "Text is required");
+                values: "Value is required");
 
             invalidStudentException.AddData(
                 key: nameof(Student.BirthDate),
