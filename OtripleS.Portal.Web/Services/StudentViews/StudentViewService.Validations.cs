@@ -18,11 +18,6 @@ namespace OtripleS.Portal.Web.Services.StudentViews
                 case null:
                     throw new NullStudentViewException();
 
-                case { } when IsInvalid(studentView.FirstName):
-                    throw new InvalidStudentViewException(
-                        parameterName: nameof(StudentView.FirstName),
-                        parameterValue: studentView.FirstName);
-
                 case { } when IsInvalid(studentView.BirthDate):
                     throw new InvalidStudentViewException(
                         parameterName: nameof(StudentView.BirthDate),
