@@ -4,31 +4,42 @@
 // ---------------------------------------------------------------
 
 using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Moq;
 using OtripleS.Portal.Web.Models.Students;
 using OtripleS.Portal.Web.Models.Students.Exceptions;
+using RESTFulSense.Exceptions;
 using Xunit;
 
 namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
 {
     public partial class StudentServiceTests
     {
-        [Theory]
-        [MemberData(nameof(ValidationApiException))]
-        public async Task ShouldThrowDependencyValidationExceptionOnRegisterIfBadRequestErrorOccursAndLogItAsync(
-            Exception validationApiException)
+        [Fact]
+        public async Task ShouldThrowDependencyValidationExceptionAddIfBadRequestErrorOccursAndLogItAsync()
         {
             // given
+            string exceptionMessage = GetRandomString();
+            var responseMessage = new HttpResponseMessage();
+
+            var httpResponseBadRequestException =
+                new HttpResponseBadRequestException(
+                    responseMessage: responseMessage,
+                    message: exceptionMessage);
+
             Student someStudent = CreateRandomStudent();
+
+            var invalidStudentException =
+                new InvalidStudentException(httpResponseBadRequestException);
 
             var expectedDepndencyValidationException =
                 new StudentDependencyValidationException(
-                    validationApiException);
+                    invalidStudentException);
 
             this.apiBrokerMock.Setup(broker =>
                 broker.PostStudentAsync(It.IsAny<Student>()))
-                    .ThrowsAsync(validationApiException);
+                    .ThrowsAsync(httpResponseBadRequestException);
 
             // when
             ValueTask<Student> registerStudentTask =
@@ -43,8 +54,8 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
                     Times.Once);
 
             this.loggingBrokerMock.Verify(broker =>
-                broker.LogError(It.Is(
-                    SameExceptionAs(expectedDepndencyValidationException))),
+                broker.LogError(It.Is(SameExceptionAs(
+                    expectedDepndencyValidationException))),
                         Times.Once);
 
             this.apiBrokerMock.VerifyNoOtherCalls();
