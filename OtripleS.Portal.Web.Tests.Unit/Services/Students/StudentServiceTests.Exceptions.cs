@@ -104,16 +104,17 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
 
         [Theory]
         [MemberData(nameof(DependencyApiException))]
-        public async Task ShouldThrowDependencyExceptionOnRegisterIfDependencyApiErrorOccursAndLogItAsync(
+        public async Task ShouldThrowDependencyExceptionOnAddIfDependencyApiErrorOccursAndLogItAsync(
             Exception dependencyApiException)
         {
             // given
             Student someStudent = CreateRandomStudent();
-            string exceptionMessage = GetRandomString();
+
+            var failedStudentDependencyException =
+                new FailedStudentDependencyException(dependencyApiException);
 
             var expectedStudentDepndencyException =
-                new StudentDependencyException(
-                    dependencyApiException);
+                new StudentDependencyException(failedStudentDependencyException);
 
             this.apiBrokerMock.Setup(broker =>
                 broker.PostStudentAsync(It.IsAny<Student>()))
