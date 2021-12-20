@@ -64,15 +64,18 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
 
         [Theory]
         [MemberData(nameof(CriticalApiException))]
-        public async Task ShouldThrowCriticalDependencyExceptionOnRegisterIfUrlNotFoundErrorOccursAndLogItAsync(
+        public async Task ShouldThrowCriticalDependencyExceptionOnAddIfCriticalErrorOccursAndLogItAsync(
             Exception httpResponseCriticalException)
         {
             // given
             Student someStudent = CreateRandomStudent();
 
+            var failedStudentDependencyException =
+                new FailedStudentDependencyException(httpResponseCriticalException);
+
             var expectedStudentDepndencyException =
                 new StudentDependencyException(
-                    httpResponseCriticalException);
+                    failedStudentDependencyException);
 
             this.apiBrokerMock.Setup(broker =>
                 broker.PostStudentAsync(It.IsAny<Student>()))
@@ -91,8 +94,8 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
                     Times.Once);
 
             this.loggingBrokerMock.Verify(broker =>
-                broker.LogCritical(It.Is(
-                    SameExceptionAs(expectedStudentDepndencyException))),
+                broker.LogCritical(It.Is(SameExceptionAs(
+                    expectedStudentDepndencyException))),
                         Times.Once);
 
             this.apiBrokerMock.VerifyNoOtherCalls();
