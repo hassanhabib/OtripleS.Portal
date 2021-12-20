@@ -34,15 +34,24 @@ namespace OtripleS.Portal.Web.Services.Students
             }
             catch (HttpRequestException httpRequestException)
             {
-                throw CreateAndLogCriticalDependencyException(httpRequestException);
+                var failedStudentDependencyException =
+                    new FailedStudentDependencyException(httpRequestException);
+
+                throw CreateAndLogCriticalDependencyException(failedStudentDependencyException);
             }
             catch (HttpResponseUrlNotFoundException httpResponseUrlNotFoundException)
             {
-                throw CreateAndLogCriticalDependencyException(httpResponseUrlNotFoundException);
+                var failedStudentDependencyException =
+                    new FailedStudentDependencyException(httpResponseUrlNotFoundException);
+
+                throw CreateAndLogCriticalDependencyException(failedStudentDependencyException);
             }
             catch (HttpResponseUnauthorizedException httpResponseUnauthorizedException)
             {
-                throw CreateAndLogCriticalDependencyException(httpResponseUnauthorizedException);
+                var failedStudentDependencyException =
+                    new FailedStudentDependencyException(httpResponseUnauthorizedException);
+
+                throw CreateAndLogCriticalDependencyException(failedStudentDependencyException);
             }
             catch (HttpResponseConflictException httpResponseConflictException)
             {
