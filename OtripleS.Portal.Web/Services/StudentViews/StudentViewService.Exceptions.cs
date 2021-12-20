@@ -102,7 +102,9 @@ namespace OtripleS.Portal.Web.Services.StudentViews
 
         private StudentViewDependencyValidationException CreateAndLogDependencyValidationException(Exception exception)
         {
-            var studentViewDependencyValidationException = new StudentViewDependencyValidationException(exception);
+            var studentViewDependencyValidationException = 
+                new StudentViewDependencyValidationException(exception.InnerException);
+            
             this.loggingBroker.LogError(studentViewDependencyValidationException);
 
             return studentViewDependencyValidationException;
