@@ -55,11 +55,14 @@ namespace OtripleS.Portal.Web.Services.Students
             }
             catch (HttpResponseConflictException httpResponseConflictException)
             {
-                throw CreateAndLogDependencyValidationException(httpResponseConflictException);
+                var alreadyExistsStudentException =
+                    new AlreadyExistStudentException(httpResponseConflictException);
+
+                throw CreateAndLogDependencyValidationException(alreadyExistsStudentException);
             }
             catch (HttpResponseBadRequestException httpResponseBadRequestException)
             {
-                var invalidStudentException = 
+                var invalidStudentException =
                     new InvalidStudentException(httpResponseBadRequestException);
 
                 throw CreateAndLogDependencyValidationException(invalidStudentException);
