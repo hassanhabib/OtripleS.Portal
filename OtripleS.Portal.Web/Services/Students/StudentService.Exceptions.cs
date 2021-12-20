@@ -66,11 +66,17 @@ namespace OtripleS.Portal.Web.Services.Students
             }
             catch (HttpResponseInternalServerErrorException httpResponseInternalServerException)
             {
-                throw CreateAndLogDependencyException(httpResponseInternalServerException);
+                var failedStudentDependencyException =
+                    new FailedStudentDependencyException(httpResponseInternalServerException);
+
+                throw CreateAndLogDependencyException(failedStudentDependencyException);
             }
             catch (HttpResponseException httpResponseException)
             {
-                throw CreateAndLogDependencyException(httpResponseException);
+                var failedStudentDependencyException =
+                    new FailedStudentDependencyException(httpResponseException);
+
+                throw CreateAndLogDependencyException(failedStudentDependencyException);
             }
             catch (Exception serviceException)
             {
