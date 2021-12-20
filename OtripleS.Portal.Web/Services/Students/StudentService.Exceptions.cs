@@ -50,7 +50,10 @@ namespace OtripleS.Portal.Web.Services.Students
             }
             catch (HttpResponseBadRequestException httpResponseBadRequestException)
             {
-                throw CreateAndLogDependencyValidationException(httpResponseBadRequestException);
+                var invalidStudentException = 
+                    new InvalidStudentException(httpResponseBadRequestException);
+
+                throw CreateAndLogDependencyValidationException(invalidStudentException);
             }
             catch (HttpResponseInternalServerErrorException httpResponseInternalServerException)
             {
