@@ -47,7 +47,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
                     Times.Never);
 
             this.studentServiceMock.Verify(service =>
-                service.RegisterStudentAsync(It.IsAny<Student>()),
+                service.AddStudentAsync(It.IsAny<Student>()),
                     Times.Never);
 
             this.loggingBrokerMock.VerifyNoOtherCalls();
@@ -98,7 +98,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
                     Times.Never);
 
             this.studentServiceMock.Verify(service =>
-                service.RegisterStudentAsync(It.IsAny<Student>()),
+                service.AddStudentAsync(It.IsAny<Student>()),
                     Times.Never);
 
             this.loggingBrokerMock.VerifyNoOtherCalls();
@@ -149,7 +149,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
                     Times.Never);
 
             this.studentServiceMock.Verify(service =>
-                service.RegisterStudentAsync(It.IsAny<Student>()),
+                service.AddStudentAsync(It.IsAny<Student>()),
                     Times.Never);
 
             this.loggingBrokerMock.VerifyNoOtherCalls();
@@ -196,7 +196,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
                     Times.Never);
 
             this.studentServiceMock.Verify(service =>
-                service.RegisterStudentAsync(It.IsAny<Student>()),
+                service.AddStudentAsync(It.IsAny<Student>()),
                     Times.Never);
 
             this.loggingBrokerMock.VerifyNoOtherCalls();

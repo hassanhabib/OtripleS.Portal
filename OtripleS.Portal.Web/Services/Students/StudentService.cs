@@ -24,7 +24,7 @@ namespace OtripleS.Portal.Web.Services.Students
             this.loggingBroker = loggingBroker;
         }
 
-        public ValueTask<Student> RegisterStudentAsync(Student student) =>
+        public ValueTask<Student> AddStudentAsync(Student student) =>
         TryCatch(async () =>
         {
             ValidateStudent(student);

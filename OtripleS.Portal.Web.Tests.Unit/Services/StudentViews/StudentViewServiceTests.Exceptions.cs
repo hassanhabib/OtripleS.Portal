@@ -39,7 +39,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
                 new StudentViewDependencyValidationException(studentServiceValidationException);
 
             this.studentServiceMock.Setup(service =>
-                service.RegisterStudentAsync(It.IsAny<Student>()))
+                service.AddStudentAsync(It.IsAny<Student>()))
                     .ThrowsAsync(studentServiceValidationException);
 
             // when
@@ -59,7 +59,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
                     Times.Once);
 
             this.studentServiceMock.Verify(service =>
-                service.RegisterStudentAsync(It.IsAny<Student>()),
+                service.AddStudentAsync(It.IsAny<Student>()),
                     Times.Once);
 
             this.loggingBrokerMock.Verify(broker =>
@@ -97,7 +97,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
                 new StudentViewDependencyException(studentServiceDependencyException);
 
             this.studentServiceMock.Setup(service =>
-                service.RegisterStudentAsync(It.IsAny<Student>()))
+                service.AddStudentAsync(It.IsAny<Student>()))
                     .ThrowsAsync(studentServiceDependencyException);
 
             // when
@@ -117,7 +117,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
                     Times.Once);
 
             this.studentServiceMock.Verify(service =>
-                service.RegisterStudentAsync(It.IsAny<Student>()),
+                service.AddStudentAsync(It.IsAny<Student>()),
                     Times.Once);
 
             this.loggingBrokerMock.Verify(broker =>
@@ -168,7 +168,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
                     Times.Never);
 
             this.studentServiceMock.Verify(service =>
-                service.RegisterStudentAsync(It.IsAny<Student>()),
+                service.AddStudentAsync(It.IsAny<Student>()),
                     Times.Never);
 
             this.loggingBrokerMock.VerifyNoOtherCalls();

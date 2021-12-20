@@ -29,7 +29,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
             // when
             Student actualStudent =
                 await this.studentService
-                    .RegisterStudentAsync(inputStudent);
+                    .AddStudentAsync(inputStudent);
 
             // then
             actualStudent.Should().BeEquivalentTo(expectedStudent);
