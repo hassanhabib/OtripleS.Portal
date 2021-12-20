@@ -34,35 +34,59 @@ namespace OtripleS.Portal.Web.Services.Students
             }
             catch (HttpRequestException httpRequestException)
             {
-                throw CreateAndLogCriticalDependencyException(httpRequestException);
+                var failedStudentDependencyException =
+                    new FailedStudentDependencyException(httpRequestException);
+
+                throw CreateAndLogCriticalDependencyException(failedStudentDependencyException);
             }
             catch (HttpResponseUrlNotFoundException httpResponseUrlNotFoundException)
             {
-                throw CreateAndLogCriticalDependencyException(httpResponseUrlNotFoundException);
+                var failedStudentDependencyException =
+                    new FailedStudentDependencyException(httpResponseUrlNotFoundException);
+
+                throw CreateAndLogCriticalDependencyException(failedStudentDependencyException);
             }
             catch (HttpResponseUnauthorizedException httpResponseUnauthorizedException)
             {
-                throw CreateAndLogCriticalDependencyException(httpResponseUnauthorizedException);
+                var failedStudentDependencyException =
+                    new FailedStudentDependencyException(httpResponseUnauthorizedException);
+
+                throw CreateAndLogCriticalDependencyException(failedStudentDependencyException);
             }
             catch (HttpResponseConflictException httpResponseConflictException)
             {
-                throw CreateAndLogDependencyValidationException(httpResponseConflictException);
+                var alreadyExistsStudentException =
+                    new AlreadyExistStudentException(httpResponseConflictException);
+
+                throw CreateAndLogDependencyValidationException(alreadyExistsStudentException);
             }
             catch (HttpResponseBadRequestException httpResponseBadRequestException)
             {
-                throw CreateAndLogDependencyValidationException(httpResponseBadRequestException);
+                var invalidStudentException =
+                    new InvalidStudentException(httpResponseBadRequestException);
+
+                throw CreateAndLogDependencyValidationException(invalidStudentException);
             }
             catch (HttpResponseInternalServerErrorException httpResponseInternalServerException)
             {
-                throw CreateAndLogDependencyException(httpResponseInternalServerException);
+                var failedStudentDependencyException =
+                    new FailedStudentDependencyException(httpResponseInternalServerException);
+
+                throw CreateAndLogDependencyException(failedStudentDependencyException);
             }
             catch (HttpResponseException httpResponseException)
             {
-                throw CreateAndLogDependencyException(httpResponseException);
+                var failedStudentDependencyException =
+                    new FailedStudentDependencyException(httpResponseException);
+
+                throw CreateAndLogDependencyException(failedStudentDependencyException);
             }
             catch (Exception serviceException)
             {
-                throw CreateAndLogServiceException(serviceException);
+                var failedStudentServiceException =
+                    new FailedStudentServiceException(serviceException);
+
+                throw CreateAndLogServiceException(failedStudentServiceException);
             }
         }
 

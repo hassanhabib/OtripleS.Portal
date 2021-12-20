@@ -11,62 +11,63 @@ namespace OtripleS.Portal.Web.Services.Students
 {
     public partial class StudentService
     {
-        private void ValidateStudent(Student student)
+        private static void ValidateStudent(Student student)
         {
-            switch (student)
+            ValidateStudentIsNotNull(student);
+
+            Validate(
+                (Rule: IsInvalid(student.Id), Parameter: nameof(Student.Id)),
+                (Rule: IsInvalid(student.IdentityNumber), Parameter: nameof(Student.IdentityNumber)),
+                (Rule: IsInvalid(student.UserId), Parameter: nameof(Student.UserId)),
+                (Rule: IsInvalid(student.FirstName), Parameter: nameof(Student.FirstName)),
+                (Rule: IsInvalid(student.BirthDate), Parameter: nameof(Student.BirthDate)),
+                (Rule: IsInvalid(student.CreatedDate), Parameter: nameof(Student.CreatedDate)),
+                (Rule: IsInvalid(student.UpdatedDate), Parameter: nameof(Student.UpdatedDate)),
+                (Rule: IsInvalid(student.CreatedBy), Parameter: nameof(Student.CreatedBy)),
+                (Rule: IsInvalid(student.UpdatedBy), Parameter: nameof(Student.UpdatedBy)));
+        }
+
+        private static void ValidateStudentIsNotNull(Student student)
+        {
+            if (student is null)
             {
-                case null:
-                    throw new NullStudentException();
-
-                case { } when IsInvalid(student.Id):
-                    throw new InvalidStudentException(
-                        parameterName: nameof(Student.Id),
-                        parameterValue: student.Id);
-
-                case { } when IsInvalid(student.UserId):
-                    throw new InvalidStudentException(
-                        parameterName: nameof(Student.UserId),
-                        parameterValue: student.UserId);
-
-                case { } when IsInvalid(student.IdentityNumber):
-                    throw new InvalidStudentException(
-                        parameterName: nameof(Student.IdentityNumber),
-                        parameterValue: student.IdentityNumber);
-
-                case { } when IsInvalid(student.FirstName):
-                    throw new InvalidStudentException(
-                        parameterName: nameof(Student.FirstName),
-                        parameterValue: student.FirstName);
-
-                case { } when IsInvalid(student.BirthDate):
-                    throw new InvalidStudentException(
-                        parameterName: nameof(Student.BirthDate),
-                        parameterValue: student.BirthDate);
-
-                case { } when IsInvalid(student.CreatedDate):
-                    throw new InvalidStudentException(
-                        parameterName: nameof(Student.CreatedDate),
-                        parameterValue: student.CreatedDate);
-
-                case { } when IsInvalid(student.UpdatedDate):
-                    throw new InvalidStudentException(
-                        parameterName: nameof(Student.UpdatedDate),
-                        parameterValue: student.UpdatedDate);
-
-                case { } when IsInvalid(student.CreatedBy):
-                    throw new InvalidStudentException(
-                        parameterName: nameof(Student.CreatedBy),
-                        parameterValue: student.CreatedBy);
-
-                case { } when IsInvalid(student.UpdatedBy):
-                    throw new InvalidStudentException(
-                        parameterName: nameof(Student.UpdatedBy),
-                        parameterValue: student.UpdatedBy);
+                throw new NullStudentException();
             }
         }
 
-        private static bool IsInvalid(Guid id) => id == Guid.Empty;
-        private static bool IsInvalid(string text) => String.IsNullOrWhiteSpace(text);
-        private static bool IsInvalid(DateTimeOffset date) => date == default;
+        private static dynamic IsInvalid(Guid Id) => new
+        {
+            Condition = Id == Guid.Empty,
+            Message = "Id is required"
+        };
+
+        private static dynamic IsInvalid(DateTimeOffset dateTimeOffset) => new
+        {
+            Condition = dateTimeOffset == default,
+            Message = "Date is required"
+        };
+
+        private static dynamic IsInvalid(string text) => new
+        {
+            Condition = String.IsNullOrWhiteSpace(text),
+            Message = "Value is required"
+        };
+
+        private static void Validate(params (dynamic Rule, string Parameter)[] validations)
+        {
+            var invalidStudentException = new InvalidStudentException();
+
+            foreach ((dynamic rule, string parameter) in validations)
+            {
+                if (rule.Condition)
+                {
+                    invalidStudentException.UpsertDataList(
+                        key: parameter,
+                        value: rule.Message);
+                }
+            }
+
+            invalidStudentException.ThrowIfContainsErrors();
+        }
     }
 }

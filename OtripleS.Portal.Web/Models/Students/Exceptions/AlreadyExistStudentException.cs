@@ -8,9 +8,11 @@ using Xeptions;
 
 namespace OtripleS.Portal.Web.Models.Students.Exceptions
 {
-    public class StudentValidationException : Xeption
+    public class AlreadyExistStudentException : Xeption
     {
-        public StudentValidationException(Exception innerException)
-            : base(message: "Student validation error occurred, try again.", innerException) { }
+        public AlreadyExistStudentException(Exception innerException)
+            : base(message: "Already exists student error occurred, please try again.",
+                  innerException)
+        { }
     }
 }

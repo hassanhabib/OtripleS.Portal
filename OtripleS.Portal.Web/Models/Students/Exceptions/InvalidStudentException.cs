@@ -4,15 +4,20 @@
 // ---------------------------------------------------------------
 
 using System;
+using Xeptions;
 
 namespace OtripleS.Portal.Web.Models.Students.Exceptions
 {
-    public class InvalidStudentException : Exception
+    public class InvalidStudentException : Xeption
     {
-        public InvalidStudentException(string parameterName, object parameterValue)
-            : base(message: "Invalid Student error occurred, " +
-                 $"parameter name: {parameterName}, " +
-                 $"parameter value: {parameterValue}")
+        public InvalidStudentException()
+            : base(message: "Invalid student error occurred, please fix the errors and try again.")
+        { }
+
+        public InvalidStudentException(Exception innerException)
+            : base(message: "Invalid student error occurred, please fix the errors and try again.",
+                  innerException,
+                  innerException.Data)
         { }
     }
 }
