@@ -18,11 +18,6 @@ namespace OtripleS.Portal.Web.Services.Students
                 case null:
                     throw new NullStudentException();
 
-                case { } when IsInvalid(student.CreatedBy):
-                    throw new InvalidStudentException(
-                        parameterName: nameof(Student.CreatedBy),
-                        parameterValue: student.CreatedBy);
-
                 case { } when IsInvalid(student.UpdatedBy):
                     throw new InvalidStudentException(
                         parameterName: nameof(Student.UpdatedBy),
