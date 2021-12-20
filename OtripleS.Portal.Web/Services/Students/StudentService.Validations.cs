@@ -3,7 +3,6 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
-using System;
 using OtripleS.Portal.Web.Models.Students;
 using OtripleS.Portal.Web.Models.Students.Exceptions;
 
@@ -11,17 +10,15 @@ namespace OtripleS.Portal.Web.Services.Students
 {
     public partial class StudentService
     {
-        private void ValidateStudent(Student student)
+        private static void ValidateStudent(Student student) =>
+            ValidateStudentIsNotNull(student);
+
+        private static void ValidateStudentIsNotNull(Student student)
         {
-            switch (student)
+            if (student is null)
             {
-                case null:
-                    throw new NullStudentException();
+                throw new NullStudentException();
             }
         }
-
-        private static bool IsInvalid(Guid id) => id == Guid.Empty;
-        private static bool IsInvalid(string text) => String.IsNullOrWhiteSpace(text);
-        private static bool IsInvalid(DateTimeOffset date) => date == default;
     }
 }
