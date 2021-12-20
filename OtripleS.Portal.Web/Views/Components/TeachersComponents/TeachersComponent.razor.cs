@@ -34,7 +34,7 @@ namespace OtripleS.Portal.Web.Views.Components.TeachersComponents
 
                 this.State = TeachersComponentState.Content;
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 this.ErrorMessage = exception.Message;
                 this.State = TeachersComponentState.Error;
