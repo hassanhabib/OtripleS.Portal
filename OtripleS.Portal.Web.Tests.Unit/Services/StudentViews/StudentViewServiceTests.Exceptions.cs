@@ -36,7 +36,8 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.StudentViews
             StudentView someStudentView = CreateRandomStudentView();
 
             var expectedDependencyValidationException =
-                new StudentViewDependencyValidationException(studentServiceValidationException);
+                new StudentViewDependencyValidationException(
+                    studentServiceValidationException.InnerException);
 
             this.studentServiceMock.Setup(service =>
                 service.AddStudentAsync(It.IsAny<Student>()))
