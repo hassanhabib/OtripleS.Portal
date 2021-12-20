@@ -44,43 +44,5 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
             this.apiBrokerMock.VerifyNoOtherCalls();
             this.loggingBrokerMock.VerifyNoOtherCalls();
         }
-
-        [Fact]
-        public async Task ShouldThrowValidationExceptionOnRegisterIfUpdatedByIdIsInvalidAndLogItAsync()
-        {
-            // given
-            Guid invalidId = Guid.Empty;
-            Student randomStudent = CreateRandomStudent();
-            Student invalidStudent = randomStudent;
-            invalidStudent.UpdatedBy = invalidId;
-
-            var invalidStudentException =
-                new InvalidStudentException(
-                    parameterName: nameof(Student.UpdatedBy),
-                    parameterValue: invalidStudent.UpdatedBy);
-
-            var expectedStudentValidationException =
-                new StudentValidationException(invalidStudentException);
-
-            // when
-            ValueTask<Student> registerStudentTask =
-                this.studentService.AddStudentAsync(invalidStudent);
-
-            // then
-            await Assert.ThrowsAsync<StudentValidationException>(() =>
-                registerStudentTask.AsTask());
-
-            this.loggingBrokerMock.Verify(broker =>
-                broker.LogError(It.Is(
-                    SameExceptionAs(expectedStudentValidationException))),
-                        Times.Once);
-
-            this.apiBrokerMock.Verify(broker =>
-                broker.PostStudentAsync(It.IsAny<Student>()),
-                    Times.Never);
-
-            this.loggingBrokerMock.VerifyNoOtherCalls();
-            this.apiBrokerMock.VerifyNoOtherCalls();
-        }
     }
 }
