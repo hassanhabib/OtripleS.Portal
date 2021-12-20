@@ -42,12 +42,12 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
                     .ThrowsAsync(httpResponseBadRequestException);
 
             // when
-            ValueTask<Student> registerStudentTask =
+            ValueTask<Student> addStudentTask =
                 this.studentService.AddStudentAsync(someStudent);
 
             // then
             await Assert.ThrowsAsync<StudentDependencyValidationException>(() =>
-               registerStudentTask.AsTask());
+               addStudentTask.AsTask());
 
             this.apiBrokerMock.Verify(broker =>
                 broker.PostStudentAsync(It.IsAny<Student>()),
@@ -82,12 +82,12 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
                     .ThrowsAsync(httpResponseCriticalException);
 
             // when
-            ValueTask<Student> registerStudentTask =
+            ValueTask<Student> addStudentTask =
                 this.studentService.AddStudentAsync(someStudent);
 
             // then
             await Assert.ThrowsAsync<StudentDependencyException>(() =>
-               registerStudentTask.AsTask());
+               addStudentTask.AsTask());
 
             this.apiBrokerMock.Verify(broker =>
                 broker.PostStudentAsync(It.IsAny<Student>()),
@@ -120,12 +120,12 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
                     .ThrowsAsync(dependencyApiException);
 
             // when
-            ValueTask<Student> registerStudentTask =
+            ValueTask<Student> addStudentTask =
                 this.studentService.AddStudentAsync(someStudent);
 
             // then
             await Assert.ThrowsAsync<StudentDependencyException>(() =>
-               registerStudentTask.AsTask());
+               addStudentTask.AsTask());
 
             this.apiBrokerMock.Verify(broker =>
                 broker.PostStudentAsync(It.IsAny<Student>()),
@@ -158,12 +158,12 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
                     .ThrowsAsync(serviceException);
 
             // when
-            ValueTask<Student> registerStudentTask =
+            ValueTask<Student> addStudentTask =
                 this.studentService.AddStudentAsync(someStudent);
 
             // then
             await Assert.ThrowsAsync<StudentServiceException>(() =>
-                registerStudentTask.AsTask());
+                addStudentTask.AsTask());
 
             this.apiBrokerMock.Verify(broker =>
                 broker.PostStudentAsync(It.IsAny<Student>()),
