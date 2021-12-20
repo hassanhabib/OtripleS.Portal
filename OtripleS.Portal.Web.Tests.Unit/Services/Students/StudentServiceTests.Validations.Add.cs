@@ -88,11 +88,11 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Students
             invalidStudentException.AddData(
                 key: nameof(Student.UpdatedDate),
                 values: "Date is required");
-            
+
             invalidStudentException.AddData(
                 key: nameof(Student.CreatedBy),
                 values: "Id is required");
-            
+
             invalidStudentException.AddData(
                 key: nameof(Student.UpdatedBy),
                 values: "Id is required");

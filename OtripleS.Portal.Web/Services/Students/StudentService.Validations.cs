@@ -57,9 +57,9 @@ namespace OtripleS.Portal.Web.Services.Students
         {
             var invalidStudentException = new InvalidStudentException();
 
-            foreach((dynamic rule, string parameter) in validations)
+            foreach ((dynamic rule, string parameter) in validations)
             {
-                if(rule.Condition)
+                if (rule.Condition)
                 {
                     invalidStudentException.UpsertDataList(
                         key: parameter,
