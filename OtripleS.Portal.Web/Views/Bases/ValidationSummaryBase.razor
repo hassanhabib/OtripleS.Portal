@@ -1,0 +1,11 @@
+﻿@using PrettyBlazor
+
+<Condition Evaluation=@(Errors is not null)>
+    <Match>
+        <ul>
+            <Iterations Items=Errors Context=Error>
+                <li>@Error</li>
+            </Iterations>
+        </ul>
+    </Match>
+</Condition>
