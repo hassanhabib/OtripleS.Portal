@@ -39,3 +39,7 @@ This project is aiming toward directing all the software development funds and h
 <img width=20 src="https://www.searchmarketingaustralia.com.au/wp-content/uploads/2017/10/original_images_YouTube.png" /> [OtripleS.Portal 014: Components (Navigation)](https://www.youtube.com/watch?v=c2sKc9LolnY)
 
 <img width=20 src="https://www.searchmarketingaustralia.com.au/wp-content/uploads/2017/10/original_images_YouTube.png" /> [OtripleS.Portal 015: Components (UI Libraries)](https://www.youtube.com/watch?v=NEmBbmuTJ6I)
+
+<img width=20 src="https://www.searchmarketingaustralia.com.au/wp-content/uploads/2017/10/original_images_YouTube.png" /> [OtripleS.Portal 016: Rendering Data Grids in Blazor](https://www.youtube.com/watch?v=wRnJ9EY1Snk)
+
+<img width=20 src="https://www.searchmarketingaustralia.com.au/wp-content/uploads/2017/10/original_images_YouTube.png" /> [OtripleS.Portal 017: Validation Summaries in Blazor (Part 1)](https://www.youtube.com/watch?v=yRBue3YpXG4)
