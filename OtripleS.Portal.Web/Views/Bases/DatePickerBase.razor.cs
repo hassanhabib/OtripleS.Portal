@@ -10,7 +10,7 @@ using Syncfusion.Blazor.Calendars;
 
 namespace OtripleS.Portal.Web.Views.Bases
 {
-    public partial class DatePickerBase
+    public partial class DatePickerBase : ComponentBase
     {
         [Parameter]
         public DateTimeOffset Value { get; set; }
