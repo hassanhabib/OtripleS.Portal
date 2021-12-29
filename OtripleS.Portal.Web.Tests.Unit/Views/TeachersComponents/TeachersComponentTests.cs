@@ -9,7 +9,7 @@ using Bunit;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using OtripleS.Portal.Web.Models.TeacherViews;
-using OtripleS.Portal.Web.Services.TeacherViews;
+using OtripleS.Portal.Web.Services.Views.TeacherViews;
 using OtripleS.Portal.Web.Views.Components.TeachersComponents;
 using Syncfusion.Blazor;
 using Tynamix.ObjectFiller;

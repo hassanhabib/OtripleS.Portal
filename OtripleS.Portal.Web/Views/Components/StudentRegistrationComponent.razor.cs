@@ -9,7 +9,7 @@ using OtripleS.Portal.Web.Models.ContainerComponents;
 using OtripleS.Portal.Web.Models.StudentRegistrationComponents.Exceptions;
 using OtripleS.Portal.Web.Models.StudentViews;
 using OtripleS.Portal.Web.Models.StudentViews.Exceptions;
-using OtripleS.Portal.Web.Services.StudentViews;
+using OtripleS.Portal.Web.Services.Views.StudentViews;
 using OtripleS.Portal.Web.Views.Bases;
 
 namespace OtripleS.Portal.Web.Views.Components

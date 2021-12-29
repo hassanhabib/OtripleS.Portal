@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using OtripleS.Portal.Web.Models.StudentViews;
 using OtripleS.Portal.Web.Models.StudentViews.Exceptions;
-using OtripleS.Portal.Web.Services.StudentViews;
+using OtripleS.Portal.Web.Services.Views.StudentViews;
 using OtripleS.Portal.Web.Views.Components;
 using Syncfusion.Blazor;
 using Tynamix.ObjectFiller;
