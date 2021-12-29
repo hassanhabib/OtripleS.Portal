@@ -14,7 +14,7 @@ using OtripleS.Portal.Web.Views.Bases;
 
 namespace OtripleS.Portal.Web.Views.Components.TeachersComponents
 {
-    public partial class TeachersComponent
+    public partial class TeachersComponent : ComponentBase
     {
         [Inject]
         public ITeacherViewService TeacherViewService { get; set; }

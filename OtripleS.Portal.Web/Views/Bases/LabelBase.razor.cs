@@ -8,7 +8,7 @@ using OtripleS.Portal.Web.Models.Colors;
 
 namespace OtripleS.Portal.Web.Views.Bases
 {
-    public partial class LabelBase
+    public partial class LabelBase : ComponentBase
     {
         [Parameter]
         public string Value { get; set; }
