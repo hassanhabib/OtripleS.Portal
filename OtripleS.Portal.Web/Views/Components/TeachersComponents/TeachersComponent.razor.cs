@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using OtripleS.Portal.Web.Models.TeacherViews;
 using OtripleS.Portal.Web.Models.Views.Components.TeachersComponents;
-using OtripleS.Portal.Web.Services.TeacherViews;
+using OtripleS.Portal.Web.Services.Views.TeacherViews;
 using OtripleS.Portal.Web.Views.Bases;
 
 namespace OtripleS.Portal.Web.Views.Components.TeachersComponents
