@@ -11,6 +11,6 @@ namespace OtripleS.Portal.Web.Models.Courses.Exceptions
     public class CourseDependencyException : Xeption
     {
         public CourseDependencyException(Exception innerException)
-            : base(message: "Course dependency error occurred, contact support.", innerException) { }
+            : base(message: "Error occured, co", innerException) { }
     }
 }
