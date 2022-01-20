@@ -11,6 +11,7 @@ using OtripleS.Portal.Web.Models.StudentViews;
 using OtripleS.Portal.Web.Models.StudentViews.Exceptions;
 using OtripleS.Portal.Web.Services.Views.StudentViews;
 using OtripleS.Portal.Web.Views.Components;
+using OtripleS.Portal.Web.Views.Components.StudentRegistrationComponents;
 using Syncfusion.Blazor;
 using Tynamix.ObjectFiller;
 using Xunit;
@@ -20,7 +21,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
     public partial class StudentRegistrationComponentTests : TestContext
     {
         private readonly Mock<IStudentViewService> studentViewServiceMock;
-        private IRenderedComponent<StudentRegistrationComponent> renderedStudentRegistrationComponent;
+        private IRenderedComponent<StudentRegistrationComponent> renderedStudentRegistrationComponents;
 
         public StudentRegistrationComponentTests()
         {

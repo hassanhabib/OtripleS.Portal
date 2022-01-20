@@ -12,7 +12,7 @@ using OtripleS.Portal.Web.Models.StudentViews.Exceptions;
 using OtripleS.Portal.Web.Services.Views.StudentViews;
 using OtripleS.Portal.Web.Views.Bases;
 
-namespace OtripleS.Portal.Web.Views.Components
+namespace OtripleS.Portal.Web.Views.Components.StudentRegistrationComponents
 {
     public partial class StudentRegistrationComponent : ComponentBase
     {
