@@ -11,7 +11,7 @@ namespace OtripleS.Portal.Web.Models.Students.Exceptions
     public class AlreadyExistStudentException : Xeption
     {
         public AlreadyExistStudentException(Exception innerException)
-            : base(message: "Already exists student error occurred, please try again.",
+            : base(message: "Error occurred, co",
                   innerException)
         { }
     }
