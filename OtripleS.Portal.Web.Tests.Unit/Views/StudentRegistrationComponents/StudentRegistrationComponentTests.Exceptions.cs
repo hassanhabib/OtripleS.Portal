@@ -30,37 +30,37 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
                     .ThrowsAsync(studentViewValidationException);
 
             // when
-            this.renderedStudentRegistrationComponents =
+            this.renderedStudentRegistrationComponent =
                 RenderComponent<StudentRegistrationComponent>();
 
-            this.renderedStudentRegistrationComponents.Instance.SubmitButton.Click();
+            this.renderedStudentRegistrationComponent.Instance.SubmitButton.Click();
 
             // then
-            this.renderedStudentRegistrationComponents.Instance.StatusLabel.Value
+            this.renderedStudentRegistrationComponent.Instance.StatusLabel.Value
                 .Should().BeEquivalentTo(expectedErrorMessage);
 
-            this.renderedStudentRegistrationComponents.Instance.StatusLabel.Color
+            this.renderedStudentRegistrationComponent.Instance.StatusLabel.Color
                 .Should().Be(Color.Red);
 
-            this.renderedStudentRegistrationComponents.Instance.StudentIdentityTextBox.IsDisabled
+            this.renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox.IsDisabled
                .Should().BeFalse();
 
-            this.renderedStudentRegistrationComponents.Instance.StudentFirstNameTextBox.IsDisabled
+            this.renderedStudentRegistrationComponent.Instance.StudentFirstNameTextBox.IsDisabled
                .Should().BeFalse();
 
-            this.renderedStudentRegistrationComponents.Instance.StudentMiddleNameTextBox.IsDisabled
+            this.renderedStudentRegistrationComponent.Instance.StudentMiddleNameTextBox.IsDisabled
                .Should().BeFalse();
 
-            this.renderedStudentRegistrationComponents.Instance.StudentLastNameTextBox.IsDisabled
+            this.renderedStudentRegistrationComponent.Instance.StudentLastNameTextBox.IsDisabled
                .Should().BeFalse();
 
-            this.renderedStudentRegistrationComponents.Instance.StudentGenderDropDown.IsDisabled
+            this.renderedStudentRegistrationComponent.Instance.StudentGenderDropDown.IsDisabled
                .Should().BeFalse();
 
-            this.renderedStudentRegistrationComponents.Instance.DateOfBirthPicker.IsDisabled
+            this.renderedStudentRegistrationComponent.Instance.DateOfBirthPicker.IsDisabled
                .Should().BeFalse();
 
-            this.renderedStudentRegistrationComponents.Instance.SubmitButton.IsDisabled
+            this.renderedStudentRegistrationComponent.Instance.SubmitButton.IsDisabled
                .Should().BeFalse();
 
             this.studentViewServiceMock.Verify(service =>
@@ -84,37 +84,37 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
                     .ThrowsAsync(studentViewDependencyServiceException);
 
             // when
-            this.renderedStudentRegistrationComponents =
+            this.renderedStudentRegistrationComponent =
                 RenderComponent<StudentRegistrationComponent>();
 
-            this.renderedStudentRegistrationComponents.Instance.SubmitButton.Click();
+            this.renderedStudentRegistrationComponent.Instance.SubmitButton.Click();
 
             // then
-            this.renderedStudentRegistrationComponents.Instance.StatusLabel.Value
+            this.renderedStudentRegistrationComponent.Instance.StatusLabel.Value
                 .Should().BeEquivalentTo(expectedErrorMessage);
 
-            this.renderedStudentRegistrationComponents.Instance.StatusLabel.Color
+            this.renderedStudentRegistrationComponent.Instance.StatusLabel.Color
                 .Should().Be(Color.Red);
 
-            this.renderedStudentRegistrationComponents.Instance.StudentIdentityTextBox.IsDisabled
+            this.renderedStudentRegistrationComponent.Instance.StudentIdentityTextBox.IsDisabled
                 .Should().BeFalse();
 
-            this.renderedStudentRegistrationComponents.Instance.StudentFirstNameTextBox.IsDisabled
+            this.renderedStudentRegistrationComponent.Instance.StudentFirstNameTextBox.IsDisabled
                .Should().BeFalse();
 
-            this.renderedStudentRegistrationComponents.Instance.StudentMiddleNameTextBox.IsDisabled
+            this.renderedStudentRegistrationComponent.Instance.StudentMiddleNameTextBox.IsDisabled
                .Should().BeFalse();
 
-            this.renderedStudentRegistrationComponents.Instance.StudentLastNameTextBox.IsDisabled
+            this.renderedStudentRegistrationComponent.Instance.StudentLastNameTextBox.IsDisabled
                .Should().BeFalse();
 
-            this.renderedStudentRegistrationComponents.Instance.StudentGenderDropDown.IsDisabled
+            this.renderedStudentRegistrationComponent.Instance.StudentGenderDropDown.IsDisabled
                .Should().BeFalse();
 
-            this.renderedStudentRegistrationComponents.Instance.DateOfBirthPicker.IsDisabled
+            this.renderedStudentRegistrationComponent.Instance.DateOfBirthPicker.IsDisabled
                .Should().BeFalse();
 
-            this.renderedStudentRegistrationComponents.Instance.SubmitButton.IsDisabled
+            this.renderedStudentRegistrationComponent.Instance.SubmitButton.IsDisabled
                .Should().BeFalse();
 
             this.studentViewServiceMock.Verify(service =>

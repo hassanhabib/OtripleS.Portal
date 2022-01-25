@@ -21,7 +21,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Views.StudentRegistrationComponents
     public partial class StudentRegistrationComponentTests : TestContext
     {
         private readonly Mock<IStudentViewService> studentViewServiceMock;
-        private IRenderedComponent<StudentRegistrationComponent> renderedStudentRegistrationComponents;
+        private IRenderedComponent<StudentRegistrationComponent> renderedStudentRegistrationComponent;
 
         public StudentRegistrationComponentTests()
         {
