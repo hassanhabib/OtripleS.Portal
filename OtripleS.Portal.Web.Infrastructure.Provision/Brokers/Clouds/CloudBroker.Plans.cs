@@ -14,7 +14,7 @@ namespace OtripleS.Portal.Web.Infrastructure.Provision.Brokers.Clouds
     public partial class CloudBroker
     {
         public async ValueTask<IAppServicePlan> CreatePlanAsync(
-            string planName, 
+            string planName,
             IResourceGroup resourceGroup)
         {
             return await this.azure.AppServices.AppServicePlans

@@ -16,8 +16,8 @@ using OtripleS.Portal.Web.Models.Students;
 using OtripleS.Portal.Web.Models.Students.Exceptions;
 using OtripleS.Portal.Web.Models.StudentViews;
 using OtripleS.Portal.Web.Services.Foundations.Students;
-using OtripleS.Portal.Web.Services.Views.StudentViews;
 using OtripleS.Portal.Web.Services.Foundations.Users;
+using OtripleS.Portal.Web.Services.Views.StudentViews;
 using Tynamix.ObjectFiller;
 using Xunit;
 
