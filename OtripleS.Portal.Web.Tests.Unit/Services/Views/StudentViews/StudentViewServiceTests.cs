@@ -12,6 +12,7 @@ using Moq;
 using OtripleS.Portal.Web.Brokers.DateTimes;
 using OtripleS.Portal.Web.Brokers.Loggings;
 using OtripleS.Portal.Web.Brokers.Navigations;
+using OtripleS.Portal.Web.Brokers.Stores;
 using OtripleS.Portal.Web.Models.Students;
 using OtripleS.Portal.Web.Models.Students.Exceptions;
 using OtripleS.Portal.Web.Models.StudentViews;
@@ -32,6 +33,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Views.StudentViews
         private readonly Mock<ILoggingBroker> loggingBrokerMock;
         private readonly ICompareLogic compareLogic;
         private readonly IStudentViewService studentViewService;
+        private readonly Mock<IStateStoreBroker> stateStoreBrokerMock;
 
         public StudentViewServiceTests()
         {
@@ -40,6 +42,8 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Views.StudentViews
             this.dateTimeBrokerMock = new Mock<IDateTimeBroker>();
             this.navigationBrokerMock = new Mock<INavigationBroker>();
             this.loggingBrokerMock = new Mock<ILoggingBroker>();
+            this.loggingBrokerMock = new Mock<ILoggingBroker>();
+            this.stateStoreBrokerMock = new Mock<IStateStoreBroker>();
             var compareConfig = new ComparisonConfig();
             compareConfig.IgnoreProperty<Student>(student => student.Id);
             compareConfig.IgnoreProperty<Student>(student => student.UserId);
@@ -50,7 +54,8 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Views.StudentViews
                 userService: this.userServiceMock.Object,
                 dateTimeBroker: this.dateTimeBrokerMock.Object,
                 navigationBroker: this.navigationBrokerMock.Object,
-                loggingBroker: this.loggingBrokerMock.Object);
+                loggingBroker: this.loggingBrokerMock.Object,
+                stateStoreBroker: this.stateStoreBrokerMock.Object);
         }
 
         public static TheoryData DependencyExceptions()

@@ -1,5 +1,4 @@
 ﻿// ---------------------------------------------------------------
-// ---------------------------------------------------------------
 // Copyright (c) Coalition of the Good-Hearted Engineers
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
@@ -11,6 +10,8 @@ using FluentAssertions;
 using Moq;
 using OtripleS.Portal.Web.Models.Students;
 using OtripleS.Portal.Web.Models.StudentViews;
+using Syncfusion.Blazor.Data;
+
 using Xunit;
 
 namespace OtripleS.Portal.Web.Tests.Unit.Services.Views.StudentViews
@@ -18,7 +19,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Views.StudentViews
     public partial class StudentViewServiceTests
     {
         [Fact]
-        public async Task ShouldRetrieveAllStudentViewsAsync()
+        public async Task ShouldRetrieveOlderStudentViewAsync()
         {
             // given
             List<dynamic> dynamicStudentViewPropertiesCollection =
@@ -44,7 +45,7 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Views.StudentViews
 
             List<Student> retrievedStudents = randomStudents;
 
-            List<StudentView> randomStudentViews =
+            StudentView randomStudentView =
                 dynamicStudentViewPropertiesCollection.Select(property =>
                     new StudentView
                     {
@@ -54,20 +55,21 @@ namespace OtripleS.Portal.Web.Tests.Unit.Services.Views.StudentViews
                         LastName = property.LastName,
                         Gender = property.GenderView,
                         BirthDate = property.BirthDate
-                    }).ToList();
+                    }).OrderBy(studentView=> studentView.BirthDate)
+                    .FirstOrDefault();
 
-            List<StudentView> expectedStudentViews = randomStudentViews;
+            StudentView expectedStudentView = randomStudentView;
 
             this.studentServiceMock.Setup(service =>
                 service.RetrieveAllStudentsAsync())
                     .ReturnsAsync(retrievedStudents);
 
             // when
-            List<StudentView> retrievedStudentViews =
-                await this.studentViewService.RetrieveAllStudentViewsAsync();
+            StudentView retrieveOlderStudentView =
+                await this.studentViewService.RetrieveOlderStudentdViewAsync();
 
             // then
-            retrievedStudentViews.Should().BeEquivalentTo(expectedStudentViews);
+            retrieveOlderStudentView.Should().BeEquivalentTo(expectedStudentView);
 
             this.studentServiceMock.Verify(service =>
                 service.RetrieveAllStudentsAsync(),

@@ -14,5 +14,6 @@ namespace OtripleS.Portal.Web.Services.Views.StudentViews
         ValueTask<StudentView> AddStudentViewAsync(StudentView studentView);
         ValueTask<List<StudentView>> RetrieveAllStudentViewsAsync();
         void NavigateTo(string route);
+        Task<StudentView> RetrieveOlderStudentdViewAsync();
     }
 }

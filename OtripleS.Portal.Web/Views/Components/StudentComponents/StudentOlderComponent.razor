@@ -1,0 +1,14 @@
+﻿@using OtripleS.Portal.Web.Views.Components.ContainerComponents;
+@using OtripleS.Portal.Web.Views.Bases;
+@using OtripleS.Portal.Web.Models.Colors;
+
+<TinyCardBase Title="Student Added"
+          SubTitle="The older Student is">
+    <Content>
+        <div>
+            @StudentView?.LastName
+            @StudentView?.BirthDate.ToString("d")
+        </div>
+    </Content>    
+</TinyCardBase>
+

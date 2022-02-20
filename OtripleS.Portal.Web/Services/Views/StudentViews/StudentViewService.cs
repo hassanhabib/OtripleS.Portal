@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using OtripleS.Portal.Web.Brokers.DateTimes;
 using OtripleS.Portal.Web.Brokers.Loggings;
 using OtripleS.Portal.Web.Brokers.Navigations;
+using OtripleS.Portal.Web.Brokers.Stores;
 using OtripleS.Portal.Web.Models.Students;
 using OtripleS.Portal.Web.Models.StudentViews;
 using OtripleS.Portal.Web.Services.Foundations.Students;
@@ -24,19 +25,22 @@ namespace OtripleS.Portal.Web.Services.Views.StudentViews
         private readonly IDateTimeBroker dateTimeBroker;
         private readonly INavigationBroker navigationBroker;
         private readonly ILoggingBroker loggingBroker;
+        private readonly IStateStoreBroker stateStoreBroker;
 
         public StudentViewService(
             IStudentService studentService,
             IUserService userService,
             IDateTimeBroker dateTimeBroker,
             INavigationBroker navigationBroker,
-            ILoggingBroker loggingBroker)
+            ILoggingBroker loggingBroker,
+            IStateStoreBroker stateStoreBroker)
         {
             this.studentService = studentService;
             this.userService = userService;
             this.dateTimeBroker = dateTimeBroker;
             this.navigationBroker = navigationBroker;
             this.loggingBroker = loggingBroker;
+            this.stateStoreBroker = stateStoreBroker;
         }
 
         public ValueTask<StudentView> AddStudentViewAsync(StudentView studentView) =>
@@ -45,6 +49,7 @@ namespace OtripleS.Portal.Web.Services.Views.StudentViews
             ValidateStudentView(studentView);
             Student student = MapToStudent(studentView);
             await this.studentService.AddStudentAsync(student);
+            this.stateStoreBroker.StudentAdded();
 
             return studentView;
         });
@@ -85,6 +90,16 @@ namespace OtripleS.Portal.Web.Services.Views.StudentViews
                 CreatedDate = currentDateTime,
                 UpdatedDate = currentDateTime
             };
+        }
+
+        public async Task<StudentView> RetrieveOlderStudentdViewAsync()
+        {
+            var students = await RetrieveAllStudentViewsAsync();
+
+            var olderStudent =  students.OrderBy(studentView => studentView.BirthDate)
+                .FirstOrDefault();
+
+            return olderStudent;
         }
 
         private static Func<Student, StudentView> AsStudentView =>
