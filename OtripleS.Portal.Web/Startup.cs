@@ -39,7 +39,6 @@ namespace OtripleS.Portal.Web
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSyncfusionBlazor();
-            AddHttpClient(services);
             AddRootDirectory(services);
             services.AddScoped<IApiBroker, ApiBroker>();
             services.AddScoped<ILogger, Logger<LoggingBroker>>();
@@ -85,16 +84,6 @@ namespace OtripleS.Portal.Web
             services.AddRazorPages(options =>
             {
                 options.RootDirectory = "/Views/Pages";
-            });
-        }
-
-        private void AddHttpClient(IServiceCollection services)
-        {
-            services.AddHttpClient<IRESTFulApiFactoryClient, RESTFulApiFactoryClient>(client =>
-            {
-                LocalConfigurations localConfigurations = Configuration.Get<LocalConfigurations>();
-                string apiUrl = localConfigurations.ApiConfigurations.Url;
-                client.BaseAddress = new Uri(apiUrl);
             });
         }
     }

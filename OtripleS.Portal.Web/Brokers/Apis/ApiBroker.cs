@@ -3,7 +3,11 @@
 // FREE TO USE AS LONG AS SOFTWARE FUNDS ARE DONATED TO THE POOR
 // ---------------------------------------------------------------
 
+using System;
+using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using OtripleS.Portal.Web.Models.Configurations;
 using RESTFulSense.Clients;
 
 namespace OtripleS.Portal.Web.Brokers.Apis
@@ -11,9 +15,14 @@ namespace OtripleS.Portal.Web.Brokers.Apis
     public partial class ApiBroker : IApiBroker
     {
         private readonly IRESTFulApiFactoryClient apiClient;
+        private readonly HttpClient httpClient;
 
-        public ApiBroker(IRESTFulApiFactoryClient apiClient) =>
-            this.apiClient = apiClient;
+        public ApiBroker(HttpClient httpClient,
+            IConfiguration configuration)
+        {
+            this.httpClient = httpClient;
+            this.apiClient = GetApiClient(configuration);
+        }
 
         private async ValueTask<T> GetAsync<T>(string relativeUrl) =>
             await this.apiClient.GetContentAsync<T>(relativeUrl);
@@ -26,5 +35,16 @@ namespace OtripleS.Portal.Web.Brokers.Apis
 
         private async ValueTask<T> DeleteAsync<T>(string relativeUrl) =>
             await this.apiClient.DeleteContentAsync<T>(relativeUrl);
+
+        private IRESTFulApiFactoryClient GetApiClient(IConfiguration configuration)
+        {
+            LocalConfigurations localConfigurations =
+                configuration.Get<LocalConfigurations>();
+
+            string apiBaseUrl = localConfigurations.ApiConfigurations.Url;
+            this.httpClient.BaseAddress = new Uri(apiBaseUrl);
+
+            return new RESTFulApiFactoryClient(this.httpClient);
+        }
     }
 }
